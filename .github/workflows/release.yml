@@ -17,12 +17,12 @@ jobs:
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
 
             - name: Setup node
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6
               with:
-                  node-version: '24.x'
+                  node-version: '25.x'
                   registry-url: https://registry.npmjs.org
 
             - name: Setup Bun
@@ -34,19 +34,16 @@ jobs:
             - name: Tag version
               run: |
                   bun pm version --cwd packages/utils $RELEASE_VERSION --no-git-tag-version || true
-                  bun pm version --cwd packages/api-core $RELEASE_VERSION --no-git-tag-version || true
                   bun pm version --cwd packages/prototype-extensions $RELEASE_VERSION --no-git-tag-version || true
 
             - name: Build packages
               run: |
                   bun --cwd packages/utils build
-                  bun --cwd packages/api-core build
                   bun --cwd packages/prototype-extensions build
 
             - name: Publish packages
               run: |
                   bun publish --cwd packages/utils --access public
-                  bun publish --cwd packages/api-core --access public
                   bun publish --cwd packages/prototype-extensions --access public
               env:
                   NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
