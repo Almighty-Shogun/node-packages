@@ -1,4 +1,3 @@
-export type { Weather, WeatherItem } from './internal/weather'
 export { getLanguage, getLanguages } from './internal/localization'
 
 export { default as containsRoutePrefix } from './containsRoutePrefix'
@@ -18,7 +17,6 @@ export { default as formatPercentage } from './formatPercentage'
 export { default as formatTime } from './formatTime'
 export { default as formatWeekday } from './formatWeekday'
 export { default as getToday } from './getToday'
-export { default as getWeather } from './getWeather'
 export { default as hasCurrentRoute } from './hasCurrentRoute'
 export { default as initApplication } from './initApplication'
 export { default as isBeforeNow } from './isBeforeNow'
