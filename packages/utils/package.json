@@ -36,6 +36,7 @@
         "dist"
     ],
     "dependencies": {
+        "@flux-ui/types": "3.0.0-next.35",
         "@types/luxon": "^3.7.1",
         "luxon": "^3.7.2",
         "vue": "^3.5.25"

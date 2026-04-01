@@ -26,5 +26,6 @@ export { default as reload } from './reload'
 export { default as scrollToTop } from './scrollToTop'
 export { default as useDarkTheme } from './useDarkTheme'
 export { default as useLoaded } from './useLoaded'
+export { default as usePageHeader } from './usePageHeader'
 
 export * from './vuei18n'
