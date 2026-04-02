@@ -3,7 +3,6 @@ import type { Route, I18n } from './types'
 
 type VueInstance = {
     i18n: I18n|null;
-    route: Route|null;
 };
 
 export default function (): VueInstance {
@@ -12,6 +11,5 @@ export default function (): VueInstance {
 
     return {
         i18n: globalProperties?.$i18n ?? null,
-        route: globalProperties?.$route ?? null,
     };
 }
