@@ -1,4 +1,4 @@
-import getCurrentRouteName from './internal/getCurrentRouteName'
+import getCurrentRouteName from './getCurrentRouteName'
 
 export default function (route: string): boolean {
     return getCurrentRouteName() === route;

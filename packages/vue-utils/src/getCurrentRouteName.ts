@@ -1,7 +1,7 @@
-import getVueInstance from './getVueInstance'
+import { useRoute } from 'vue-router'
 
 export default function (): string {
-    const { route } = getVueInstance();
+    const route = useRoute();
 
     return route?.name?.toString() ?? "";
 }

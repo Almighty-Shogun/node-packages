@@ -1,11 +1,11 @@
 {
-    "name": "@almighty-shogun/utils",
-    "description": "A small package that contains common utilities used in all my projects.",
+    "name": "@almighty-shogun/vue-utils",
+    "description": "A small package that contains common utilities around Vue, VueRouter and Vue i18n used in all my projects.",
     "version": "0.0.0",
     "type": "module",
     "license": "MIT",
     "scripts": {
-        "build": "tsc"
+        "build": "tsdown"
     },
     "publishConfig": {
         "access": "public",
@@ -19,30 +19,39 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Almighty-Shogun/node-packages.git",
-        "directory": "packages/utils"
+        "directory": "packages/vue-utils"
     },
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
-    "typings": "./dist/index.d.ts",
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.mts",
+    "typings": "./dist/index.d.mts",
     "sideEffects": false,
     "exports": {
         ".": {
-            "types": "./dist/index.d.ts",
-            "default": "./dist/index.js"
+            "types": "./dist/index.d.mts",
+            "default": "./dist/index.mjs"
         }
     },
     "files": [
         "src",
-        "dist"
+        "dist",
+        "LICENSE",
+        "CODEOWNERS"
     ],
-    "dependencies": {
-        "@flux-ui/types": "3.0.0-next.35",
-        "@fortawesome/fontawesome-common-types": "^7.2.0",
-        "@types/luxon": "^3.7.1",
-        "luxon": "^3.7.2",
-        "vue": "^3.5.25"
+    "peerDependencies": {
+        "vue": "^3.5.25",
+        "vue-i18n": "^11.1.2",
+        "vue-router": "^4.5.1"
+    },
+    "peerDependenciesMeta": {
+        "vue-i18n": {
+            "optional": true
+        }
     },
     "devDependencies": {
-        "typescript": "^5.7.2"
+        "tsdown": "^0.16.6",
+        "typescript": "^5.7.2",
+        "vue": "^3.5.25",
+        "vue-i18n": "^11.1.2",
+        "vue-router": "^4.5.1"
     }
 }
