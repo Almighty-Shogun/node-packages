@@ -21,19 +21,19 @@
         "url": "git+https://github.com/Almighty-Shogun/node-packages.git",
         "directory": "packages/webkit-native-bridge"
     },
-    "main": "./dist/index.mjs",
-    "types": "./dist/index.d.mts",
-    "typings": "./dist/index.d.mts",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "typings": "./dist/index.d.ts",
     "sideEffects": false,
     "exports": {
         ".": {
-            "types": "./dist/index.d.mts",
-            "default": "./dist/index.mjs"
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
         }
     },
     "files": [
+        "src",
         "dist",
-        "README.md",
         "LICENSE",
         "CODEOWNERS"
     ],
