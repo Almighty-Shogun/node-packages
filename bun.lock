@@ -13,7 +13,7 @@
       "name": "@almighty-shogun/utils",
       "version": "0.0.0",
       "dependencies": {
-        "@flux-ui/types": "3.0.0-next.35",
+        "@flux-ui/types": "^3.0.0-next.35",
         "@fortawesome/fontawesome-common-types": "^7.2.0",
         "luxon": "^3.7.2",
       },
@@ -45,6 +45,14 @@
         "vue-i18n",
       ],
     },
+    "packages/webkit-native-bridge": {
+      "name": "@almighty-shogun/webkit-native-bridge",
+      "version": "0.0.0",
+      "devDependencies": {
+        "tsdown": "^0.16.6",
+        "typescript": "^5.7.2",
+      },
+    },
   },
   "packages": {
     "@almighty-shogun/prototype-extensions": ["@almighty-shogun/prototype-extensions@workspace:packages/prototype-extensions"],
@@ -52,6 +60,8 @@
     "@almighty-shogun/utils": ["@almighty-shogun/utils@workspace:packages/utils"],
 
     "@almighty-shogun/vue-utils": ["@almighty-shogun/vue-utils@workspace:packages/vue-utils"],
+
+    "@almighty-shogun/webkit-native-bridge": ["@almighty-shogun/webkit-native-bridge@workspace:packages/webkit-native-bridge"],
 
     "@babel/generator": ["@babel/generator@7.29.1", "", { "dependencies": { "@babel/parser": "^7.29.0", "@babel/types": "^7.29.0", "@jridgewell/gen-mapping": "^0.3.12", "@jridgewell/trace-mapping": "^0.3.28", "jsesc": "^3.0.2" } }, "sha512-qsaF+9Qcm2Qv8SRIMMscAvG4O3lJ0F1GuMo5HR/Bp02LopNgnZBC/EkbevHFeGs4ls/oPz9v+Bsmzbkbe+0dUw=="],
 
