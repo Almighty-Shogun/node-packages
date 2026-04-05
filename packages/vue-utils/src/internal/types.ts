@@ -12,8 +12,4 @@ export type I18n = {
     $te?: TranslateExists;
 };
 
-export type RequiredRef<T> = {
-    readonly ref: Ref<T | undefined>
-    get value(): T
-    set value(value: T)
-};
+export type RequiredRef<T> = Ref<T>;

@@ -1,22 +1,25 @@
-import { shallowRef } from 'vue'
+import { customRef } from 'vue'
 import type { RequiredRef } from './internal/types'
 
+const UNINITIALIZED = Symbol('requiredRef.uninitialized');
+
 export default function <T>(): RequiredRef<T> {
-    const state = shallowRef<T | undefined>(undefined);
+    let state: T | typeof UNINITIALIZED = UNINITIALIZED;
 
-    return {
-        ref: state,
+    return customRef<T>((track, trigger) => ({
+        get(): T {
+            track();
 
-        get value(): T {
-            if (state.value === undefined) {
+            if (state === UNINITIALIZED) {
                 throw new Error('Required ref accessed before initialization');
             }
 
-            return state.value;
+            return state;
         },
 
-        set value(value: T) {
-            state.value = value;
+        set(value: T): void {
+            state = value;
+            trigger();
         }
-    };
+    }));
 }
