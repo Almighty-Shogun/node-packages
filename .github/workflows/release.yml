@@ -37,17 +37,20 @@ jobs:
                   bun pm version --cwd packages/prototype-extensions $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/utils $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/vue-utils $RELEASE_VERSION --no-git-tag-version
+                  bun pm version --cwd packages/webkit-native-bridge $RELEASE_VERSION --no-git-tag-version
 
             - name: Build packages
               run: |
                   bun --cwd packages/prototype-extensions build
                   bun --cwd packages/utils build
                   bun --cwd packages/vue-utils build
+                  bun --cwd packages/webkit-native-bridge build
 
             - name: Publish packages
               run: |
                   bun publish --cwd packages/prototype-extensions --access public
                   bun publish --cwd packages/utils --access public
                   bun publish --cwd packages/vue-utils --access public
+                  bun publish --cwd packages/webkit-native-bridge --access public
               env:
                   NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
