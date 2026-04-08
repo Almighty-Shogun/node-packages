@@ -1,5 +1,7 @@
 export { getLanguage, getLanguages } from './internal/localization'
 
+export * from './composables'
+
 export { default as disableZoom } from './disableZoom'
 export { default as formatCelsius } from './formatCelsius'
 export { default as formatCurrency } from './formatCurrency'
@@ -22,6 +24,3 @@ export { default as isToday } from './isToday'
 export { default as reload } from './reload'
 export { default as scrollToTop } from './scrollToTop'
 export { default as useDarkTheme } from './useDarkTheme'
-export { default as useInterval } from './useInterval'
-export { default as useLoaded } from './useLoaded'
-export { default as usePageHeader } from './usePageHeader'
