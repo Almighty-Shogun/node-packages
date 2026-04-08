@@ -1,3 +1,21 @@
+export type BridgeSuccess<T> = {
+    ok: true;
+    message: string | null;
+    data: T;
+};
+
+export type BridgeFailure<E = unknown> = {
+    ok: false;
+    message: string | null;
+    error: E;
+};
+
+export type BridgeResponse<T, E = unknown> = BridgeSuccess<T> | BridgeFailure<E>;
+
+export type NativeTransportError = {
+    type: "timeout" | "unavailable" | "disposed" | "unknown";
+};
+
 export type NativeBridgeMessageHandler = {
     postMessage: (message: string) => void
 };
@@ -21,11 +39,11 @@ export type NativeMethodsWithoutBody<TRequests extends NativeBridgeRequestMap> =
 export type NativeMethodsWithBody<TRequests extends NativeBridgeRequestMap> =
     Exclude<keyof TRequests, NativeMethodsWithoutBody<TRequests>>;
 
-export type NativeResponseEventDetail<TPayload = unknown> = {
+export type NativeResponseEventDetail = {
     requestId: string;
     ok: boolean;
-    payload?: TPayload;
-    error?: string | null;
+    payload: unknown;
+    error: unknown;
 };
 
 export type NativeBridgeWindow = Window & {
@@ -46,9 +64,9 @@ export type NativeBridgeOptions = {
 };
 
 export type NativeBridgePendingRequest = {
-    reject: (reason?: unknown) => void;
-    resolve: (value: unknown) => void;
-    timeoutId: ReturnType<typeof setTimeout> | null;
+    method: string;
+    resolve: (value: BridgeResponse<unknown, unknown>) => void;
+    timeoutId: ReturnType<typeof setTimeout>|null;
 };
 
 export type NativeBridge<TRequests extends NativeBridgeRequestMap, TCommands extends string = never> = {
@@ -58,15 +76,15 @@ export type NativeBridge<TRequests extends NativeBridgeRequestMap, TCommands ext
     isAvailable: () => boolean;
     postMessage: (message: string) => void;
     request: {
-        <TMethod extends NativeMethodsWithoutBody<TRequests>>(
+        <TMethod extends NativeMethodsWithoutBody<TRequests>, TError = NativeTransportError>(
             method: TMethod,
             body?: undefined,
             options?: NativeRequestOptions
-        ): Promise<NativeResponseBody<TRequests, TMethod>>;
-        <TMethod extends NativeMethodsWithBody<TRequests>>(
+        ): Promise<BridgeResponse<NativeResponseBody<TRequests, TMethod>, TError>>;
+        <TMethod extends NativeMethodsWithBody<TRequests>, TError = NativeTransportError>(
             method: TMethod,
             body: NativeRequestBody<TRequests, TMethod>,
             options?: NativeRequestOptions
-        ): Promise<NativeResponseBody<TRequests, TMethod>>;
+        ): Promise<BridgeResponse<NativeResponseBody<TRequests, TMethod>, TError>>;
     }
 }

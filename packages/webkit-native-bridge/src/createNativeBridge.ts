@@ -1,9 +1,7 @@
 import {
     NativeBridgeDisposedError,
-    NativeBridgeResponseError,
-    NativeBridgeTimeoutError,
     NativeBridgeUnavailableError
-} from './errors';
+} from './errors'
 import type {
     NativeBridge,
     NativeBridgeOptions,
@@ -11,11 +9,12 @@ import type {
     NativeBridgeRequestMap,
     NativeRequestBody,
     NativeRequestOptions,
-    NativeResponseBody,
     NativeResponseEventDetail,
     NativeBridgeWindow,
-    NativeBridgeMessageHandler
-} from './types';
+    NativeBridgeMessageHandler,
+    BridgeResponse,
+    NativeResponseBody
+} from './types'
 
 const DEFAULT_REQUEST_TIMEOUT = 30_000;
 const DEFAULT_HANDLER_NAME = "nativeBridge";
@@ -42,7 +41,7 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
     const handlerName = options.handlerName ?? DEFAULT_HANDLER_NAME;
     const requestTimeout = options.requestTimeout === undefined ? DEFAULT_REQUEST_TIMEOUT : options.requestTimeout;
 
-    const pendingRequests = new Map<string, NativeBridgePendingRequest & { method: string }>()
+    const pendingRequests = new Map<string, NativeBridgePendingRequest>()
 
     let disposed = false;
     let responseListenerRegistered = false;
@@ -116,15 +115,35 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
 
         if (!pendingRequest) return;
 
-        clearPendingRequest(requestId)
+        clearPendingRequest(requestId);
 
         if (detail.ok) {
-            pendingRequest.resolve(detail.payload);
+            pendingRequest.resolve({
+                ok: true,
+                message: null,
+                data: detail.payload,
+            });
             return;
         }
 
-        pendingRequest.reject(new NativeBridgeResponseError(pendingRequest.method, detail.error));
+        if (typeof detail.error === "object" && detail.error !== null) {
+            const errorObject = detail.error as { message?: string | null; error?: unknown };
+
+            pendingRequest.resolve({
+                ok: false,
+                message: errorObject.message ?? null,
+                error: errorObject.error ?? null,
+            });
+            return;
+        }
+
+        pendingRequest.resolve({
+            ok: false,
+            message: typeof detail.error === "string" ? detail.error : null,
+            error: detail.error,
+        });
     }
+
 
     function dispose(): void {
         if (disposed) return;
@@ -138,28 +157,37 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
 
         for (const [requestId, pendingRequest] of pendingRequests) {
             clearPendingRequest(requestId);
-            pendingRequest.reject(new NativeBridgeDisposedError());
+            pendingRequest.resolve({
+                ok: false,
+                message: new NativeBridgeDisposedError().message,
+                error: { type: "disposed" },
+            });
         }
     }
 
-    function request<TMethod extends keyof TRequests>(method: TMethod, body?: NativeRequestBody<TRequests, TMethod>, maybeOptions?: NativeRequestOptions): Promise<NativeResponseBody<TRequests, TMethod>> {
+    function request<TMethod extends keyof TRequests, TError = unknown>(method: TMethod, body?: NativeRequestBody<TRequests, TMethod>, maybeOptions?: NativeRequestOptions): Promise<BridgeResponse<NativeResponseBody<TRequests, TMethod>, TError>> {
         ensureActive();
         registerResponseListener();
 
         const requestOptions = maybeOptions;
 
-        return new Promise<NativeResponseBody<TRequests, TMethod>>((resolve, reject) => {
+        return new Promise<BridgeResponse<NativeResponseBody<TRequests, TMethod>, TError>>((resolve) => {
             const requestId = createRequestId();
             const timeout = requestOptions?.timeout ?? requestTimeout;
+
             const timeoutId = timeout === null ? null : setTimeout(() => {
                 clearPendingRequest(requestId);
-                reject(new NativeBridgeTimeoutError(String(method), timeout))
+
+                resolve({
+                    ok: false,
+                    message: `Native request "${String(method)}" timed out after ${timeout}ms`,
+                    error: { type: "timeout" } as TError,
+                });
             }, timeout);
 
             pendingRequests.set(requestId, {
                 method: String(method),
-                reject,
-                resolve,
+                resolve: resolve as (value: BridgeResponse<unknown, unknown>) => void,
                 timeoutId,
             });
 
@@ -167,10 +195,15 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
                 postMessage(`request:${requestId}|${String(method)}|${encodeRequestBody(body)}`);
             } catch (error) {
                 clearPendingRequest(requestId);
-                reject(error);
+                resolve({
+                    ok: false,
+                    message: error instanceof Error ? error.message : "Unknown native bridge error.",
+                    error: error as TError,
+                });
             }
-        })
+        });
     }
+
 
     return {
         call,
