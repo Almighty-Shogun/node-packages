@@ -4,9 +4,14 @@ A collection of Node / Bun packages I use in (personal) projects.
 > [!NOTE]
 > All these packages are designed to work for my own (personal) projects. Because of this reason I will not accept PR's with that add or change features. I will only accept bug fixes.
 
+> [!NOTE]
+> Documentation is currently in the works and will be published once it's ready.
+
 ## 📦 Packages
-- [**Utils**](/packages/utils): `@almighty-shogun/utils`
 - [**Prototype Extensions**](/packages/prototype-extensions): `@almighty-shogun/prototype-extensions`
+- [**Utils**](/packages/utils): `@almighty-shogun/utils`
+- [**Vue Utils**](/packages/vue-utils): `@almighty-shogun/vue-utils`
+- [**WebKit Native Bridge**](/packages/webkit-native-bridge): `@almighty-shogun/webkit-native-bridge`
 
 ## 📃 Prerequisites
 - **[Node.js](https://nodejs.org/en/)**: >= v23.11.1
