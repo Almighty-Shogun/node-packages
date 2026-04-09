@@ -1,4 +1,5 @@
 export { createNativeBridge } from './createNativeBridge'
+export { mapBridgeError, normalizeBridgeResponse } from './normalizeBridgeResponse'
 
-export * from './errors'
 export * from './types'
+export * from './errors'
