@@ -1,20 +1,4 @@
-export type BridgeSuccess<T> = {
-    ok: true;
-    message: string | null;
-    data: T;
-};
-
-export type BridgeFailure<E = unknown> = {
-    ok: false;
-    message: string | null;
-    error: E;
-};
-
-export type BridgeResponse<T, E = unknown> = BridgeSuccess<T> | BridgeFailure<E>;
-
-export type NativeTransportError = {
-    type: "timeout" | "unavailable" | "disposed" | "unknown";
-};
+import type { BridgeResponse, NativeTransportErrorCode, NativeTransportErrorDetails } from './bridgeResponse'
 
 export type NativeBridgeMessageHandler = {
     postMessage: (message: string) => void
@@ -23,6 +7,8 @@ export type NativeBridgeMessageHandler = {
 export type NativeBridgeRequestMap = Record<string, {
     body: unknown
     response: unknown
+    errorCode?: string
+    errorDetails?: unknown
 }>;
 
 export type NativeRequestBody<TRequests extends NativeBridgeRequestMap, TMethod extends keyof TRequests> =
@@ -30,6 +16,12 @@ export type NativeRequestBody<TRequests extends NativeBridgeRequestMap, TMethod 
 
 export type NativeResponseBody<TRequests extends NativeBridgeRequestMap, TMethod extends keyof TRequests> =
     TRequests[TMethod]['response'];
+
+export type NativeErrorCode<TRequests extends NativeBridgeRequestMap, TMethod extends keyof TRequests> =
+    TRequests[TMethod] extends { errorCode?: infer TErrorCode extends string } ? TErrorCode : string;
+
+export type NativeErrorDetails<TRequests extends NativeBridgeRequestMap, TMethod extends keyof TRequests> =
+    TRequests[TMethod] extends { errorDetails?: infer TErrorDetails } ? TErrorDetails : unknown;
 
 export type NativeMethodsWithoutBody<TRequests extends NativeBridgeRequestMap> = {
     [TMethod in keyof TRequests]: [NativeRequestBody<TRequests, TMethod>] extends [void]
@@ -65,8 +57,8 @@ export type NativeBridgeOptions = {
 
 export type NativeBridgePendingRequest = {
     method: string;
-    resolve: (value: BridgeResponse<unknown, unknown>) => void;
-    timeoutId: ReturnType<typeof setTimeout>|null;
+    resolve: (value: BridgeResponse<unknown>) => void;
+    timeoutId: ReturnType<typeof setTimeout> | null;
 };
 
 export type NativeBridge<TRequests extends NativeBridgeRequestMap, TCommands extends string = never> = {
@@ -76,15 +68,23 @@ export type NativeBridge<TRequests extends NativeBridgeRequestMap, TCommands ext
     isAvailable: () => boolean;
     postMessage: (message: string) => void;
     request: {
-        <TMethod extends NativeMethodsWithoutBody<TRequests>, TError = NativeTransportError>(
+        <TMethod extends NativeMethodsWithoutBody<TRequests>>(
             method: TMethod,
             body?: undefined,
             options?: NativeRequestOptions
-        ): Promise<BridgeResponse<NativeResponseBody<TRequests, TMethod>, TError>>;
-        <TMethod extends NativeMethodsWithBody<TRequests>, TError = NativeTransportError>(
+        ): Promise<BridgeResponse<
+            NativeResponseBody<TRequests, TMethod>,
+            NativeErrorCode<TRequests, TMethod> | NativeTransportErrorCode,
+            NativeErrorDetails<TRequests, TMethod> | NativeTransportErrorDetails
+        >>;
+        <TMethod extends NativeMethodsWithBody<TRequests>>(
             method: TMethod,
             body: NativeRequestBody<TRequests, TMethod>,
             options?: NativeRequestOptions
-        ): Promise<BridgeResponse<NativeResponseBody<TRequests, TMethod>, TError>>;
+        ): Promise<BridgeResponse<
+            NativeResponseBody<TRequests, TMethod>,
+            NativeErrorCode<TRequests, TMethod> | NativeTransportErrorCode,
+            NativeErrorDetails<TRequests, TMethod> | NativeTransportErrorDetails
+        >>;
     }
 }
