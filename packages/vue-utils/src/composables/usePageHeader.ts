@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import type { FluxIconName } from '@flux-ui/types'
 
 type HeaderData = {
@@ -7,10 +7,10 @@ type HeaderData = {
     page?: string;
 };
 
-const pageIcon = ref<FluxIconName>("grid-2");
 const pageTitle = ref<string>("Dashboard");
+const pageIcon = ref<FluxIconName>("grid-2");
 
-export default function (config?: HeaderData) {
+export default function (config?: HeaderData): UsePageHeader {
     if (config) {
         pageIcon.value = config.icon
         pageTitle.value = config.title
@@ -22,4 +22,9 @@ export default function (config?: HeaderData) {
         pageIcon,
         pageTitle
     };
-}
+};
+
+type UsePageHeader = {
+    readonly pageTitle: Ref<string>;
+    readonly pageIcon: Ref<FluxIconName>;
+};
