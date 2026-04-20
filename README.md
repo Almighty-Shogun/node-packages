@@ -5,13 +5,13 @@ A collection of Node / Bun packages I use in (personal) projects.
 > Documentation is currently in the works and will be published once it's ready.
 
 ## 📦 Packages
-- [**Prototype Extensions**](/packages/prototype-extensions): `@almighty-shogun/prototype-extensions`
-- [**Utils**](/packages/utils): `@almighty-shogun/utils`
-- [**Vue Utils**](/packages/vue-utils): `@almighty-shogun/vue-utils`
-- [**WebKit Native Bridge**](/packages/webkit-native-bridge): `@almighty-shogun/webkit-native-bridge`
+- The [**Prototype Extensions**](/packages/prototype-extensions) package is available under `@almighty-shogun/prototype-extensions`
+- The [**Utils**](/packages/utils) package is available under `@almighty-shogun/utils`
+- The [**Vue Utils**](/packages/vue-utils) package is available under `@almighty-shogun/vue-utils`
+- The [**WebKit Native Bridge**](/packages/webkit-native-bridge) package is available under `@almighty-shogun/webkit-native-bridge`
 
 ## 📃 Prerequisites
-- **[Node.js](https://nodejs.org/en/)**: >= v23.11.1
+- **[Bun](https://bun.sh)**: >= 1.3.10
 
 ## ℹ️ Package versioning
 This repository contains multiple **Node** / **Bun** packages maintained together as a single workspace.
