@@ -15,9 +15,7 @@ export function clearRegisteredI18n(): void {
 export function translate(key: string, params?: TranslationParams): string {
     const method = getMethod('t', ((value: string) => value) as Translate);
 
-    return params === undefined
-        ? method(key)
-        : method(key, params);
+    return params === undefined ? method(key) : method(key, params);
 }
 
 export function translationExists(key: string, subKeys: string[] = []): boolean {
