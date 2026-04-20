@@ -1,3 +1,5 @@
+export * from './composables'
+
 export { default as containsRoutePrefix } from './containsRoutePrefix'
 export { default as getCurrentRouteName } from './getCurrentRouteName'
 export { default as hasCurrentRoute } from './hasCurrentRoute'
