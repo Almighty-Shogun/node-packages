@@ -13,22 +13,19 @@
       "name": "@almighty-shogun/utils",
       "version": "0.0.0",
       "dependencies": {
-        "@flux-ui/types": "^3.0.0-next.35",
-        "@fortawesome/fontawesome-common-types": "^7.2.0",
         "luxon": "^3.7.2",
       },
       "devDependencies": {
         "tsdown": "^0.16.6",
         "typescript": "^5.7.2",
-        "vue": "^3.5.25",
-      },
-      "peerDependencies": {
-        "vue": "^3.5.25",
       },
     },
     "packages/vue-utils": {
       "name": "@almighty-shogun/vue-utils",
       "version": "0.0.0",
+      "dependencies": {
+        "@flux-ui/types": "^3.0.0-next.35",
+      },
       "devDependencies": {
         "tsdown": "^0.16.6",
         "typescript": "^5.7.2",
@@ -80,8 +77,6 @@
     "@emnapi/wasi-threads": ["@emnapi/wasi-threads@1.2.1", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-uTII7OYF+/Mes/MrcIOYp5yOtSMLBWSIoLPpcgwipoiKbli6k322tcoFsxoIIxPDqW01SQGAgko4EzZi2BNv2w=="],
 
     "@flux-ui/types": ["@flux-ui/types@3.0.0-next.35", "", {}, "sha512-slUc7sYTmB3xQuTfR78HcN4kQMTajhPItlfhHdBsxgkpj6J4Tl9OcnHGzAlMsQusBcB/nc5qvKNQf61tLf11Hw=="],
-
-    "@fortawesome/fontawesome-common-types": ["@fortawesome/fontawesome-common-types@7.2.0", "", {}, "sha512-IpR0bER9FY25p+e7BmFH25MZKEwFHTfRAfhOyJubgiDnoJNsSvJ7nigLraHtp4VOG/cy8D7uiV0dLkHOne5Fhw=="],
 
     "@intlify/core-base": ["@intlify/core-base@11.3.0", "", { "dependencies": { "@intlify/devtools-types": "11.3.0", "@intlify/message-compiler": "11.3.0", "@intlify/shared": "11.3.0" } }, "sha512-NNX5jIwF4TJBe7RtSKDMOA6JD9mp2mRcBHAwt2X+Q8PvnZub0yj5YYXlFu2AcESdgQpEv/5Yx2uOCV/yh7YkZg=="],
 
