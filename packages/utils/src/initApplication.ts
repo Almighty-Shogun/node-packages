@@ -1,6 +1,6 @@
 import disableZoom from './disableZoom'
-import useDarkTheme from './useDarkTheme'
-import useWebsiteLocale from './useWebsiteLocale'
+import setDarkTheme from './setDarkTheme'
+import setWebsiteLocale from './setWebsiteLocale'
 
 type ApplicationConfig = {
     locale?: string;
@@ -9,8 +9,8 @@ type ApplicationConfig = {
 };
 
 export default function (config: ApplicationConfig): void {
-    useWebsiteLocale(config.locale);
-    useDarkTheme(config.isDarkTheme ?? false);
+    setWebsiteLocale(config.locale);
+    setDarkTheme(config.isDarkTheme ?? false);
 
     if (config.isZoomDisabled) {
         disableZoom();

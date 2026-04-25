@@ -41,7 +41,7 @@
         "luxon": "^3.7.2"
     },
     "devDependencies": {
-        "tsdown": "^0.16.6",
-        "typescript": "^5.7.2"
+        "tsdown": "^0.16.8",
+        "typescript": "^5.9.3"
     }
 }

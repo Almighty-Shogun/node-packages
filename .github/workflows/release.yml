@@ -38,6 +38,8 @@ jobs:
                   bun pm version --cwd packages/utils $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/vue-utils $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/webkit-native-bridge $RELEASE_VERSION --no-git-tag-version
+                  
+                   sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/types/vue-utils.json
 
             - name: Build packages
               run: |
