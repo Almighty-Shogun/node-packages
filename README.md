@@ -1,3 +1,9 @@
+<a href="https://shogun.ms" target="_blank" rel="noopener">
+	<img src="https://cdn.shogun.ms/assets/branding/app-icon-256.svg" alt="Shogun app-icon" height="62"/>
+</a>
+
+---
+
 # Node Packages
 A collection of Node / Bun packages I use in (personal) projects.
 
