@@ -7,9 +7,6 @@
 # Node Packages
 A collection of Node / Bun packages I use in (personal) projects.
 
-> [!NOTE]
-> Documentation is currently in the works and will be published once it's ready.
-
 ## 📦 Packages
 - The [**Prototype Extensions**](/packages/prototype-extensions) package is available under `@almighty-shogun/prototype-extensions`
 - The [**Utils**](/packages/utils) package is available under `@almighty-shogun/utils`
