@@ -1,0 +1,23 @@
+{
+    "name": "shogun-packages-docs",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vitepress dev .",
+        "build": "vitepress build .",
+        "preview": "vitepress preview ."
+    },
+    "dependencies": {
+        "@almighty-shogun/prototype-extensions": "workspace:*",
+        "@almighty-shogun/utils": "workspace:*",
+        "@almighty-shogun/vue-utils": "workspace:*",
+        "@almighty-shogun/webkit-native-bridge": "workspace:*"
+    },
+    "devDependencies": {
+        "@types/luxon": "^3.7.1",
+        "@types/node": "^25.9.1",
+        "vitepress": "^1.6.4",
+        "vitepress-plugin-group-icons": "^1.7.5",
+        "vue": "^3.5.34"
+    }
+}
