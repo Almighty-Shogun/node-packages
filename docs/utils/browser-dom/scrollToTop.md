@@ -1,6 +1,17 @@
+---
+outline: deep
+
+params:
+    - name: element
+      description: Optional scrollable element to move back to the top. When omitted, the current window is scrolled.
+      type: HTMLElement
+---
+
 # scrollToTop
 
-Smoothly scrolls the current window back to the top. Use it after route changes, pagination changes, or workflows where the user should return to the beginning of the page.
+Smoothly scrolls a page or scrollable element back to the top. When no element is provided, it scrolls the current window. Pass an `HTMLElement` when the scroll position belongs to a sidebar, modal body, panel, or another contained scrolling area.
+
+The helper always uses native smooth scrolling with `top: 0`, so it is useful after route changes, pagination changes, filter resets, or workflows where the user should return to the beginning of a view.
 
 ## Importing
 
@@ -13,11 +24,23 @@ import { scrollToTop } from '@almighty-shogun/utils'
 ```ts
 import { scrollToTop } from '@almighty-shogun/utils'
 
-scrollToTop()
+scrollToTop();
 ```
+
+```ts
+import { scrollToTop } from '@almighty-shogun/utils'
+
+const sidebar = document.getElementsByClassName('VPSidebar')[0] as HTMLElement | undefined;
+
+if (sidebar) {
+    scrollToTop(sidebar);
+}
+```
+
+<FrontmatterDocs/>
 
 ## Type signature
 
 ```ts
-declare function scrollToTop(): void;
+declare function scrollToTop(element?: HTMLElement): void;
 ```
