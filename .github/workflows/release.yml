@@ -1,8 +1,8 @@
-name: Release packages
+name: 🚀 Release packages
 
 on:
     release:
-        types: [released]
+        types: [ released ]
 
 env:
     RELEASE_VERSION: ${{ github.event.release.tag_name }}
@@ -14,25 +14,23 @@ permissions:
 jobs:
     publish:
         runs-on: ubuntu-latest
-        name: Publish to Registry
+        name: 🚀 Publish to Registry
 
         steps:
-            - name: Checkout
+            - name: 👀 Checkout
               uses: actions/checkout@v6
 
-            - name: Setup node
+            - name: ⚙️ Setup node & Bun
               uses: actions/setup-node@v6
               with:
                   node-version: '25.x'
                   registry-url: https://registry.npmjs.org
+            - uses: oven-sh/setup-bun@v2
 
-            - name: Setup Bun
-              uses: oven-sh/setup-bun@v2
-
-            - name: Install dependencies
+            - name: 📦️ Install dependencies
               run: bun install --frozen-lockfile
 
-            - name: Tag version
+            - name: ✏️ Tag version
               run: |
                   bun pm version --cwd packages/prototype-extensions $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/utils $RELEASE_VERSION --no-git-tag-version
@@ -41,14 +39,14 @@ jobs:
                   
                    sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/vue-utils/package.json
 
-            - name: Build packages
+            - name: 🔨 Build packages
               run: |
                   bun --cwd packages/prototype-extensions build
                   bun --cwd packages/utils build
                   bun --cwd packages/vue-utils build
                   bun --cwd packages/webkit-native-bridge build
 
-            - name: Publish packages
+            - name: 🚀 Publish packages
               run: |
                   bun publish --cwd packages/prototype-extensions --access public
                   bun publish --cwd packages/utils --access public

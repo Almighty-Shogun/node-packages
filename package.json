@@ -4,5 +4,14 @@
     "workspaces": [
         "packages/*",
         "docs"
-    ]
+    ],
+    "scripts": {
+        "docs:dev": "bun --cwd docs dev",
+        "docs:build": "bun --cwd docs build",
+        "docs:preview": "bun --cwd docs preview",
+        "docs:deploy": "wrangler deploy"
+    },
+    "dependencies": {
+        "wrangler": "^4.94.0"
+    }
 }
