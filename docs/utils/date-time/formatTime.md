@@ -29,7 +29,7 @@ import { formatTime } from '@almighty-shogun/utils'
 import { DateTime } from 'luxon'
 import { formatTime } from '@almighty-shogun/utils'
 
-const time = formatTime(DateTime.fromISO('2026-05-20T14:30:00'), 'en')
+const time = formatTime(DateTime.fromISO('2026-05-20T14:30:00'), 'en');
 ```
 
 <FrontmatterDocs/>

@@ -11,7 +11,7 @@ Converts a string with JavaScript's `Number()` constructor. This means numeric s
 ## Usage
 
 ```ts
-const amount = '42'.toNumber()
+const amount = '42'.toNumber();
 
 // 42
 ```

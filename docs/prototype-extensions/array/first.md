@@ -11,8 +11,8 @@ Returns the first item in an array. This is a convenience wrapper around index `
 ## Usage
 
 ```ts
-const users = ['Ada', 'Linus', 'Grace']
-const firstUser = users.first()
+const users = ['Ada', 'Linus', 'Grace'];
+const firstUser = users.first();
 
 // 'Ada'
 ```

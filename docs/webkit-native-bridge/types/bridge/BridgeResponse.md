@@ -31,7 +31,7 @@ import type { BridgeResponse } from '@almighty-shogun/webkit-native-bridge'
 ```ts
 import type { BridgeResponse } from '@almighty-shogun/webkit-native-bridge'
 
-type UserResponse = BridgeResponse<
+type UserResponse = BridgeResponse<;
     { id: string; name: string },
     'USER_NOT_FOUND',
     { id: string }
@@ -39,14 +39,14 @@ type UserResponse = BridgeResponse<
 
 function renderUserResponse(response: UserResponse) {
     if (response.ok) {
-        return response.data.name
+        return response.data.name;
     }
 
     if (response.error.code === 'USER_NOT_FOUND') {
-        return 'User ' + (response.error.details?.id ?? 'unknown') + ' was not found'
+        return 'User ' + (response.error.details?.id ?? 'unknown') + ' was not found';
     }
 
-    return response.message ?? 'Unknown error'
+    return response.message ?? 'Unknown error';
 }
 ```
 

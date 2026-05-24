@@ -19,7 +19,7 @@ import { NativeBridgeDisposedError } from '@almighty-shogun/webkit-native-bridge
 ```ts
 import { NativeBridgeDisposedError } from '@almighty-shogun/webkit-native-bridge'
 
-throw new NativeBridgeDisposedError()
+throw new NativeBridgeDisposedError();
 ```
 
 <FrontmatterDocs/>

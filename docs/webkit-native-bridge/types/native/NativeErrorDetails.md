@@ -34,7 +34,7 @@ type Requests = {
     }
 }
 
-type GetUserDetails = NativeErrorDetails<Requests, 'getUser'>
+type GetUserDetails = NativeErrorDetails<Requests, 'getUser'>;
 
 // { id: string }
 ```

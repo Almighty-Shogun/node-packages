@@ -22,7 +22,7 @@ import { setWebsiteLocale } from '@almighty-shogun/utils'
 ```ts
 import { setWebsiteLocale } from '@almighty-shogun/utils'
 
-setWebsiteLocale('nl')
+setWebsiteLocale('nl');
 
 // <html lang="nl">
 ```

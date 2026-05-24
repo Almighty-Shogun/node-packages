@@ -19,7 +19,7 @@ import { getToday } from '@almighty-shogun/utils'
 ```ts
 import { getToday } from '@almighty-shogun/utils'
 
-const today = getToday()
+const today = getToday();
 
 // '2026-05-20'
 ```

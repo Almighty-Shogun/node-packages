@@ -11,8 +11,8 @@ Checks whether the string contains no characters by reading `length === 0`. The 
 ## Usage
 
 ```ts
-const value = ''
-const missingValue = value.isEmpty()
+const value = '';
+const missingValue = value.isEmpty();
 
 // true
 ```

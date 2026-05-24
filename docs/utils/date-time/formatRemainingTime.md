@@ -24,7 +24,7 @@ import { formatRemainingTime } from '@almighty-shogun/utils'
 ```ts
 import { formatRemainingTime } from '@almighty-shogun/utils'
 
-const remaining = formatRemainingTime({ days: 2, hours: 4, minutes: 30 })
+const remaining = formatRemainingTime({ days: 2, hours: 4, minutes: 30 });
 
 // '2d 4h'
 ```

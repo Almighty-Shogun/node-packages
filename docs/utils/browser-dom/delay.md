@@ -24,7 +24,7 @@ import { delay } from '@almighty-shogun/utils'
 ```ts
 import { delay } from '@almighty-shogun/utils'
 
-await delay(300)
+await delay(300);
 
 // continue after 300ms
 ```

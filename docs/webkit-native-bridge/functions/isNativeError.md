@@ -25,7 +25,7 @@ import { isNativeError } from '@almighty-shogun/webkit-native-bridge'
 import { isNativeError } from '@almighty-shogun/webkit-native-bridge'
 
 if (!response.ok && isNativeError(response.error)) {
-    console.warn('Native code rejected the request')
+    console.warn('Native code rejected the request');
 }
 ```
 

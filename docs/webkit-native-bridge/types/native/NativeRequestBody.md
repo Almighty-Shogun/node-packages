@@ -30,7 +30,7 @@ type Requests = {
     getUser: { body: { id: string }; response: { name: string } }
 }
 
-type GetUserBody = NativeRequestBody<Requests, 'getUser'>
+type GetUserBody = NativeRequestBody<Requests, 'getUser'>;
 
 // { id: string }
 ```

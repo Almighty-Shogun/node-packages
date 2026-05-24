@@ -54,17 +54,17 @@ import { usePagination } from '@almighty-shogun/vue-utils'
 import { watch } from 'vue'
 import { usePagination } from '@almighty-shogun/vue-utils'
 
-const { page, perPage, setPage, setPerPage, setTotal } = usePagination(25)
+const { page, perPage, setPage, setPerPage, setTotal } = usePagination(25);
 
 watch([page, perPage], async () => {
-    const response = await fetch('/api/users?page=' + page.value + '&limit=' + perPage.value)
-    const result = await response.json()
+    const response = await fetch('/api/users?page=' + page.value + '&limit=' + perPage.value);
+    const result = await response.json();
 
-    setTotal(result.total)
-})
+    setTotal(result.total);
+});
 
-setPage(2)
-setPerPage(50)
+setPage(2);
+setPerPage(50);
 ```
 
 <FrontmatterDocs/>

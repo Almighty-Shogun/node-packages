@@ -24,7 +24,7 @@ import { formatDutchCurrency } from '@almighty-shogun/utils'
 ```ts
 import { formatDutchCurrency } from '@almighty-shogun/utils'
 
-const total = formatDutchCurrency(1299.5)
+const total = formatDutchCurrency(1299.5);
 ```
 
 <FrontmatterDocs/>

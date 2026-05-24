@@ -11,8 +11,8 @@ Checks whether the array contains no items by reading `length === 0`. It is a sm
 ## Usage
 
 ```ts
-const items: string[] = []
-const shouldShowEmptyState = items.isEmpty()
+const items: string[] = [];
+const shouldShowEmptyState = items.isEmpty();
 
 // true
 ```

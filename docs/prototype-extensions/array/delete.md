@@ -16,8 +16,8 @@ Returns a copy of the array without the item at the provided index. The original
 ## Usage
 
 ```ts
-const values = ['draft', 'published', 'archived']
-const nextValues = values.delete(1)
+const values = ['draft', 'published', 'archived'];
+const nextValues = values.delete(1);
 
 // ['draft', 'archived']
 ```

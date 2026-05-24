@@ -36,10 +36,10 @@ import { useInterval } from '@almighty-shogun/vue-utils'
 import { ref } from 'vue'
 import { useInterval } from '@almighty-shogun/vue-utils'
 
-const count = ref(0)
-const interval = useInterval(1000, () => count.value++)
+const count = ref(0);
+const interval = useInterval(1000, () => count.value++);
 
-interval.stop()
+interval.stop();
 ```
 
 <FrontmatterDocs/>

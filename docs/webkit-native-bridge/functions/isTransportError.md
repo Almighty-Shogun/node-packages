@@ -25,7 +25,7 @@ import { isTransportError } from '@almighty-shogun/webkit-native-bridge'
 import { isTransportError } from '@almighty-shogun/webkit-native-bridge'
 
 if (!response.ok && isTransportError(response.error)) {
-    console.warn('Request did not reach native code')
+    console.warn('Request did not reach native code');
 }
 ```
 

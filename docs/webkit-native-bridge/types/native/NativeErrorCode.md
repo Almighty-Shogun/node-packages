@@ -34,7 +34,7 @@ type Requests = {
     }
 }
 
-type GetUserCode = NativeErrorCode<Requests, 'getUser'>
+type GetUserCode = NativeErrorCode<Requests, 'getUser'>;
 
 // 'USER_NOT_FOUND'
 ```

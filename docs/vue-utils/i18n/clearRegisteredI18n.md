@@ -13,7 +13,7 @@ import { clearRegisteredI18n } from '@almighty-shogun/vue-utils'
 ```ts
 import { clearRegisteredI18n } from '@almighty-shogun/vue-utils'
 
-clearRegisteredI18n()
+clearRegisteredI18n();
 ```
 
 ## Type signature

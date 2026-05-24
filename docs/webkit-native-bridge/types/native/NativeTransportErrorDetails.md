@@ -19,7 +19,7 @@ import type { NativeTransportErrorDetails } from '@almighty-shogun/webkit-native
 ```ts
 import type { NativeTransportErrorDetails } from '@almighty-shogun/webkit-native-bridge'
 
-const details: NativeTransportErrorDetails = { cause: new Error('Missing handler') }
+const details: NativeTransportErrorDetails = { cause: new Error('Missing handler') };
 ```
 
 <FrontmatterDocs/>

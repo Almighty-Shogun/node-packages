@@ -24,7 +24,7 @@ import { getLanguage } from '@almighty-shogun/utils'
 ```ts
 import { getLanguage } from '@almighty-shogun/utils'
 
-const language = getLanguage('nl')
+const language = getLanguage('nl');
 
 // { name: 'Dutch', code: 'nl', flag: { ... } }
 ```

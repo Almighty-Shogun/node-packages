@@ -26,9 +26,9 @@ import { useDarkTheme } from '@almighty-shogun/vue-utils'
 ```ts
 import { useDarkTheme } from '@almighty-shogun/vue-utils'
 
-const { darkMode, toggle } = useDarkTheme()
+const { darkMode, toggle } = useDarkTheme();
 
-toggle()
+toggle();
 ```
 
 <FrontmatterDocs/>

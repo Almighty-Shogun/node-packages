@@ -24,7 +24,7 @@ import { addTime } from '@almighty-shogun/utils'
 ```ts
 import { addTime } from '@almighty-shogun/utils'
 
-const expiresAt = addTime({ minutes: 15 })
+const expiresAt = addTime({ minutes: 15 });
 ```
 
 <FrontmatterDocs/>

@@ -33,7 +33,7 @@ import { formatMonth } from '@almighty-shogun/utils'
 import { DateTime } from 'luxon'
 import { formatMonth } from '@almighty-shogun/utils'
 
-const month = formatMonth(DateTime.fromISO('2026-05-20'), false, 'en')
+const month = formatMonth(DateTime.fromISO('2026-05-20'), false, 'en');
 
 // 'May'
 ```

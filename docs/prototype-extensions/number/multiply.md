@@ -16,7 +16,7 @@ Multiplies the current number by the provided value and returns the product. It 
 ## Usage
 
 ```ts
-const total = (6).multiply(7)
+const total = (6).multiply(7);
 
 // 42
 ```

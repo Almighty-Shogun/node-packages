@@ -19,7 +19,7 @@ import { getCurrentRouteName } from '@almighty-shogun/vue-utils'
 ```ts
 import { getCurrentRouteName } from '@almighty-shogun/vue-utils'
 
-const routeName = getCurrentRouteName()
+const routeName = getCurrentRouteName();
 ```
 
 <FrontmatterDocs/>

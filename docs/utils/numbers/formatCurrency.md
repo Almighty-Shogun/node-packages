@@ -32,7 +32,7 @@ import { formatCurrency } from '@almighty-shogun/utils'
 ```ts
 import { formatCurrency } from '@almighty-shogun/utils'
 
-const total = formatCurrency(1299.5, 'EUR', 'nl')
+const total = formatCurrency(1299.5, 'EUR', 'nl');
 ```
 
 <FrontmatterDocs/>

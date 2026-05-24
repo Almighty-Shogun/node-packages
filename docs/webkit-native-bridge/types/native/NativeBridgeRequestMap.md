@@ -35,10 +35,10 @@ type Requests = {
     }
 }
 
-const bridge = createNativeBridge<Requests>()
+const bridge = createNativeBridge<Requests>();
 
-await bridge.request('getUser', { id: '1' })
-await bridge.request('getVersion')
+await bridge.request('getUser', { id: '1' });
+await bridge.request('getVersion');
 ```
 
 <FrontmatterDocs/>

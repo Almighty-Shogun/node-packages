@@ -35,7 +35,7 @@ const header = usePageHeader({
     title: 'Users',
     icon: 'users',
     page: 'Users - Dashboard'
-})
+});
 ```
 
 <FrontmatterDocs/>

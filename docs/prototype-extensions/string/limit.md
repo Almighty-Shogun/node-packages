@@ -20,7 +20,7 @@ Limits a string to a maximum number of original characters. When the string is l
 ## Usage
 
 ```ts
-const label = 'Dashboard overview'.limit(9, '...')
+const label = 'Dashboard overview'.limit(9, '...');
 
 // 'Dashboard...'
 ```

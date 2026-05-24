@@ -72,26 +72,26 @@ type Requests = {
     }
 }
 
-type Commands = 'close' | 'openSettings'
+type Commands = 'close' | 'openSettings';
 
 const bridge = createNativeBridge<Requests, Commands>({
     handlerName: 'nativeBridge',
     requestTimeout: 15000
-})
+});
 
-bridge.call('openSettings')
+bridge.call('openSettings');
 
-const response = await bridge.request('getUser', { id: '1' })
+const response = await bridge.request('getUser', { id: '1' });
 
 if (response.ok) {
-    console.log(response.data.name)
+    console.log(response.data.name);
 } else {
-    console.error(response.error.code, response.message)
+    console.error(response.error.code, response.message);
 }
 
-const ping = await bridge.request('ping')
+const ping = await bridge.request('ping');
 
-bridge.dispose()
+bridge.dispose();
 ```
 
 ```cpp [bridgeHandler.cpp]

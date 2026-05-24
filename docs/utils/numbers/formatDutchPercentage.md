@@ -24,7 +24,7 @@ import { formatDutchPercentage } from '@almighty-shogun/utils'
 ```ts
 import { formatDutchPercentage } from '@almighty-shogun/utils'
 
-const conversion = formatDutchPercentage(0.153)
+const conversion = formatDutchPercentage(0.153);
 ```
 
 <FrontmatterDocs/>

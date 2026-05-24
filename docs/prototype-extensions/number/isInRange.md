@@ -20,7 +20,7 @@ Checks whether the number falls inside an inclusive range. Both boundaries are i
 ## Usage
 
 ```ts
-const isValidPageSize = (25).isInRange(5, 100)
+const isValidPageSize = (25).isInRange(5, 100);
 
 // true
 ```

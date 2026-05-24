@@ -16,8 +16,8 @@ Toggles a string or number inside an array. If the value already exists, the met
 ## Usage
 
 ```ts
-const selected = ['users', 'settings']
-const nextSelected = selected.addOrRemove('users')
+const selected = ['users', 'settings'];
+const nextSelected = selected.addOrRemove('users');
 
 // ['settings']
 ```

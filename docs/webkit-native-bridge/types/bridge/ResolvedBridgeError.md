@@ -20,7 +20,7 @@ import type { ResolvedBridgeError } from '@almighty-shogun/webkit-native-bridge'
 import type { ResolvedBridgeError } from '@almighty-shogun/webkit-native-bridge'
 
 function logError(error: ResolvedBridgeError) {
-    console.error(error.message)
+    console.error(error.message);
 }
 ```
 

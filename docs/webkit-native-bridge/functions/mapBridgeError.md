@@ -24,8 +24,8 @@ import { mapBridgeError } from '@almighty-shogun/webkit-native-bridge'
 ```ts
 import { mapBridgeError } from '@almighty-shogun/webkit-native-bridge'
 
-const resolved = mapBridgeError(response.error)
-console.error(resolved.message)
+const resolved = mapBridgeError(response.error);
+console.error(resolved.message);
 ```
 
 <FrontmatterDocs/>

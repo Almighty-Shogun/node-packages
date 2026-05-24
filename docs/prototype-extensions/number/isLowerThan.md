@@ -20,7 +20,7 @@ Checks whether the number is lower than another value. Set `allowEqual` to `true
 ## Usage
 
 ```ts
-const isBelowLimit = (9).isLowerThan(10)
+const isBelowLimit = (9).isLowerThan(10);
 
 // true
 ```

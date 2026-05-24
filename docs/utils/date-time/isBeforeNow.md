@@ -25,7 +25,7 @@ import { isBeforeNow } from '@almighty-shogun/utils'
 import { DateTime } from 'luxon'
 import { isBeforeNow } from '@almighty-shogun/utils'
 
-const expired = isBeforeNow(DateTime.now().minus({ minutes: 1 }))
+const expired = isBeforeNow(DateTime.now().minus({ minutes: 1 }));
 
 // true
 ```

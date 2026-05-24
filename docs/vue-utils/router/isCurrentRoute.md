@@ -24,7 +24,7 @@ import { isCurrentRoute } from '@almighty-shogun/vue-utils'
 ```ts
 import { isCurrentRoute } from '@almighty-shogun/vue-utils'
 
-const isDashboard = isCurrentRoute('dashboard')
+const isDashboard = isCurrentRoute('dashboard');
 ```
 
 <FrontmatterDocs/>

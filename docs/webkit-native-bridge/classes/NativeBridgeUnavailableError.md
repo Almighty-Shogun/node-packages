@@ -24,7 +24,7 @@ import { NativeBridgeUnavailableError } from '@almighty-shogun/webkit-native-bri
 ```ts
 import { NativeBridgeUnavailableError } from '@almighty-shogun/webkit-native-bridge'
 
-throw new NativeBridgeUnavailableError('nativeBridge')
+throw new NativeBridgeUnavailableError('nativeBridge');
 ```
 
 <FrontmatterDocs/>

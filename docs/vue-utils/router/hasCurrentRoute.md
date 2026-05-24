@@ -24,7 +24,7 @@ import { hasCurrentRoute } from '@almighty-shogun/vue-utils'
 ```ts
 import { hasCurrentRoute } from '@almighty-shogun/vue-utils'
 
-const isInUsersArea = hasCurrentRoute(['users.index', 'users.show'])
+const isInUsersArea = hasCurrentRoute(['users.index', 'users.show']);
 ```
 
 <FrontmatterDocs/>

@@ -11,8 +11,8 @@ Returns the last item in an array. It reads from `array.length - 1`, so it is be
 ## Usage
 
 ```ts
-const users = ['Ada', 'Linus', 'Grace']
-const lastUser = users.last()
+const users = ['Ada', 'Linus', 'Grace'];
+const lastUser = users.last();
 
 // 'Grace'
 ```

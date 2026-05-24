@@ -19,8 +19,8 @@ import { getLanguages } from '@almighty-shogun/utils'
 ```ts
 import { getLanguages } from '@almighty-shogun/utils'
 
-const languages = getLanguages()
-const codes = languages.map(language => language.code)
+const languages = getLanguages();
+const codes = languages.map(language => language.code);
 
 // ['en', 'nl', 'fr', 'de', 'pl']
 ```

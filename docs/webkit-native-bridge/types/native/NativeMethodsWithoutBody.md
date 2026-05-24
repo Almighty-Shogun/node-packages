@@ -28,7 +28,7 @@ type Requests = {
     ping: { body: void; response: 'pong' }
 }
 
-type MethodsWithoutBody = NativeMethodsWithoutBody<Requests>
+type MethodsWithoutBody = NativeMethodsWithoutBody<Requests>;
 
 // 'ping'
 ```

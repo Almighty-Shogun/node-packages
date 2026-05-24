@@ -16,7 +16,7 @@ Returns a new string with another string appended to the end. It is a small read
 ## Usage
 
 ```ts
-const path = '/users'.append('/42')
+const path = '/users'.append('/42');
 
 // '/users/42'
 ```

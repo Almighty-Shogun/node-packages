@@ -3,7 +3,7 @@ outline: deep
 
 returns:
     - name: isLoading
-      description: true` while the wrapped task is pending.
+      description: '`true` while the wrapped task is pending.'
       type: Ref<boolean>
 
     - name: load(task)
@@ -28,13 +28,13 @@ import { useLoaded } from '@almighty-shogun/vue-utils'
 ```ts
 import { useLoaded } from '@almighty-shogun/vue-utils'
 
-const { isLoading, load } = useLoaded()
+const { isLoading, load } = useLoaded();
 
 async function submit() {
     try {
-        await load(() => fetch('/api/profile', { method: 'POST' }))
+        await load(() => fetch('/api/profile', { method: 'POST' }));
     } catch (error) {
-        console.error('Saving profile failed', error)
+        console.error('Saving profile failed', error);
     }
 }
 ```

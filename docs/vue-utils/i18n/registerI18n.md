@@ -22,7 +22,7 @@ import { registerI18n } from '@almighty-shogun/vue-utils'
 ```ts
 import { registerI18n } from '@almighty-shogun/vue-utils'
 
-registerI18n(i18n.global)
+registerI18n(i18n.global);
 ```
 
 <FrontmatterDocs/>

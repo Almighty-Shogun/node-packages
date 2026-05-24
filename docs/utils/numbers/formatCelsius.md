@@ -24,7 +24,7 @@ import { formatCelsius } from '@almighty-shogun/utils'
 ```ts
 import { formatCelsius } from '@almighty-shogun/utils'
 
-const label = formatCelsius(21.6)
+const label = formatCelsius(21.6);
 
 // '22 °C'
 ```

@@ -13,7 +13,7 @@ import { reload } from '@almighty-shogun/utils'
 ```ts
 import { reload } from '@almighty-shogun/utils'
 
-reload()
+reload();
 ```
 
 ## Type signature

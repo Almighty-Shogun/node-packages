@@ -26,7 +26,7 @@ initApplication({
     locale: 'nl',
     isDarkTheme: true,
     isZoomDisabled: true
-})
+});
 ```
 
 <FrontmatterDocs/>

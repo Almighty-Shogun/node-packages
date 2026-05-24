@@ -16,7 +16,7 @@ Compares the number with another number using strict equality. It does not coerc
 ## Usage
 
 ```ts
-const isSamePage = (2).equals(2)
+const isSamePage = (2).equals(2);
 
 // true
 ```

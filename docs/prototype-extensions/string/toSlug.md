@@ -11,7 +11,7 @@ Converts a string into a URL-friendly slug. The method trims surrounding whitesp
 ## Usage
 
 ```ts
-const slug = '  Hello World!  '.toSlug()
+const slug = '  Hello World!  '.toSlug();
 
 // 'hello-world'
 ```

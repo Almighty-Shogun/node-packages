@@ -24,10 +24,10 @@ import { normalizeBridgeResponse } from '@almighty-shogun/webkit-native-bridge'
 ```ts
 import { normalizeBridgeResponse } from '@almighty-shogun/webkit-native-bridge'
 
-const normalized = normalizeBridgeResponse(response)
+const normalized = normalizeBridgeResponse(response);
 
 if (!normalized.ok) {
-    console.error(normalized.error.message)
+    console.error(normalized.error.message);
 }
 ```
 

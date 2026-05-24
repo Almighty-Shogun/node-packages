@@ -22,7 +22,7 @@ import { setDarkTheme } from '@almighty-shogun/utils'
 ```ts
 import { setDarkTheme } from '@almighty-shogun/utils'
 
-setDarkTheme(true)
+setDarkTheme(true);
 
 // <html dark>
 ```

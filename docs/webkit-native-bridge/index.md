@@ -24,8 +24,8 @@ type Requests = {
     ping: { body: void; response: 'pong' }
 }
 
-const bridge = createNativeBridge<Requests>()
-const response = await bridge.request('ping')
+const bridge = createNativeBridge<Requests>();
+const response = await bridge.request('ping');
 ```
 
 Continue with [installation](./installation) or jump to a category from the sidebar.

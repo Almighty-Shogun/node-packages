@@ -12,7 +12,7 @@ params:
 
 returns:
     - name: isEmpty
-      description: true` when the current source collection contains no items.
+      description: '`true` when the current source collection contains no items.'
       type: Ref<boolean>
 
     - name: total
@@ -86,13 +86,13 @@ import { useDataTable } from '@almighty-shogun/vue-utils'
 import { ref } from 'vue'
 import { useDataTable } from '@almighty-shogun/vue-utils'
 
-type User = { id: number; name: string }
+type User = { id: number; name: string };
 
 const users = ref<User[]>([
     { id: 1, name: 'Ada' },
     { id: 2, name: 'Grace' },
     { id: 3, name: 'Linus' }
-])
+]);
 
 const {
     filteredItems,
@@ -103,7 +103,7 @@ const {
     limits,
     setPage,
     setPerPage
-} = useDataTable(users, 10)
+} = useDataTable(users, 10);
 </script>
 ```
 

@@ -19,9 +19,9 @@ The package is marked as side-effectful. It does not provide named runtime expor
 ```ts
 import '@almighty-shogun/prototype-extensions'
 
-const selected = ['users', 'settings'].addOrRemove('users')
-const slug = 'User Settings'.toSlug()
-const validPage = (25).isInRange(5, 100)
+const selected = ['users', 'settings'].addOrRemove('users');
+const slug = 'User Settings'.toSlug();
+const validPage = (25).isInRange(5, 100);
 ```
 
 Continue with [installation](./installation) or jump to a category from the sidebar.

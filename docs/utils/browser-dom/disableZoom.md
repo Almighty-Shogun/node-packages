@@ -13,7 +13,7 @@ import { disableZoom } from '@almighty-shogun/utils'
 ```ts
 import { disableZoom } from '@almighty-shogun/utils'
 
-disableZoom()
+disableZoom();
 ```
 
 ## Type signature

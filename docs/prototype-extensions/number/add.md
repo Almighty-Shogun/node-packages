@@ -16,7 +16,7 @@ Adds the provided number to the current number and returns the result. The metho
 ## Usage
 
 ```ts
-const total = (10).add(5)
+const total = (10).add(5);
 
 // 15
 ```

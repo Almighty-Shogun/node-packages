@@ -30,7 +30,7 @@ type Requests = {
     getUser: { body: { id: string }; response: { name: string } }
 }
 
-type AppBridge = NativeBridge<Requests, 'close'>
+type AppBridge = NativeBridge<Requests, 'close'>;
 ```
 
 <FrontmatterDocs/>

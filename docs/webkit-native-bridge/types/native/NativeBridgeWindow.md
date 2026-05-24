@@ -20,7 +20,7 @@ import type { NativeBridgeWindow } from '@almighty-shogun/webkit-native-bridge'
 import type { NativeBridgeWindow } from '@almighty-shogun/webkit-native-bridge'
 
 function hasBridge(window: NativeBridgeWindow) {
-    return window.webkit?.messageHandlers?.nativeBridge !== undefined
+    return window.webkit?.messageHandlers?.nativeBridge !== undefined;
 }
 ```
 

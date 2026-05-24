@@ -28,7 +28,7 @@ type Requests = {
     ping: { body: void; response: 'pong' }
 }
 
-type MethodsRequiringBody = NativeMethodsWithBody<Requests>
+type MethodsRequiringBody = NativeMethodsWithBody<Requests>;
 
 // 'getUser'
 ```

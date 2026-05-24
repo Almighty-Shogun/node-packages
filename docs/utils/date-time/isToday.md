@@ -29,7 +29,7 @@ import { isToday } from '@almighty-shogun/utils'
 import { DateTime } from 'luxon'
 import { isToday } from '@almighty-shogun/utils'
 
-const shouldHighlight = isToday(DateTime.now())
+const shouldHighlight = isToday(DateTime.now());
 
 // true
 ```

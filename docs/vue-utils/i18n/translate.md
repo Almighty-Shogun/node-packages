@@ -28,7 +28,7 @@ import { translate } from '@almighty-shogun/vue-utils'
 ```ts
 import { translate } from '@almighty-shogun/vue-utils'
 
-const label = translate('navigation.dashboard')
+const label = translate('navigation.dashboard');
 ```
 
 <FrontmatterDocs/>

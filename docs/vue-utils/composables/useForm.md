@@ -31,10 +31,10 @@ import { useForm } from '@almighty-shogun/vue-utils'
 ```ts
 import { useForm } from '@almighty-shogun/vue-utils'
 
-const { form, reset } = useForm({ email: '', password: '' })
+const { form, reset } = useForm({ email: '', password: '' });
 
-form.value.email = 'ada@example.com'
-reset()
+form.value.email = 'ada@example.com';
+reset();
 ```
 
 <FrontmatterDocs/>

@@ -32,7 +32,7 @@ import { formatNumber } from '@almighty-shogun/utils'
 ```ts
 import { formatNumber } from '@almighty-shogun/utils'
 
-const amount = formatNumber(1234.567, 2, 'en')
+const amount = formatNumber(1234.567, 2, 'en');
 ```
 
 <FrontmatterDocs/>

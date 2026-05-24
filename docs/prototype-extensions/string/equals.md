@@ -16,7 +16,7 @@ Compares the string with another string using strict equality. The comparison is
 ## Usage
 
 ```ts
-const isSameRole = 'admin'.equals('admin')
+const isSameRole = 'admin'.equals('admin');
 
 // true
 ```

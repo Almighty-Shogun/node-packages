@@ -20,7 +20,7 @@ Checks whether the number is greater than another value. Set `allowEqual` to `tr
 ## Usage
 
 ```ts
-const isAboveMinimum = (10).isGreaterThan(5)
+const isAboveMinimum = (10).isGreaterThan(5);
 
 // true
 ```

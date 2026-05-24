@@ -16,7 +16,7 @@ Subtracts the provided number from the current number and returns the result. It
 ## Usage
 
 ```ts
-const remaining = (10).subtract(4)
+const remaining = (10).subtract(4);
 
 // 6
 ```

@@ -28,7 +28,7 @@ import { formatDutchNumber } from '@almighty-shogun/utils'
 ```ts
 import { formatDutchNumber } from '@almighty-shogun/utils'
 
-const amount = formatDutchNumber(1234.567, 1)
+const amount = formatDutchNumber(1234.567, 1);
 ```
 
 <FrontmatterDocs/>

@@ -29,7 +29,7 @@ import { formatDate } from '@almighty-shogun/utils'
 import { DateTime } from 'luxon'
 import { formatDate } from '@almighty-shogun/utils'
 
-const label = formatDate(DateTime.fromISO('2026-05-20'), 'en')
+const label = formatDate(DateTime.fromISO('2026-05-20'), 'en');
 
 // 'May 20, 2026'
 ```

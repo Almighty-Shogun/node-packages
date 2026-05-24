@@ -33,7 +33,7 @@ import { formatWeekday } from '@almighty-shogun/utils'
 import { DateTime } from 'luxon'
 import { formatWeekday } from '@almighty-shogun/utils'
 
-const weekday = formatWeekday(DateTime.fromISO('2026-05-20'), true, 'en')
+const weekday = formatWeekday(DateTime.fromISO('2026-05-20'), true, 'en');
 ```
 
 <FrontmatterDocs/>

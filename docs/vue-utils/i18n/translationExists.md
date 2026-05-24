@@ -28,7 +28,7 @@ import { translationExists } from '@almighty-shogun/vue-utils'
 ```ts
 import { translationExists } from '@almighty-shogun/vue-utils'
 
-const hasMenuTranslations = translationExists('navigation', ['dashboard', 'settings'])
+const hasMenuTranslations = translationExists('navigation', ['dashboard', 'settings']);
 ```
 
 <FrontmatterDocs/>

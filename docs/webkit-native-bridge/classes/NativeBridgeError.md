@@ -24,7 +24,7 @@ import { NativeBridgeError } from '@almighty-shogun/webkit-native-bridge'
 ```ts
 import { NativeBridgeError } from '@almighty-shogun/webkit-native-bridge'
 
-throw new NativeBridgeError('Bridge request failed')
+throw new NativeBridgeError('Bridge request failed');
 ```
 
 <FrontmatterDocs/>

@@ -26,7 +26,7 @@ import type { BridgeError } from '@almighty-shogun/webkit-native-bridge'
 ```ts
 import type { BridgeError } from '@almighty-shogun/webkit-native-bridge'
 
-type ValidationError = BridgeError<'VALIDATION_ERROR', { field: string }>
+type ValidationError = BridgeError<'VALIDATION_ERROR', { field: string }>;
 ```
 
 <FrontmatterDocs/>

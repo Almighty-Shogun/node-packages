@@ -24,7 +24,7 @@ import { containsRoutePrefix } from '@almighty-shogun/vue-utils'
 ```ts
 import { containsRoutePrefix } from '@almighty-shogun/vue-utils'
 
-const isSettingsPage = containsRoutePrefix('settings.')
+const isSettingsPage = containsRoutePrefix('settings.');
 ```
 
 <FrontmatterDocs/>

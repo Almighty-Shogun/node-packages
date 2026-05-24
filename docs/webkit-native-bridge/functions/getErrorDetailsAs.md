@@ -24,8 +24,8 @@ import { getErrorDetailsAs } from '@almighty-shogun/webkit-native-bridge'
 ```ts
 import { getErrorDetailsAs } from '@almighty-shogun/webkit-native-bridge'
 
-type ValidationDetails = { field: string }
-const details = getErrorDetailsAs<ValidationDetails>(response.error)
+type ValidationDetails = { field: string };
+const details = getErrorDetailsAs<ValidationDetails>(response.error);
 ```
 
 <FrontmatterDocs/>

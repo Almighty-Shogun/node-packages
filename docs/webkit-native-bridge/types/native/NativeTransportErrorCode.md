@@ -19,7 +19,7 @@ import type { NativeTransportErrorCode } from '@almighty-shogun/webkit-native-br
 ```ts
 import type { NativeTransportErrorCode } from '@almighty-shogun/webkit-native-bridge'
 
-const retryable: NativeTransportErrorCode[] = ['TIMEOUT', 'UNAVAILABLE']
+const retryable: NativeTransportErrorCode[] = ['TIMEOUT', 'UNAVAILABLE'];
 ```
 
 <FrontmatterDocs/>

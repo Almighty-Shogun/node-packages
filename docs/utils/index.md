@@ -22,10 +22,10 @@ The package is tree-shakeable and exposes named exports from the root entry poin
 import { DateTime } from 'luxon'
 import { formatDate, formatCurrency, setWebsiteLocale } from '@almighty-shogun/utils'
 
-setWebsiteLocale('nl')
+setWebsiteLocale('nl');
 
-const date = formatDate(DateTime.now(), 'nl')
-const total = formatCurrency(1299.5, 'EUR', 'nl')
+const date = formatDate(DateTime.now(), 'nl');
+const total = formatCurrency(1299.5, 'EUR', 'nl');
 ```
 
 Continue with [installation](./installation) or jump to a category from the sidebar.

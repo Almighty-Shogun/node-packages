@@ -16,7 +16,7 @@ Divides the current number by the provided value and returns the quotient. Divis
 ## Usage
 
 ```ts
-const pages = (50).divide(10)
+const pages = (50).divide(10);
 
 // 5
 ```

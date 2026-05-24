@@ -28,7 +28,7 @@ import { formatPercentage } from '@almighty-shogun/utils'
 ```ts
 import { formatPercentage } from '@almighty-shogun/utils'
 
-const completion = formatPercentage(0.875, 'en')
+const completion = formatPercentage(0.875, 'en');
 ```
 
 <FrontmatterDocs/>

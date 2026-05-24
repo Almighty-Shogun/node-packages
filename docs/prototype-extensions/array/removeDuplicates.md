@@ -11,8 +11,8 @@ Returns a new array with duplicate string or number values removed. The first oc
 ## Usage
 
 ```ts
-const ids = [1, 2, 2, 3, 3]
-const uniqueIds = ids.removeDuplicates()
+const ids = [1, 2, 2, 3, 3];
+const uniqueIds = ids.removeDuplicates();
 
 // [1, 2, 3]
 ```

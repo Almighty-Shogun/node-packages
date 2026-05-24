@@ -26,9 +26,9 @@ import { useWebsiteLocale } from '@almighty-shogun/vue-utils'
 ```ts
 import { useWebsiteLocale } from '@almighty-shogun/vue-utils'
 
-const { locale, setLocale } = useWebsiteLocale()
+const { locale, setLocale } = useWebsiteLocale();
 
-setLocale('nl')
+setLocale('nl');
 ```
 
 <FrontmatterDocs/>

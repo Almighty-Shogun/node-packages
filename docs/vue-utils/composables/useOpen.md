@@ -46,7 +46,7 @@ import { useOpen } from '@almighty-shogun/vue-utils'
 <script setup lang="ts">
 import { useOpen } from '@almighty-shogun/vue-utils'
 
-const { isOpen, open, close } = useOpen()
+const { isOpen, open, close } = useOpen();
 </script>
 ```
 

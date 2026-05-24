@@ -23,7 +23,7 @@ import type { NormalizedBridgeResponse } from '@almighty-shogun/webkit-native-br
 ```ts
 import type { NormalizedBridgeResponse } from '@almighty-shogun/webkit-native-bridge'
 
-type NormalizedUser = NormalizedBridgeResponse<{ id: string }>
+type NormalizedUser = NormalizedBridgeResponse<{ id: string }>;
 ```
 
 <FrontmatterDocs/>

@@ -11,7 +11,7 @@ Checks whether the number is evenly divisible by `2`. The method uses the remain
 ## Usage
 
 ```ts
-const shouldAlternate = (4).isEven()
+const shouldAlternate = (4).isEven();
 
 // true
 ```

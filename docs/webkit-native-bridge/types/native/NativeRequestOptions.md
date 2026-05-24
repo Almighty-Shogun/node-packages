@@ -19,7 +19,7 @@ import type { NativeRequestOptions } from '@almighty-shogun/webkit-native-bridge
 ```ts
 import type { NativeRequestOptions } from '@almighty-shogun/webkit-native-bridge'
 
-const options: NativeRequestOptions = { timeout: 5000 }
+const options: NativeRequestOptions = { timeout: 5000 };
 ```
 
 <FrontmatterDocs/>
