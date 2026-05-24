@@ -1,9 +1,8 @@
-import { customRef } from 'vue'
-import type { RequiredRef } from './internal/types'
+import { customRef, type Ref } from 'vue'
 
 const UNINITIALIZED = Symbol('requiredRef.uninitialized');
 
-export default function <T>(): RequiredRef<T> {
+export default function <T>(): Ref<T> {
     let state: T | typeof UNINITIALIZED = UNINITIALIZED;
 
     return customRef<T>((track, trigger) => ({

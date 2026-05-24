@@ -20,6 +20,7 @@ export const vueUtils: DefaultTheme.SidebarItem[] = [
             { text: 'useOpen', link: '/vue-utils/composables/useOpen' },
             { text: 'usePageHeader', link: '/vue-utils/composables/usePageHeader' },
             { text: 'usePagination', link: '/vue-utils/composables/usePagination' },
+            { text: 'useRouteParam', link: '/vue-utils/composables/useRouteParam' },
             { text: 'useWebsiteLocale', link: '/vue-utils/composables/useWebsiteLocale' }
         ]
     },
@@ -37,6 +38,7 @@ export const vueUtils: DefaultTheme.SidebarItem[] = [
         text: 'Refs',
         collapsed: false,
         items: [
+            { text: 'localStorageRef', link: '/vue-utils/refs/localStorageRef' },
             { text: 'requiredRef', link: '/vue-utils/refs/requiredRef' }
         ]
     },

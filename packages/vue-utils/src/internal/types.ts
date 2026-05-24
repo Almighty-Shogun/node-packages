@@ -1,5 +1,3 @@
-import type { Ref } from 'vue'
-
 export type TranslationParams = Record<string, unknown> | (string | number)[];
 
 export type TranslateExists = (key: string) => boolean;
@@ -11,5 +9,3 @@ export type I18n = {
     te?: TranslateExists;
     $te?: TranslateExists;
 };
-
-export type RequiredRef<T> = Ref<T>;
