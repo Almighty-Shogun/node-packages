@@ -6,9 +6,8 @@ returns:
       description: Current dark-mode state.
       type: Ref<boolean>
 
-    - name: toggle()
+    - name: 'toggle(): void'
       description: Flips `darkMode` and applies the new state to the document.
-      type: () => void
 ---
 
 # useDarkTheme

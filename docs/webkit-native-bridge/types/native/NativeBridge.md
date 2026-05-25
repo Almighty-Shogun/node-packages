@@ -3,10 +3,13 @@ outline: deep
 
 params:
     - name: TRequests
+      type: NativeBridgeRequestMap
       description: Request map used to type request method names, request bodies, responses, and native errors.
 
     - name: TCommands
-      description: String union of fire-and-forget command names. Defaults to `never`.
+      type: string
+      description: String union of fire-and-forget command names.
+      defaultValue: 'never'
 
 returns: A TypeScript type for native bridge APIs. It is erased at runtime and is used only by TypeScript to describe the shape of values passed to or returned from the package APIs.
 ---

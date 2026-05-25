@@ -7,8 +7,10 @@ params:
       type: Ref<T[]>
 
     - name: pageSize
-      description: Initial number of items per page. Defaults to `5`.
+      description: Initial number of items per page.
       type: number
+      optional: true
+      defaultValue: '5'
 
 returns:
     - name: isEmpty
@@ -35,17 +37,14 @@ returns:
       description: Computed slice for the active page and page size.
       type: Ref<T[]>
 
-    - name: setTotal(total)
+    - name: 'setTotal(total: number): void'
       description: Manually overrides the total. Usually not needed because the watcher syncs it.
-      type: '(total: number) => void'
 
-    - name: setPage(page)
+    - name: 'setPage(page: number): void'
       description: Changes the active page.
-      type: '(page: number) => void'
 
-    - name: setPerPage(perPage)
+    - name: 'setPerPage(perPage: number): void'
       description: Changes the active page size.
-      type: '(perPage: number) => void'
 ---
 
 # useDataTable

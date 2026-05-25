@@ -7,8 +7,9 @@ params:
       type: DateTime
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
 returns: A localized hour string. Locale rules decide whether the result uses 12-hour or 24-hour formatting.
 ---

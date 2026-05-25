@@ -9,10 +9,12 @@ params:
     - name: isLong
       description: Use long month names when `true`; short names when `false`.
       type: boolean
+      defaultValue: 'true'
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
 returns: A localized month name. When `isLong` is `true`, the long month form is used; when `false`, the short form is used.
 ---
@@ -45,7 +47,7 @@ const month = formatMonth(DateTime.fromISO('2026-05-20'), false, 'en');
 ```ts
 declare function formatMonth(
     date: DateTime,
-    isLong?: boolean,
+    isLong: boolean,
     locale?: string
 ): string;
 ```

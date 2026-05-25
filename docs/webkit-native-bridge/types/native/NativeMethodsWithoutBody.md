@@ -3,6 +3,7 @@ outline: deep
 
 params:
     - name: TRequests
+      type: NativeBridgeRequestMap
       description: Request map to inspect for methods that accept no body.
 
 returns: A TypeScript type for native bridge APIs. It is erased at runtime and is used only by TypeScript to describe the shape of values passed to or returned from the package APIs.

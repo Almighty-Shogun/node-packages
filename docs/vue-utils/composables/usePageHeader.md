@@ -3,8 +3,9 @@ outline: deep
 
 params:
     - name: config
-      description: Optional header data.
+      description: Header data.
       type: HeaderData
+      optional: true
 
 returns:
     - name: pageTitle

@@ -7,8 +7,9 @@ params:
       type: number
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
 returns: A localized percentage string. The input is treated as a ratio, so `0.5` represents fifty percent.
 ---

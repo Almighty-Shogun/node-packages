@@ -3,38 +3,45 @@ outline: deep
 
 params:
     - name: options.eventName
-      description: DOM event name used for native responses. Defaults to `webkit-native-bridge`.
+      description: DOM event name used for native responses.
       type: string
+      optional: true
+      defaultValue: 'webkit-native-bridge'
 
     - name: options.handlerName
-      description: WebKit message handler name under `window.webkit.messageHandlers`. Defaults to `nativeBridge`.
+      description: WebKit message handler name under `window.webkit.messageHandlers`.
       type: string
+      optional: true
+      defaultValue: 'nativeBridge'
 
     - name: options.requestTimeout
-      description: Default request timeout in milliseconds. Defaults to `30000`; use `null` to disable request timeouts.
+      description: Request timeout in milliseconds. Use `null` to disable request timeouts.
       type: number | null
+      optional: true
+      defaultValue: '30000'
 
     - name: options.window
-      description: Optional window-like object. Useful for tests or custom runtimes.
+      description: Window-like object. Useful for tests or custom runtimes.
       type: NativeBridgeWindow
+      optional: true
 
 returns:
-    - name: call(method)
+    - name: 'call(method: TCommands): void'
       description: Sends a fire-and-forget command string to native code.
 
-    - name: request(method, body, options)
+    - name: 'request(method, body, options): Promise<BridgeResponse>'
       description: Sends a typed request and resolves to a `BridgeResponse`.
 
-    - name: postMessage(message)
+    - name: 'postMessage(message: string): void'
       description: Sends a raw message through the configured WebKit handler.
 
-    - name: handleResponse(detail)
+    - name: 'handleResponse(detail: NativeResponseEventDetail): void'
       description: Manually resolves a pending request from a native response detail.
 
-    - name: isAvailable()
+    - name: 'isAvailable(): boolean'
       description: Returns whether the configured WebKit message handler exists.
 
-    - name: dispose()
+    - name: 'dispose(): void'
       description: Removes the response listener and resolves pending requests as disposed failures.
 ---
 

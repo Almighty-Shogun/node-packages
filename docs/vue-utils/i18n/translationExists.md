@@ -7,8 +7,9 @@ params:
       type: string
 
     - name: subKeys
-      description: Optional subkeys that must all exist under the base key.
+      description: Subkeys that must all exist under the base key.
       type: string[]
+      defaultValue: '[]'
 
 returns: '`true` when the registered i18n instance reports that the key exists. When `subKeys` are provided, all nested keys must exist.'
 ---
@@ -38,6 +39,6 @@ const hasMenuTranslations = translationExists('navigation', ['dashboard', 'setti
 ```ts
 declare function translationExists(
     key: string,
-    subKeys?: string[]
+    subKeys: string[]
 ): boolean;
 ```

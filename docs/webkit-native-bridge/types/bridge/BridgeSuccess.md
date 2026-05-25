@@ -3,6 +3,7 @@ outline: deep
 
 params:
     - name: T
+      type: any
       description: Success payload type stored in `data`.
 
 returns: A TypeScript type for native bridge APIs. It is erased at runtime and is used only by TypeScript to describe the shape of values passed to or returned from the package APIs.

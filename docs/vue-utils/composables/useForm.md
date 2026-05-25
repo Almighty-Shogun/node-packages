@@ -11,9 +11,8 @@ returns:
       description: Mutable form state cloned from the initial `spec`.
       type: Ref<T>
 
-    - name: reset()
+    - name: 'reset(): void'
       description: Replaces `form.value` with a fresh clone of the original `spec`.
-      type: () => void
 ---
 
 # useForm

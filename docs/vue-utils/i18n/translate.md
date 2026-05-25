@@ -7,8 +7,9 @@ params:
       type: string
 
     - name: params
-      description: Optional translation parameters.
+      description: Translation parameters.
       type: TranslationParams
+      optional: true
 
 returns: The translated string when an i18n instance is registered. Without one, the original key is returned so callers get a predictable fallback.
 ---

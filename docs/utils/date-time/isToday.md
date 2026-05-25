@@ -7,8 +7,9 @@ params:
       type: DateTime
 
     - name: today
-      description: Optional comparison date.
+      description: Comparison date.
       type: DateTime
+      optional: true
 
 returns: '`true` when both values share the same day.'
 ---

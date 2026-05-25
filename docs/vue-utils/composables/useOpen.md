@@ -6,17 +6,14 @@ returns:
       description: Current open state. Starts as `false`.
       type: Ref<boolean>
 
-    - name: open()
+    - name: 'open(): void'
       description: Sets `isOpen` to `true`.
-      type: () => void
 
-    - name: close()
+    - name: 'close(): void'
       description: Sets `isOpen` to `false`.
-      type: () => void
 
-    - name: toggle()
+    - name: 'toggle(): void'
       description: Flips the current open state.
-      type: () => void
 ---
 
 # useOpen

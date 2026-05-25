@@ -27,15 +27,19 @@ import { localStorageRef } from '@almighty-shogun/vue-utils'
 
 ## Usage
 
-```ts
+::: code-group
+
+```ts [stringUnion.ts]
 import { localStorageRef } from '@almighty-shogun/vue-utils'
 
-const selectedTheme = localStorageRef<'light' | 'dark'>('selected-theme', 'light');
+type WebsiteTheme = 'light' | 'dark';
+
+const selectedTheme = localStorageRef<WebsiteTheme>('theme', 'light');
 
 selectedTheme.value = 'dark';
 ```
 
-```ts
+```ts [dateTime.ts]
 import { DateTime } from 'luxon'
 import { localStorageRef } from '@almighty-shogun/vue-utils'
 
@@ -43,6 +47,8 @@ const lastVisit = localStorageRef('last-visit', DateTime.now());
 
 lastVisit.value = DateTime.now();
 ```
+
+:::
 
 <FrontmatterDocs/>
 

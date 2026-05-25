@@ -7,15 +7,16 @@ params:
       type: number
 
     - name: decimals
-      description: Fraction digits. Defaults to `2`.
+      description: Fraction digits.
       type: number
+      defaultValue: '2'
 
 returns: A Dutch localized number string.
 ---
 
 # formatDutchNumber
 
-Formats a number using Dutch locale rules and a fixed number of decimal places. The default is two decimals, which fits many financial and measurement displays.
+Formats a number using Dutch locale rules and a fixed number of decimal places. Use `decimals` to align values in tables, cards, and chart labels.
 
 ## Importing
 
@@ -38,7 +39,7 @@ const amount = formatDutchNumber(1234.567, 1);
 ```ts
 declare function formatDutchNumber(
     value: number,
-    decimals?: number
+    decimals: number
 ): string;
 ```
 

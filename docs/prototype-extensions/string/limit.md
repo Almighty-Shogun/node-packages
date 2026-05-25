@@ -9,6 +9,7 @@ params:
     - name: appending
       description: Suffix used when the string is truncated.
       type: string | null
+      defaultValue: 'null'
 
 returns: The original string when it fits, otherwise the truncated string plus `appending`.
 ---

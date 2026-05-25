@@ -7,8 +7,9 @@ params:
       type: DateTime
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
 returns: A localized date label containing weekday, day, and month. The year is intentionally omitted.
 ---

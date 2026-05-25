@@ -7,8 +7,9 @@ params:
       type: DateTime
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
 returns: A localized date-time label containing weekday, day, month, hour, and minute. The exact punctuation and ordering come from Luxon and the active locale.
 ---

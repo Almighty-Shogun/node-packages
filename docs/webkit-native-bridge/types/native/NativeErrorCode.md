@@ -3,9 +3,11 @@ outline: deep
 
 params:
     - name: TRequests
+      type: NativeBridgeRequestMap
       description: Request map containing the method definition.
 
     - name: TMethod
+      type: keyof TRequests
       description: Method key whose native error code should be resolved.
 
 returns: A TypeScript type for native bridge APIs. It is erased at runtime and is used only by TypeScript to describe the shape of values passed to or returned from the package APIs.

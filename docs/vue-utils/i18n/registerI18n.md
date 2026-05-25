@@ -4,7 +4,7 @@ outline: deep
 params:
     - name: i18n
       description: Instance with `t`, `$t`, `te`, or `$te` methods.
-      type: I18n | null
+      type: I18n
 ---
 
 # registerI18n
@@ -30,5 +30,5 @@ registerI18n(i18n.global);
 ## Type signature
 
 ```ts
-declare function registerI18n(i18n: I18n | null): void;
+declare function registerI18n(i18n: I18n): void;
 ```

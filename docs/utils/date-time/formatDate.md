@@ -7,8 +7,9 @@ params:
       type: DateTime
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
 returns: A localized date string such as `May 20, 2026` in English locales. The exact output depends on the locale data available in the runtime.
 ---

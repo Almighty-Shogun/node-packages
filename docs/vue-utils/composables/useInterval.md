@@ -11,13 +11,11 @@ params:
       type: Function
 
 returns:
-    - name: start()
+    - name: 'start(): void'
       description: Starts the interval when it is not already running.
-      type: () => void
 
-    - name: stop()
+    - name: 'stop(): void'
       description: Clears the active interval.
-      type: () => void
 ---
 
 # useInterval

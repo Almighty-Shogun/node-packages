@@ -9,6 +9,8 @@ params:
     - name: allowEqual
       description: When `true`, equality is accepted.
       type: boolean
+      optional: true
+      defaultValue: 'false'
 
 returns: '`true` when the number is lower than `value`, or lower than or equal when `allowEqual` is `true`.'
 ---

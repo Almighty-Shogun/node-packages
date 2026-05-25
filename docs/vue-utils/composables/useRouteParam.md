@@ -7,8 +7,9 @@ params:
       type: string
 
     - name: defaultValue
-      description: Optional fallback used when the parameter is missing or is not a single string value. Passing a number also converts matching route values with `Number()`.
+      description: Fallback used when the parameter is missing or is not a single string value. Passing a number also converts matching route values with `Number()`.
       type: T | null
+      defaultValue: 'null'
 
 returns: A reactive `Ref<T | null>` containing the current route parameter value.
 ---
@@ -58,6 +59,6 @@ const page = useRouteParam('page', 1);
 ```ts
 declare function useRouteParam<T = string>(
     name: string,
-    defaultValue?: T | null
+    defaultValue: T | null
 ): Ref<T | null>;
 ```

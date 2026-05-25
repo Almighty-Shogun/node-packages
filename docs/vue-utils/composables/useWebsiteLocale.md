@@ -6,9 +6,8 @@ returns:
       description: Current website locale.
       type: Ref<string>
 
-    - name: setLocale(locale)
+    - name: 'setLocale(locale: string): void'
       description: Updates the locale ref and applies it to the document.
-      type: '(locale: string) => void'
 ---
 
 # useWebsiteLocale

@@ -3,8 +3,9 @@ outline: deep
 
 params:
     - name: locale
-      description: Optional locale. Falls back to document or navigator language, or `en`.
+      description: Locale to apply. Falls back to document or navigator language, or `en`.
       type: string
+      optional: true
 ---
 
 # setWebsiteLocale

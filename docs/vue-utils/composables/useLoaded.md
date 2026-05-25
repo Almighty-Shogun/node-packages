@@ -6,9 +6,8 @@ returns:
       description: '`true` while the wrapped task is pending.'
       type: Ref<boolean>
 
-    - name: load(task)
+    - name: 'load<T>(task: Promise<T> | (() => Promise<T>)): Promise<T>'
       description: Runs or awaits the task while managing `isLoading`.
-      type: Promise<T> | (() => Promise<T>)
 ---
 
 # useLoaded

@@ -3,8 +3,9 @@ outline: deep
 
 params:
     - name: pageSize
-      description: Initial `perPage` value. Defaults to `5`.
+      description: Initial `perPage` value.
       type: number
+      defaultValue: '5'
 
 returns:
     - name: limits
@@ -23,17 +24,14 @@ returns:
       description: Total number of items across all pages. Starts at `0`.
       type: Ref<number>
 
-    - name: setTotal(total)
+    - name: 'setTotal(total: number): void'
       description: Updates total item count.
-      type: '(total: number) => void'
 
-    - name: setPage(page)
+    - name: 'setPage(page: number): void'
       description: Updates the active page.
-      type: '(page: number) => void'
 
-    - name: setPerPage(perPage)
+    - name: 'setPerPage(perPage: number): void'
       description: Updates the active page size.
-      type: '(perPage: number) => void'
 ---
 
 # usePagination
@@ -72,7 +70,7 @@ setPerPage(50);
 ## Type signature
 
 ```ts
-declare function usePagination(pageSize?: number): UsePagination;
+declare function usePagination(pageSize: number): UsePagination;
 
 type UsePagination = {
     readonly limits: Ref<number[]>;

@@ -3,8 +3,9 @@ outline: deep
 
 params:
     - name: element
-      description: Optional scrollable element to move back to the top. When omitted, the current window is scrolled.
+      description: Scrollable element to move back to the top. When omitted, the current window is scrolled.
       type: HTMLElement
+      optional: true
 ---
 
 # scrollToTop

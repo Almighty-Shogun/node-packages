@@ -3,13 +3,18 @@ outline: deep
 
 params:
     - name: TData
+      type: any
       description: Success payload type.
 
     - name: TCode
-      description: Error code union for failures. Defaults to `string`.
+      type: string
+      description: Error code union for failures.
+      defaultValue: 'string'
 
     - name: TDetails
-      description: Optional structured error details. Defaults to `unknown`.
+      type: any
+      description: Structured error details.
+      defaultValue: 'unknown'
 
 returns: A discriminated TypeScript union. It does not exist at runtime, but it describes the success and failure shapes returned by native bridge requests.
 ---

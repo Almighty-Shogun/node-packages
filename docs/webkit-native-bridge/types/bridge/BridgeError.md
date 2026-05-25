@@ -3,10 +3,14 @@ outline: deep
 
 params:
     - name: TCode
-      description: Error code union for the failure. Defaults to `string`.
+      type: string
+      description: Error code union for the failure.
+      defaultValue: 'string'
 
     - name: TDetails
-      description: Optional structured details returned with the error. Defaults to `unknown`.
+      type: any
+      description: Structured details returned with the error.
+      defaultValue: 'unknown'
 
 returns: A TypeScript type for native bridge APIs. It is erased at runtime and is used only by TypeScript to describe the shape of values passed to or returned from the package APIs.
 ---

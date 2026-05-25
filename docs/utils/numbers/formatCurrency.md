@@ -7,19 +7,22 @@ params:
       type: number
 
     - name: currency
-      description: Currency code. Defaults to `EUR`.
+      description: Currency code.
       type: string
+      optional: true
+      defaultValue: 'EUR'
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
-returns: A localized currency string with exactly two fraction digits. Defaults to Euro formatting when no currency is provided.
+returns: A localized currency string with exactly two fraction digits. When no currency is provided, Euro formatting is used.
 ---
 
 # formatCurrency
 
-Formats a number as localized currency using `Intl.NumberFormat`. The currency defaults to `EUR`, and the locale follows the package locale fallback unless a locale is provided explicitly.
+Formats a number as localized currency using `Intl.NumberFormat`. The locale follows the package locale fallback unless a locale is provided explicitly.
 
 ## Importing
 

@@ -9,10 +9,12 @@ params:
     - name: isLong
       description: Use long weekday names when `true`; short names when `false`.
       type: boolean
+      defaultValue: 'true'
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
 returns: A localized weekday name. When `isLong` is `true`, the long weekday form is used; when `false`, the short form is used.
 ---
@@ -43,7 +45,7 @@ const weekday = formatWeekday(DateTime.fromISO('2026-05-20'), true, 'en');
 ```ts
 declare function formatWeekday(
     date: DateTime,
-    isLong?: boolean,
+    isLong: boolean,
     locale?: string
 ): string;
 ```

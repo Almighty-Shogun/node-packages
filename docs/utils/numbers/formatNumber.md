@@ -7,12 +7,14 @@ params:
       type: number
 
     - name: decimals
-      description: Fraction digits. Defaults to `2`.
+      description: Fraction digits.
       type: number
+      defaultValue: '2'
 
     - name: locale
-      description: Optional locale override.
+      description: Locale override.
       type: string
+      optional: true
 
 returns: A localized number string with exactly `decimals` fraction digits. This is useful when table columns need visually consistent precision.
 ---
@@ -42,7 +44,7 @@ const amount = formatNumber(1234.567, 2, 'en');
 ```ts
 declare function formatNumber(
     value: number,
-    decimals?: number,
+    decimals: number,
     locale?: string
 ): string;
 ```
