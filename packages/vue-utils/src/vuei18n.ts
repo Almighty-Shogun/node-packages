@@ -4,7 +4,7 @@ type I18nMethod = 't' | 'te';
 
 let i18nGlobal: I18n|null = null;
 
-export function registerI18n(i18n: I18n|null): void {
+export function registerI18n(i18n: I18n): void {
     i18nGlobal = i18n;
 }
 
