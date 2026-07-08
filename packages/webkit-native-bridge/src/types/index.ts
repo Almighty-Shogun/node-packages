@@ -6,8 +6,8 @@ export type {
     NativeTransportErrorCode,
     NativeTransportErrorDetails,
     NormalizedBridgeResponse,
-    ResolvedBridgeError,
-} from './bridgeResponse'
+    ResolvedBridgeError
+} from './bridgeResponse';
 
 export type {
     NativeBridge,
@@ -22,4 +22,6 @@ export type {
     NativeRequestOptions,
     NativeResponseBody,
     NativeResponseEventDetail,
-} from './nativeBridge'
+    NativeBridgePendingRequest,
+    NativeBridgeMessageHandler
+} from './nativeBridge';
