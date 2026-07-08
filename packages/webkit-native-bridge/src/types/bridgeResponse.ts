@@ -5,7 +5,7 @@ export type BridgeSuccess<T> = {
 };
 
 export type BridgeError<TCode extends string = string, TDetails = unknown> = {
-    type: "native" | "transport";
+    type: 'native' | 'transport';
     code: TCode;
     message: string | null;
     details: TDetails | null;
@@ -21,7 +21,7 @@ export type BridgeResponse<TData, TCode extends string = string, TDetails = unkn
     BridgeSuccess<TData> | BridgeFailure<TCode, TDetails>;
 
 export type ResolvedBridgeError = {
-    type: "native" | "transport";
+    type: 'native' | 'transport';
     code: string;
     message: string;
     details: unknown;
@@ -32,7 +32,7 @@ export type NormalizedBridgeResponse<TData> = BridgeSuccess<TData> | {
     error: ResolvedBridgeError;
 };
 
-export type NativeTransportErrorCode = "TIMEOUT" | "UNAVAILABLE" | "DISPOSED" | "UNKNOWN";
+export type NativeTransportErrorCode = 'TIMEOUT' | 'UNAVAILABLE' | 'DISPOSED' | 'UNKNOWN';
 
 export type NativeTransportErrorDetails = {
     cause?: unknown;

@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon'
+import { DateTime } from 'luxon';
 
 export default function (): string {
-    return DateTime.now().toFormat("yyyy-MM-dd");
+    return DateTime.now().toFormat('yyyy-MM-dd');
 }

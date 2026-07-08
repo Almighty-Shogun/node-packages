@@ -1,4 +1,4 @@
-import getCorrectLocale from './internal/getCorrectLocale'
+import getCorrectLocale from './internal/getCorrectLocale';
 
 export default function (value: number, decimals: number = 2, locale?: string): string {
     const localization = getCorrectLocale(locale);

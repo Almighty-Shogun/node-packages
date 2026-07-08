@@ -1,5 +1,5 @@
-import formatPercentage from './formatPercentage'
+import formatPercentage from './formatPercentage';
 
 export default function (value: number): string {
-    return formatPercentage(value, "nl");
+    return formatPercentage(value, 'nl');
 }

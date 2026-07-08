@@ -1,6 +1,6 @@
-import disableZoom from './disableZoom'
-import setDarkTheme from './setDarkTheme'
-import setWebsiteLocale from './setWebsiteLocale'
+import disableZoom from './disableZoom';
+import setDarkTheme from './setDarkTheme';
+import setWebsiteLocale from './setWebsiteLocale';
 
 type ApplicationConfig = {
     locale?: string;

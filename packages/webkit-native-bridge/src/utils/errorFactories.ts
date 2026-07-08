@@ -1,4 +1,4 @@
-import type { BridgeError, NativeTransportErrorCode, NativeTransportErrorDetails } from '../types'
+import type { BridgeError, NativeTransportErrorCode, NativeTransportErrorDetails } from '../types';
 
 export function createTransportError<TCode extends string = NativeTransportErrorCode, TDetails = NativeTransportErrorDetails>(
     code: TCode,
@@ -6,10 +6,10 @@ export function createTransportError<TCode extends string = NativeTransportError
     details?: TDetails | null
 ): BridgeError<TCode, TDetails> {
     return {
-        type: "transport",
+        type: 'transport',
         code,
         message,
-        details: details ?? null,
+        details: details ?? null
     };
 }
 
@@ -19,9 +19,9 @@ export function createNativeError<TCode extends string = string, TDetails = unkn
     details?: TDetails | null
 ): BridgeError<TCode, TDetails> {
     return {
-        type: "native",
+        type: 'native',
         code,
         message,
-        details: details ?? null,
+        details: details ?? null
     };
 }

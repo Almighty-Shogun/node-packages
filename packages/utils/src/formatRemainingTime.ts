@@ -1,8 +1,8 @@
-import { Duration, type DurationLikeObject } from 'luxon'
+import { Duration, type DurationLikeObject } from 'luxon';
 
 export default function (time: DurationLikeObject): string {
     const duration = Duration.fromObject(time)
-        .shiftTo("years", "months", "weeks", "days", "hours", "minutes")
+        .shiftTo('years', 'months', 'weeks', 'days', 'hours', 'minutes')
         .normalize();
 
     const years = Math.floor(duration.years);
@@ -21,5 +21,5 @@ export default function (time: DurationLikeObject): string {
         minutes > 0 ? `${minutes}m` : null
     ].filter((part): part is string => part !== null);
 
-    return parts.slice(0, 2).join(" ") || "1m";
+    return parts.slice(0, 2).join(' ') || '1m';
 }

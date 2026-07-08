@@ -1,11 +1,11 @@
-import type { NativeBridgeWindow } from '../types'
+import type { NativeBridgeWindow } from '../types';
 
 export function getDefaultWindow(): NativeBridgeWindow | undefined {
-    return typeof window === "undefined" ? undefined : window as NativeBridgeWindow;
+    return typeof window === 'undefined' ? undefined : window as NativeBridgeWindow;
 }
 
 export function createRequestId(): string {
-    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
         return crypto.randomUUID();
     }
 

@@ -1,11 +1,11 @@
-import type { BridgeError, BridgeResponse, NormalizedBridgeResponse, ResolvedBridgeError } from './types'
+import type { BridgeError, BridgeResponse, NormalizedBridgeResponse, ResolvedBridgeError } from './types';
 
 export function mapBridgeError<TCode extends string, TDetails>(error: BridgeError<TCode, TDetails>): ResolvedBridgeError {
     return {
         type: error.type,
         code: error.code,
         message: error.message ?? 'Unknown bridge error.',
-        details: error.details,
+        details: error.details
     };
 }
 
@@ -14,12 +14,12 @@ export function normalizeBridgeResponse<TData, TCode extends string, TDetails>(r
         return {
             ok: true,
             message: response.message,
-            data: response.data,
+            data: response.data
         };
     }
 
     return {
         ok: false,
-        error: mapBridgeError(response.error),
+        error: mapBridgeError(response.error)
     };
 }

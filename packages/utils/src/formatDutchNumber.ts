@@ -1,5 +1,5 @@
-import formatNumber from './formatNumber'
+import formatNumber from './formatNumber';
 
 export default function (value: number, decimals: number = 2): string {
-    return formatNumber(value, decimals, "nl");
+    return formatNumber(value, decimals, 'nl');
 }

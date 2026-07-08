@@ -1,8 +1,8 @@
-import { createTransportError } from './utils/errorFactories'
-import { normalizeNativeError } from './utils/normalizeNativeError'
-import { NativeBridgeDisposedError, NativeBridgeUnavailableError } from './errors'
-import { DEFAULT_EVENT_NAME, DEFAULT_HANDLER_NAME, DEFAULT_REQUEST_TIMEOUT } from './constants'
-import { createRequestId, encodeRequestBody, getDefaultWindow } from './utils/nativeBridgeRuntime'
+import { createTransportError } from './utils/errorFactories';
+import { normalizeNativeError } from './utils/normalizeNativeError';
+import { NativeBridgeDisposedError, NativeBridgeUnavailableError } from './errors';
+import { DEFAULT_EVENT_NAME, DEFAULT_HANDLER_NAME, DEFAULT_REQUEST_TIMEOUT } from './constants';
+import { createRequestId, encodeRequestBody, getDefaultWindow } from './utils/nativeBridgeRuntime';
 
 import type {
     BridgeResponse,
@@ -20,7 +20,7 @@ import type {
     NativeResponseEventDetail,
     NativeTransportErrorCode,
     NativeTransportErrorDetails
-} from './types'
+} from './types';
 
 export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Record<never, never>, TCommands extends string = never>(options: NativeBridgeOptions = {}): NativeBridge<TRequests, TCommands> {
     const eventName = options.eventName ?? DEFAULT_EVENT_NAME;
@@ -107,19 +107,19 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
             pendingRequest.resolve({
                 ok: true,
                 message: null,
-                data: detail.payload,
+                data: detail.payload
             });
 
             return;
         }
 
-        const resolvedMessage = typeof detail.error === "object" && detail.error !== null && "message" in detail.error && typeof (detail.error as { message?: unknown }).message === "string"
-            ? (detail.error as { message: string }).message : typeof detail.error === "string" ? detail.error : null;
+        const resolvedMessage = typeof detail.error === 'object' && detail.error !== null && 'message' in detail.error && typeof (detail.error as { message?: unknown }).message === 'string'
+            ? (detail.error as { message: string }).message : typeof detail.error === 'string' ? detail.error : null;
 
         pendingRequest.resolve({
             ok: false,
             message: resolvedMessage,
-            error: normalizeNativeError(detail.error, resolvedMessage),
+            error: normalizeNativeError(detail.error, resolvedMessage)
         });
     }
 
@@ -138,7 +138,7 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
             pendingRequest.resolve({
                 ok: false,
                 message: new NativeBridgeDisposedError().message,
-                error: createTransportError("DISPOSED", new NativeBridgeDisposedError().message),
+                error: createTransportError('DISPOSED', new NativeBridgeDisposedError().message)
             });
         }
     }
@@ -171,14 +171,14 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
                 resolve({
                     ok: false,
                     message: `Native request "${String(method)}" timed out after ${timeout}ms`,
-                    error: createTransportError("TIMEOUT", `Native request "${String(method)}" timed out after ${timeout}ms`),
+                    error: createTransportError('TIMEOUT', `Native request "${String(method)}" timed out after ${timeout}ms`)
                 });
             }, timeout);
 
             pendingRequests.set(requestId, {
                 method: String(method),
                 resolve: resolve as (value: BridgeResponse<unknown>) => void,
-                timeoutId,
+                timeoutId
             });
 
             try {
@@ -187,14 +187,14 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
                 clearPendingRequest(requestId);
 
                 const transportError = error instanceof NativeBridgeUnavailableError
-                    ? createTransportError("UNAVAILABLE", error.message, { cause: error }) : error instanceof NativeBridgeDisposedError
-                        ? createTransportError("DISPOSED", error.message, { cause: error })
-                        : createTransportError("UNKNOWN", error instanceof Error ? error.message : "Unknown native bridge error.", { cause: error });
+                    ? createTransportError('UNAVAILABLE', error.message, { cause: error }) : error instanceof NativeBridgeDisposedError
+                        ? createTransportError('DISPOSED', error.message, { cause: error })
+                        : createTransportError('UNKNOWN', error instanceof Error ? error.message : 'Unknown native bridge error.', { cause: error });
 
                 resolve({
                     ok: false,
                     message: transportError.message,
-                    error: transportError,
+                    error: transportError
                 });
             }
         });
@@ -206,6 +206,6 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
         handleResponse,
         isAvailable: () => getBridge() !== undefined,
         postMessage,
-        request: request as NativeBridge<TRequests, TCommands>['request'],
+        request: request as NativeBridge<TRequests, TCommands>['request']
     };
 }

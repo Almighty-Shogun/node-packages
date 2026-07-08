@@ -1,4 +1,4 @@
-import type { BridgeResponse, NativeTransportErrorCode, NativeTransportErrorDetails } from './bridgeResponse'
+import type { BridgeResponse, NativeTransportErrorCode, NativeTransportErrorDetails } from './bridgeResponse';
 
 export type NativeBridgeMessageHandler = {
     postMessage: (message: string) => void
