@@ -8,5 +8,5 @@ The repository is intentionally practical. Packages are small, ESM-first, TypeSc
 
 - [Prototype Extensions](/prototype-extensions/) &mdash; side-effect imports that add focused helpers to `Array`, `String`, and `Number`.
 - [Utils](/utils/) &mdash; shared date, number, locale, DOM, theme, and browser utilities.
-- [Vue Utils](/vue-utils/) &mdash; Vue composables, route helpers, required refs, and i18n helpers.
+- [Common](/common/) &mdash; Vue composables, route helpers, required refs, and i18n helpers.
 - [WebKit Native Bridge](/webkit-native-bridge/) &mdash; a typed JavaScript-to-C++ bridge for WebKit-hosted applications.

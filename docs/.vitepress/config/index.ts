@@ -9,7 +9,7 @@ const packagePath = resolve(fileURLToPath(new URL('.', import.meta.url)), '../..
 const alias = {
     '@almighty-shogun/prototype-extensions': resolve(packagePath, 'packages/prototype-extensions/src/index.ts'),
     '@almighty-shogun/utils': resolve(packagePath, 'packages/utils/src/index.ts'),
-    '@almighty-shogun/vue-utils': resolve(packagePath, 'packages/vue-utils/src/index.ts'),
+    '@almighty-shogun/common': resolve(packagePath, 'packages/common/src/index.ts'),
     '@almighty-shogun/webkit-native-bridge': resolve(packagePath, 'packages/webkit-native-bridge/src/index.ts')
 };
 

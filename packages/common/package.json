@@ -1,0 +1,63 @@
+{
+    "name": "@almighty-shogun/common",
+    "description": "A small package that contains common application helpers used across my projects.",
+    "version": "0.0.0",
+    "type": "module",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsdown"
+    },
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "author": {
+        "name": "Almighty-Shogun",
+        "email": "alm1ghtyshogun1998@gmail.com",
+        "url": "https://shogun.ms"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Almighty-Shogun/node-packages.git",
+        "directory": "packages/common"
+    },
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.mts",
+    "typings": "./dist/index.d.mts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.mts",
+            "default": "./dist/index.mjs"
+        }
+    },
+    "files": [
+        "src",
+        "dist",
+        "LICENSE",
+        "CODEOWNERS"
+    ],
+    "dependencies": {
+        "@almighty-shogun/utils": "workspace:*",
+        "@flux-ui/types": "^3.3.1",
+        "@vueuse/core": "^14.3.0"
+    },
+    "peerDependencies": {
+        "vue": "^3.5.25",
+        "vue-i18n": "^11.1.2",
+        "vue-router": "^4.5.1"
+    },
+    "peerDependenciesMeta": {
+        "vue-i18n": {
+            "optional": true
+        }
+    },
+    "devDependencies": {
+        "@types/luxon": "^3.7.2",
+        "tsdown": "^0.16.8",
+        "typescript": "^5.9.3",
+        "vue": "^3.5.39",
+        "vue-i18n": "^11.4.6",
+        "vue-router": "^4.6.4"
+    }
+}

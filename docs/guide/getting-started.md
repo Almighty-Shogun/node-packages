@@ -6,7 +6,7 @@ This guide shows how to install one or more `@almighty-shogun/*` packages and us
 
 - Bun, npm, pnpm, or yarn.
 - TypeScript for typed imports and declarations.
-- Vue 3 when using `@almighty-shogun/vue-utils`.
+- Vue 3 when using `@almighty-shogun/common`.
 - A browser runtime for DOM helpers and WebKit bridge runtime APIs.
 
 ## Install your first package
@@ -43,22 +43,22 @@ const total = formatCurrency(1299.5, 'EUR', 'en')
 
 ## Common Vue setup
 
-A Vue application usually combines `utils` and `vue-utils`:
+A Vue application usually combines `utils` and `common`:
 
 ::: code-group
 
 ```sh [Bun]
-bun add @almighty-shogun/utils @almighty-shogun/vue-utils luxon vue vue-router
+bun add @almighty-shogun/utils @almighty-shogun/common luxon vue vue-router
 ```
 
 ```sh [NPM]
-npm install @almighty-shogun/utils @almighty-shogun/vue-utils luxon vue vue-router
+npm install @almighty-shogun/utils @almighty-shogun/common luxon vue vue-router
 ```
 
 :::
 
 ```ts
-import { useLoaded, useOpen } from '@almighty-shogun/vue-utils'
+import { useLoaded, useOpen } from '@almighty-shogun/common'
 
 const { isOpen, open, close } = useOpen()
 const { isLoading, load } = useLoaded()

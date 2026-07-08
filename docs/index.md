@@ -32,9 +32,9 @@ features:
         link: /utils/
         linkText: View package
 
-    -   title: Vue Utils
+    -   title: Common
         details: Vue composables, route helpers, required refs, and i18n helpers.
-        link: /vue-utils/
+        link: /common/
         linkText: View package
 
     -   title: WebKit Native Bridge
