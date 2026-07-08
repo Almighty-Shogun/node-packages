@@ -1,0 +1,45 @@
+{
+    "name": "@almighty-shogun/bun-server",
+    "description": "Routing and response helpers for Bun HTTP servers.",
+    "version": "0.0.0",
+    "type": "module",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsdown"
+    },
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "author": {
+        "name": "Almighty-Shogun",
+        "email": "alm1ghtyshogun1998@gmail.com",
+        "url": "https://shogun.ms"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Almighty-Shogun/node-packages.git",
+        "directory": "packages/bun-server"
+    },
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.mts",
+    "typings": "./dist/index.d.mts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.mts",
+            "default": "./dist/index.mjs"
+        }
+    },
+    "files": [
+        "src",
+        "dist",
+        "LICENSE",
+        "CODEOWNERS"
+    ],
+    "devDependencies": {
+        "@types/bun": "^1.3.14",
+        "tsdown": "^0.16.8",
+        "typescript": "^5.9.3"
+    }
+}
