@@ -8,8 +8,7 @@ The package is useful when a Web UI is embedded in a native application and need
 
 - [Functions](./functions/createNativeBridge) &mdash; bridge creation, response normalization, and error helpers.
 - [Classes](./classes/NativeBridgeError) &mdash; runtime errors for unavailable and disposed bridge states.
-- [Bridge types](./types/bridge/BridgeResponse) &mdash; response, success, failure, and normalized error types.
-- [Native types](./types/native/NativeBridgeRequestMap) &mdash; request maps, method groups, request bodies, response bodies, and event details.
+- [Types](./types) &mdash; bridge responses, request maps, method groups, request bodies, response bodies, and event details.
 
 ## Native integration
 

@@ -5,7 +5,8 @@ export const webkitNativeBridge: DefaultTheme.SidebarItem[] = [
         text: 'WebKit Native Bridge',
         items: [
             { text: 'Introduction', link: '/webkit-native-bridge/' },
-            { text: 'Installation', link: '/webkit-native-bridge/installation' }
+            { text: 'Installation', link: '/webkit-native-bridge/installation' },
+            { text: 'Types', link: '/webkit-native-bridge/types' }
         ]
     },
     {
@@ -29,36 +30,4 @@ export const webkitNativeBridge: DefaultTheme.SidebarItem[] = [
             { text: 'NativeBridgeDisposedError', link: '/webkit-native-bridge/classes/NativeBridgeDisposedError' }
         ]
     },
-    {
-        text: 'Bridge Types',
-        collapsed: false,
-        items: [
-            { text: 'BridgeSuccess', link: '/webkit-native-bridge/types/bridge/BridgeSuccess' },
-            { text: 'BridgeError', link: '/webkit-native-bridge/types/bridge/BridgeError' },
-            { text: 'BridgeFailure', link: '/webkit-native-bridge/types/bridge/BridgeFailure' },
-            { text: 'BridgeResponse', link: '/webkit-native-bridge/types/bridge/BridgeResponse' },
-            { text: 'ResolvedBridgeError', link: '/webkit-native-bridge/types/bridge/ResolvedBridgeError' },
-            { text: 'NormalizedBridgeResponse', link: '/webkit-native-bridge/types/bridge/NormalizedBridgeResponse' }
-        ]
-    },
-    {
-        text: 'Native Types',
-        collapsed: false,
-        items: [
-            { text: 'NativeBridge', link: '/webkit-native-bridge/types/native/NativeBridge' },
-            { text: 'NativeBridgeOptions', link: '/webkit-native-bridge/types/native/NativeBridgeOptions' },
-            { text: 'NativeBridgeRequestMap', link: '/webkit-native-bridge/types/native/NativeBridgeRequestMap' },
-            { text: 'NativeBridgeWindow', link: '/webkit-native-bridge/types/native/NativeBridgeWindow' },
-            { text: 'NativeErrorCode', link: '/webkit-native-bridge/types/native/NativeErrorCode' },
-            { text: 'NativeErrorDetails', link: '/webkit-native-bridge/types/native/NativeErrorDetails' },
-            { text: 'NativeMethodsWithBody', link: '/webkit-native-bridge/types/native/NativeMethodsWithBody' },
-            { text: 'NativeMethodsWithoutBody', link: '/webkit-native-bridge/types/native/NativeMethodsWithoutBody' },
-            { text: 'NativeRequestBody', link: '/webkit-native-bridge/types/native/NativeRequestBody' },
-            { text: 'NativeRequestOptions', link: '/webkit-native-bridge/types/native/NativeRequestOptions' },
-            { text: 'NativeResponseBody', link: '/webkit-native-bridge/types/native/NativeResponseBody' },
-            { text: 'NativeResponseEventDetail', link: '/webkit-native-bridge/types/native/NativeResponseEventDetail' },
-            { text: 'NativeTransportErrorCode', link: '/webkit-native-bridge/types/native/NativeTransportErrorCode' },
-            { text: 'NativeTransportErrorDetails', link: '/webkit-native-bridge/types/native/NativeTransportErrorDetails' }
-        ]
-    }
 ]
