@@ -94,3 +94,22 @@ type Requests = {
 const bridge = createNativeBridge<Requests>()
 const response = await bridge.request('ping')
 ```
+
+## Bun server
+
+Use `@almighty-shogun/bun-server` when a Bun HTTP server needs typed route definitions and consistent response helpers without a larger framework.
+
+```ts
+import { createServer, defineRoute, HttpMethod } from '@almighty-shogun/bun-server';
+
+const routes = {
+    health: defineRoute('/health', HttpMethod.Get, (_, response) => {
+        return response.json({ ok: true });
+    })
+};
+
+createServer({
+    port: 3000,
+    routes
+});
+```

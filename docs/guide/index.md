@@ -10,3 +10,4 @@ The repository is intentionally practical. Packages are small, ESM-first, TypeSc
 - [Utils](/utils/) &mdash; shared date, number, locale, DOM, theme, and browser utilities.
 - [Common](/common/) &mdash; Vue composables, route helpers, required refs, and i18n helpers.
 - [WebKit Native Bridge](/webkit-native-bridge/) &mdash; a typed JavaScript-to-C++ bridge for WebKit-hosted applications.
+- [Bun Server](/bun-server/) &mdash; typed Bun HTTP routing, route compilation, and response helpers.

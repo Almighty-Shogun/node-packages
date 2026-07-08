@@ -7,7 +7,7 @@ titleTemplate: Documentation
 hero:
     name: Node Packages
     text: Small TypeScript packages for web applications.
-    tagline: API-focused documentation for utilities, Vue composables, prototype helpers, and a WebKit native bridge.
+    tagline: API-focused documentation for utilities, Vue composables, prototype helpers, Bun servers, and a WebKit native bridge.
 
     image:
         src: /logo.svg
@@ -40,5 +40,10 @@ features:
     -   title: WebKit Native Bridge
         details: Type-safe request and command bridge for WebKit-hosted native integrations.
         link: /webkit-native-bridge/
+        linkText: View package
+
+    -   title: Bun Server
+        details: Typed route definitions, compiled Bun routes, and response helpers for HTTP servers.
+        link: /bun-server/
         linkText: View package
 ---

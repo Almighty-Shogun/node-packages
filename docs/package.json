@@ -11,7 +11,8 @@
         "@almighty-shogun/prototype-extensions": "workspace:*",
         "@almighty-shogun/utils": "workspace:*",
         "@almighty-shogun/common": "workspace:*",
-        "@almighty-shogun/webkit-native-bridge": "workspace:*"
+        "@almighty-shogun/webkit-native-bridge": "workspace:*",
+        "@almighty-shogun/bun-server": "workspace:*"
     },
     "devDependencies": {
         "@types/luxon": "^3.7.2",

@@ -27,6 +27,9 @@
             ],
             "@almighty-shogun/webkit-native-bridge": [
                 "../packages/webkit-native-bridge/src/index.ts"
+            ],
+            "@almighty-shogun/bun-server": [
+                "../packages/bun-server/src/index.ts"
             ]
         }
     },

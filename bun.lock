@@ -11,6 +11,7 @@
     "docs": {
       "name": "shogun-packages-docs",
       "dependencies": {
+        "@almighty-shogun/bun-server": "workspace:*",
         "@almighty-shogun/common": "workspace:*",
         "@almighty-shogun/prototype-extensions": "workspace:*",
         "@almighty-shogun/utils": "workspace:*",
