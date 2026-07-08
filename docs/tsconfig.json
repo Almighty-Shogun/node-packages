@@ -22,8 +22,8 @@
             "@almighty-shogun/utils": [
                 "../packages/utils/src/index.ts"
             ],
-            "@almighty-shogun/vue-utils": [
-                "../packages/vue-utils/src/index.ts"
+            "@almighty-shogun/common": [
+                "../packages/common/src/index.ts"
             ],
             "@almighty-shogun/webkit-native-bridge": [
                 "../packages/webkit-native-bridge/src/index.ts"
