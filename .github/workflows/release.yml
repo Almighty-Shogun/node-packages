@@ -34,23 +34,26 @@ jobs:
               run: |
                   bun pm version --cwd packages/prototype-extensions $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/utils $RELEASE_VERSION --no-git-tag-version
-                  bun pm version --cwd packages/vue-utils $RELEASE_VERSION --no-git-tag-version
+                  bun pm version --cwd packages/common $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/webkit-native-bridge $RELEASE_VERSION --no-git-tag-version
-                  
-                   sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/vue-utils/package.json
+                  bun pm version --cwd packages/bun-server $RELEASE_VERSION --no-git-tag-version
+
+                  sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/common/package.json
 
             - name: 🔨 Build packages
               run: |
                   bun --cwd packages/prototype-extensions build
                   bun --cwd packages/utils build
-                  bun --cwd packages/vue-utils build
+                  bun --cwd packages/common build
                   bun --cwd packages/webkit-native-bridge build
+                  bun --cwd packages/bun-server build
 
             - name: 🚀 Publish packages
               run: |
                   bun publish --cwd packages/prototype-extensions --access public
                   bun publish --cwd packages/utils --access public
-                  bun publish --cwd packages/vue-utils --access public
+                  bun publish --cwd packages/common --access public
                   bun publish --cwd packages/webkit-native-bridge --access public
+                  bun publish --cwd packages/bun-server --access public
               env:
                   NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
