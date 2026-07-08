@@ -105,6 +105,7 @@ Show the generated notes to the user.
 Before creating the release, state:
 
 - version
+- release title, which must exactly match the version
 - stable release
 - target SHA
 - comparison base
@@ -118,7 +119,7 @@ After approval:
 ```bash
 gh release create "<version>" \
     --target "<origin-main-sha>" \
-    --title "Release <version>" \
+    --title "<version>" \
     --notes-file "<notes-file>" \
     --latest
 ```
