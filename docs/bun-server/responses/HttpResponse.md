@@ -28,6 +28,9 @@ returns:
 
     - name: 'noContent(headers?: HeadersInit): NoContentHttpResponse'
       description: Creates a `204 No Content` response.
+
+    - name: 'redirect(location: string | URL, status?: RedirectHttpStatus, headers?: HeadersInit): RedirectHttpResponse'
+      description: Creates a redirect response with a `Location` header.
 ---
 
 # HttpResponse
@@ -51,6 +54,7 @@ const response = new HttpResponse();
 
 const json = response.json({ ok: true });
 const missing = response.notFound({ 'X-Reason': 'missing' });
+const redirect = response.redirect('/login');
 const html = response.html('<h1>Created</h1>', HttpStatus.Created);
 ```
 
@@ -69,5 +73,6 @@ declare class HttpResponse {
     notFound(headers?: HeadersInit): NotFoundHttpResponse;
     created(headers?: HeadersInit): CreatedHttpResponse;
     noContent(headers?: HeadersInit): NoContentHttpResponse;
+    redirect(location: string | URL, status?: RedirectHttpStatus, headers?: HeadersInit): RedirectHttpResponse;
 }
 ```

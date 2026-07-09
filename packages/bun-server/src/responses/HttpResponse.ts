@@ -6,7 +6,8 @@ import CreatedHttpResponse from './CreatedHttpResponse';
 import NotFoundHttpResponse from './NotFoundHttpResponse';
 import ForbiddenHttpResponse from './ForbiddenHttpResponse';
 import NoContentHttpResponse from './NoContentHttpResponse';
-import { HttpStatus, type ImageContentType } from '../types';
+import RedirectHttpResponse from './RedirectHttpResponse';
+import { HttpStatus, type ImageContentType, type RedirectHttpStatus } from '../types';
 
 export default class HttpResponse {
     json<T = unknown>(data: T, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit): JsonHttpResponse<T> {
@@ -43,5 +44,9 @@ export default class HttpResponse {
 
     noContent(headers?: HeadersInit): NoContentHttpResponse {
         return new NoContentHttpResponse(headers);
+    }
+
+    redirect(location: string | URL, status: RedirectHttpStatus = HttpStatus.Found, headers?: HeadersInit): RedirectHttpResponse {
+        return new RedirectHttpResponse(location, status, headers);
     }
 }

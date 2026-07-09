@@ -29,6 +29,19 @@ type ImageContentType =
     | 'image/webp';
 ```
 
+## RedirectHttpStatus
+
+Restricts redirect responses to HTTP status codes that are valid for redirects. It is used by `RedirectHttpResponse` and `HttpResponse.redirect()` so callers do not accidentally create a redirect with a non-redirect status code.
+
+```ts
+type RedirectHttpStatus =
+    | HttpStatus.MovedPermanently
+    | HttpStatus.Found
+    | HttpStatus.SeeOther
+    | HttpStatus.TemporaryRedirect
+    | HttpStatus.PermanentRedirect;
+```
+
 ## HttpMethod
 
 Enum used by route definitions and route compilation to identify supported HTTP methods. `compileRoutes()` also uses it when adding automatic `HEAD` and `OPTIONS` behavior.
@@ -183,4 +196,3 @@ type CreateServerOptions<WebSocketData = undefined> = Omit<BunServeOptions, 'rou
     defaultErrorResponse?: DefaultErrorResponse;
 };
 ```
-

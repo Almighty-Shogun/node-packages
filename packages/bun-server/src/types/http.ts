@@ -87,3 +87,10 @@ export enum HttpStatus {
     NotExtended = 510,
     NetworkAuthenticationRequired = 511
 }
+
+export type RedirectHttpStatus =
+    | HttpStatus.MovedPermanently
+    | HttpStatus.Found
+    | HttpStatus.SeeOther
+    | HttpStatus.TemporaryRedirect
+    | HttpStatus.PermanentRedirect;
