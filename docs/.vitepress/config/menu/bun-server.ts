@@ -37,6 +37,7 @@ export const bunServer: DefaultTheme.SidebarItem[] = [
             { text: 'CreatedHttpResponse', link: '/bun-server/responses/CreatedHttpResponse' },
             { text: 'ForbiddenHttpResponse', link: '/bun-server/responses/ForbiddenHttpResponse' },
             { text: 'NotFoundHttpResponse', link: '/bun-server/responses/NotFoundHttpResponse' },
+            { text: 'MethodNotAllowedHttpResponse', link: '/bun-server/responses/MethodNotAllowedHttpResponse' },
             { text: 'NoContentHttpResponse', link: '/bun-server/responses/NoContentHttpResponse' },
             { text: 'RedirectHttpResponse', link: '/bun-server/responses/RedirectHttpResponse' }
         ]

@@ -6,6 +6,7 @@ import CreatedHttpResponse from './CreatedHttpResponse';
 import NotFoundHttpResponse from './NotFoundHttpResponse';
 import ForbiddenHttpResponse from './ForbiddenHttpResponse';
 import NoContentHttpResponse from './NoContentHttpResponse';
+import MethodNotAllowedHttpResponse from './MethodNotAllowedHttpResponse';
 import RedirectHttpResponse from './RedirectHttpResponse';
 import { HttpStatus, type ImageContentType, type RedirectHttpStatus } from '../types';
 
@@ -36,6 +37,10 @@ export default class HttpResponse {
 
     notFound(headers?: HeadersInit): NotFoundHttpResponse {
         return new NotFoundHttpResponse(headers);
+    }
+
+    notAllowed(headers?: HeadersInit): MethodNotAllowedHttpResponse {
+        return new MethodNotAllowedHttpResponse(headers);
     }
 
     created(headers?: HeadersInit): CreatedHttpResponse {

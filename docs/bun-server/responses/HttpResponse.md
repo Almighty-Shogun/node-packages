@@ -23,6 +23,9 @@ returns:
     - name: 'notFound(headers?: HeadersInit): NotFoundHttpResponse'
       description: Creates a `404 Not Found` response.
 
+    - name: 'notAllowed(headers?: HeadersInit): MethodNotAllowedHttpResponse'
+      description: Creates a `405 Method Not Allowed` response.
+
     - name: 'created(headers?: HeadersInit): CreatedHttpResponse'
       description: Creates a `201 Created` response.
 
@@ -54,6 +57,7 @@ const response = new HttpResponse();
 
 const json = response.json({ ok: true });
 const missing = response.notFound({ 'X-Reason': 'missing' });
+const invalidMethod = response.notAllowed({ Allow: 'GET, HEAD' });
 const redirect = response.redirect('/login');
 const html = response.html('<h1>Created</h1>', HttpStatus.Created);
 ```
@@ -71,6 +75,7 @@ declare class HttpResponse {
     image(source: string | Blob, status?: HttpStatus, headers?: HeadersInit, contentType?: ImageContentType): FileHttpResponse;
     forbidden(headers?: HeadersInit): ForbiddenHttpResponse;
     notFound(headers?: HeadersInit): NotFoundHttpResponse;
+    notAllowed(headers?: HeadersInit): MethodNotAllowedHttpResponse;
     created(headers?: HeadersInit): CreatedHttpResponse;
     noContent(headers?: HeadersInit): NoContentHttpResponse;
     redirect(location: string | URL, status?: RedirectHttpStatus, headers?: HeadersInit): RedirectHttpResponse;
