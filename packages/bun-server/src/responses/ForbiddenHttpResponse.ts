@@ -1,7 +1,7 @@
 import { HttpStatus } from '../types';
 import HttpBaseResponse from './HttpBaseResponse';
 
-export default class extends HttpBaseResponse {
+export default class ForbiddenHttpResponse extends HttpBaseResponse {
     constructor(headers?: HeadersInit) {
         super(null, HttpStatus.Forbidden, headers);
     }

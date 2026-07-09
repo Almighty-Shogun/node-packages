@@ -1,7 +1,7 @@
 import { HttpStatus } from '../types';
 import HttpBaseResponse from './HttpBaseResponse';
 
-export default class extends HttpBaseResponse {
+export default class FileHttpResponse extends HttpBaseResponse {
     constructor(source: string | Blob, status: HttpStatus, headers?: HeadersInit, contentType?: string) {
         let file: Blob | null;
 

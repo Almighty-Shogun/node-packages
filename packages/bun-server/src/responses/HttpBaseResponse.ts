@@ -1,6 +1,6 @@
 import { HttpStatus } from '../types';
 
-export default abstract class extends Response {
+export default abstract class HttpBaseResponse extends Response {
     protected constructor(body: BodyInit | null, status: HttpStatus, headers?: HeadersInit, contentType?: string) {
         const responseHeaders = new Headers(headers);
 

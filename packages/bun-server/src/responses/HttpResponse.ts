@@ -8,40 +8,40 @@ import ForbiddenHttpResponse from './ForbiddenHttpResponse';
 import NoContentHttpResponse from './NoContentHttpResponse';
 import { HttpStatus, type ImageContentType } from '../types';
 
-export default class {
-    json<T = unknown>(data: T, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit) {
+export default class HttpResponse {
+    json<T = unknown>(data: T, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit): JsonHttpResponse<T> {
         return new JsonHttpResponse(data, status, headers);
     }
 
-    html(html: string, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit) {
+    html(html: string, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit): HtmlHttpResponse {
         return new HtmlHttpResponse(html, status, headers);
     }
 
-    text(text: string, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit) {
+    text(text: string, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit): TextHttpResponse {
         return new TextHttpResponse(text, status, headers);
     }
 
-    file(source: string | Blob, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit, contentType?: string) {
+    file(source: string | Blob, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit, contentType?: string): FileHttpResponse {
         return new FileHttpResponse(source, status, headers, contentType);
     }
 
-    image(source: string | Blob, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit, contentType?: ImageContentType) {
+    image(source: string | Blob, status: HttpStatus = HttpStatus.Ok, headers?: HeadersInit, contentType?: ImageContentType): FileHttpResponse {
         return new FileHttpResponse(source, status, headers, contentType);
     }
 
-    forbidden(headers?: HeadersInit) {
+    forbidden(headers?: HeadersInit): ForbiddenHttpResponse {
         return new ForbiddenHttpResponse(headers);
     }
 
-    notFound(headers?: HeadersInit) {
+    notFound(headers?: HeadersInit): NotFoundHttpResponse {
         return new NotFoundHttpResponse(headers);
     }
 
-    created(headers?: HeadersInit) {
+    created(headers?: HeadersInit): CreatedHttpResponse {
         return new CreatedHttpResponse(headers);
     }
 
-    noContent(headers?: HeadersInit) {
+    noContent(headers?: HeadersInit): NoContentHttpResponse {
         return new NoContentHttpResponse(headers);
     }
 }
