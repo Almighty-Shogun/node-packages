@@ -20,7 +20,9 @@ Compiles a route collection into Bun route handlers. It groups route definitions
 
 When a route exists for a path but not for the request method, the compiled handler returns a `405 Method Not Allowed` response with an `Allow` header. `OPTIONS` responses return `204 No Content` with the same header.
 
-Use `compileRoutes()` when you want route files to stay declarative. A route file can export a single `defineRoute()` result or an array of route definitions. The route barrel then re-exports those files, and `compileRoutes()` turns the imported collection into the object expected by `Bun.serve({ routes })`.
+Use `compileRoutes()` when you want route files to stay declarative but still need the native route object yourself. A route file can export a single `defineRoute()` result or an array of route definitions. The route barrel then re-exports those files, and `compileRoutes()` turns the imported collection into the object expected by `Bun.serve({ routes })`.
+
+When you use `createServer()` with the default route mode, you can pass the same route collection directly and let `createServer()` call `compileRoutes()` for you.
 
 ## Importing
 

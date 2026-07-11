@@ -9,7 +9,7 @@ outline: deep
 The package includes:
 
 - Routing &mdash; `defineRoute` creates typed route definitions and `compileRoutes` converts route collections into Bun route handlers.
-- Server setup &mdash; `createServer` wraps `Bun.serve()` with compiled routes and default error handling.
+- Server setup &mdash; `createServer` wraps `Bun.serve()` with defined routes by default, native Bun routes when requested, and default error handling.
 - Responses &mdash; response classes and a `HttpResponse` factory for JSON, HTML, text, file, image, no-content, redirect, and common status responses such as not found and method not allowed.
 - Types &mdash; HTTP method/status enums and route/server type helpers for Bun request handlers.
 

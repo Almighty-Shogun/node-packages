@@ -161,15 +161,31 @@ type RouteDefinition<
 };
 ```
 
-## RouteCollection
+## RouteExport
 
-Named route map accepted by `compileRoutes()` and `createServer()`. Each key can point to a single route definition or a readonly array of route definitions, which is useful for grouping multiple methods for the same resource.
+Single value that can be exported from a route barrel consumed by `compileRoutes()` or `createServer()` in defined route mode. It accepts either one route definition or a readonly array of route definitions, which lets one file expose multiple methods for the same resource.
 
 ```ts
-type RouteCollection<WebSocketData = undefined> = Readonly<Record<string,
-    | RouteDefinition<string, HttpMethod, WebSocketData>
-    | readonly RouteDefinition<string, HttpMethod, WebSocketData>[]
->>;
+type RouteExport<WebSocketData = undefined> =
+    | RouteDefinition<any, HttpMethod, WebSocketData>
+    | readonly RouteDefinition<any, HttpMethod, WebSocketData>[];
+```
+
+## RouteCollection
+
+Named route map accepted by `compileRoutes()` and by `createServer()` when `routeMode` is omitted or set to `'defined'`. Each key can point to a single route definition or a readonly array of route definitions.
+
+This type is intentionally based on `RouteExport` instead of a fixed `RouteDefinition<string, ...>` shape so namespace imports from a route barrel can be passed directly:
+
+```ts
+import { createServer } from '@almighty-shogun/bun-server';
+import * as routes from './routes';
+
+createServer({ routes });
+```
+
+```ts
+type RouteCollection<WebSocketData = undefined> = Readonly<Record<string, RouteExport<WebSocketData>>>;
 ```
 
 ## CompileRoutesOptions
@@ -184,15 +200,56 @@ type CompileRoutesOptions = {
 };
 ```
 
-## CreateServerOptions
+## NativeRouteCollection
 
-Extends Bun's native serve options with a required route collection and the compilation options understood by `compileRoutes()`. All Bun serve options except `routes` can still be supplied.
+Native Bun route map accepted by `createServer()` when `routeMode` is set to `'native'`. Use this when you already have handlers in Bun's `Bun.serve({ routes })` format and do not want `createServer()` to run `compileRoutes()`.
 
 ```ts
-type CreateServerOptions<WebSocketData = undefined> = Omit<BunServeOptions, 'routes'> & {
+type NativeRouteCollection<WebSocketData = undefined> = NonNullable<
+    BunServeOptions<WebSocketData>['routes']
+>;
+```
+
+## RouteMode
+
+Controls how `createServer()` interprets `options.routes`. The default `'defined'` mode compiles route definitions created with `defineRoute()`. The `'native'` mode passes Bun-compatible routes directly to `Bun.serve()`.
+
+```ts
+type RouteMode = 'defined' | 'native';
+```
+
+## CreateServerDefinedOptions
+
+Options for the default `createServer()` route mode. `routes` is a package route collection and is compiled with `compileRoutes()` before the server is created.
+
+```ts
+type CreateServerDefinedOptions<WebSocketData = undefined> = CreateServerBaseOptions<WebSocketData> & {
+    routeMode?: 'defined';
     routes: RouteCollection<WebSocketData>;
     automaticHead?: boolean;
     automaticOptions?: boolean;
-    defaultErrorResponse?: DefaultErrorResponse;
 };
+```
+
+## CreateServerNativeOptions
+
+Options for native route mode. `routes` must already be in Bun's native route format and is passed through without package route compilation. Compilation-only options such as `automaticHead` and `automaticOptions` are not accepted in this mode.
+
+```ts
+type CreateServerNativeOptions<WebSocketData = undefined> = CreateServerBaseOptions<WebSocketData> & {
+    routeMode: 'native';
+    routes: NativeRouteCollection<WebSocketData>;
+    automaticHead?: never;
+    automaticOptions?: never;
+};
+```
+
+## CreateServerOptions
+
+Union of the two supported `createServer()` route modes. Omit `routeMode` for the package's defined route workflow, or set `routeMode: 'native'` when you want to provide Bun route handlers yourself.
+
+```ts
+type CreateServerOptions<WebSocketData = undefined> =
+    | CreateServerDefinedOptions<WebSocketData>
+    | CreateServerNativeOptions<WebSocketData>;
 ```

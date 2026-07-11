@@ -14,10 +14,11 @@ export type RouteDefinition<Path extends string = string, Method extends HttpMet
     readonly handler: RouteHandler<Path, WebSocketData>;
 };
 
-export type RouteCollection<WebSocketData = undefined> = Readonly<Record<string,
-    | RouteDefinition<string, HttpMethod, WebSocketData>
-    | readonly RouteDefinition<string, HttpMethod, WebSocketData>[]
->>;
+export type RouteExport<WebSocketData = undefined> =
+    | RouteDefinition<any, HttpMethod, WebSocketData>
+    | readonly RouteDefinition<any, HttpMethod, WebSocketData>[];
+
+export type RouteCollection<WebSocketData = undefined> = Readonly<Record<string, RouteExport<WebSocketData>>>;
 
 export type CompileRoutesOptions = {
     automaticHead?: boolean;

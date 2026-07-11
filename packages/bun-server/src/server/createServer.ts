@@ -3,7 +3,7 @@ import { compileRoutes } from '../routing';
 import { createDefaultErrorResponse } from '../internal';
 import { HttpStatus, type CreateServerOptions } from '../types';
 
-type BunServeOptions = Parameters<typeof Bun.serve>[0];
+type BunServeOptions<WebSocketData = undefined> = Parameters<typeof Bun.serve<WebSocketData>>[0];
 
 export default function <WebSocketData = undefined>(
     options: CreateServerOptions<WebSocketData>
@@ -13,9 +13,18 @@ export default function <WebSocketData = undefined>(
         automaticOptions,
         defaultErrorResponse,
         error,
+        routeMode,
         routes,
         ...serveOptions
     } = options;
+
+    const resolvedRoutes = routeMode === 'native'
+        ? routes
+        : compileRoutes(routes, {
+            automaticHead,
+            automaticOptions,
+            defaultErrorResponse
+        });
 
     return Bun.serve({
         ...serveOptions,
@@ -24,10 +33,6 @@ export default function <WebSocketData = undefined>(
             error.message || 'Internal Server Error',
             defaultErrorResponse ?? null
         )),
-        routes: compileRoutes(routes, {
-            automaticHead,
-            automaticOptions,
-            defaultErrorResponse
-        })
-    } as BunServeOptions);
+        routes: resolvedRoutes
+    } as BunServeOptions<WebSocketData>);
 }
