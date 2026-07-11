@@ -15,7 +15,7 @@ Creates a Bun HTTP server from either package route definitions or native Bun ro
 
 Set `routeMode: 'native'` when `routes` is already in Bun's own `Bun.serve({ routes })` format. Native mode bypasses `compileRoutes()`, so it does not add package behavior such as automatic `HEAD`, automatic `OPTIONS`, generated `405 Method Not Allowed` responses, or `Allow` headers.
 
-The default error handler returns a response based on `defaultErrorResponse`: JSON, text, or an empty response body when set to `null`.
+The default error handler uses `defaultErrorResponse` to decide how generated errors are returned. Set it to `'json'` for JSON, `'text'` for plain text, or `null` for an empty response body.
 
 ## Importing
 
