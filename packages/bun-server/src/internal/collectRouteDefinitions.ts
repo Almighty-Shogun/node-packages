@@ -1,6 +1,8 @@
-import type { HttpMethod, RouteCollection, RouteDefinition } from '../types';
+import type { HtmlRouteDefinition, HttpMethod, RouteCollection, RouteDefinition } from '../types';
 
-type AnyRouteDefinition<WebSocketData = undefined> = RouteDefinition<string, HttpMethod, WebSocketData>;
+type AnyRouteDefinition<WebSocketData = undefined> =
+    | RouteDefinition<string, HttpMethod, WebSocketData>
+    | HtmlRouteDefinition;
 
 export default function <WebSocketData>(routes: RouteCollection<WebSocketData>): AnyRouteDefinition<WebSocketData>[] {
     if (!routes || typeof routes !== 'object' || Array.isArray(routes)) {

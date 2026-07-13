@@ -14,6 +14,7 @@ export const bunServer: DefaultTheme.SidebarItem[] = [
         collapsed: false,
         items: [
             { text: 'compileRoutes', link: '/bun-server/routing/compileRoutes' },
+            { text: 'defineHtmlRoute', link: '/bun-server/routing/defineHtmlRoute' },
             { text: 'defineRoute', link: '/bun-server/routing/defineRoute' }
         ]
     },

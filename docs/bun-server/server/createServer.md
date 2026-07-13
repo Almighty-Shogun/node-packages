@@ -11,7 +11,7 @@ returns: The server instance returned by `Bun.serve()`.
 
 # createServer
 
-Creates a Bun HTTP server from either package route definitions or native Bun routes. By default, `createServer()` treats `options.routes` as a route collection created with `defineRoute()` and compiles it with `compileRoutes()` before passing it to `Bun.serve()`.
+Creates a Bun HTTP server from either package route definitions or native Bun routes. By default, `createServer()` treats `options.routes` as a route collection created with `defineRoute()` and `defineHtmlRoute()`, then compiles it with `compileRoutes()` before passing it to `Bun.serve()`.
 
 Set `routeMode: 'native'` when `routes` is already in Bun's own `Bun.serve({ routes })` format. Native mode bypasses `compileRoutes()`, so it does not add package behavior such as automatic `HEAD`, automatic `OPTIONS`, generated `405 Method Not Allowed` responses, or `Allow` headers.
 
@@ -40,6 +40,24 @@ const server = createServer({
     port: 3000,
     routes,
     defaultErrorResponse: 'json'
+});
+
+console.log(server.url);
+```
+
+HTML route definitions can be mixed into the same route collection. This keeps React or other Bun-bundled frontends in the normal package workflow instead of requiring native route mode.
+
+```ts
+import app from './public/app.html';
+import { createServer, defineHtmlRoute } from '@almighty-shogun/bun-server';
+
+const routes = {
+    app: defineHtmlRoute(['/', '/dashboard'], app)
+};
+
+const server = createServer({
+    port: 3000,
+    routes
 });
 
 console.log(server.url);

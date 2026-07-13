@@ -161,25 +161,44 @@ type RouteDefinition<
 };
 ```
 
+## HtmlRouteDefinition
+
+Represents one Bun HTML import and the route path, or route paths, that should serve it. `defineHtmlRoute()` returns this shape so HTML bundles can be included in the same route collection as method routes.
+
+The `path` property accepts an array for single-page applications or React frontends that should be served from multiple entry URLs while client-side routing handles the rest.
+
+```ts
+type HtmlRouteDefinition<Path extends string = string> = {
+    readonly path: Path | readonly Path[];
+    readonly bundle: HTMLBundle;
+};
+```
+
 ## RouteExport
 
-Single value that can be exported from a route barrel consumed by `compileRoutes()` or `createServer()` in defined route mode. It accepts either one route definition or a readonly array of route definitions, which lets one file expose multiple methods for the same resource.
+Single value that can be exported from a route barrel consumed by `compileRoutes()` or `createServer()` in defined route mode. It accepts one method route definition, one HTML route definition, or a readonly array of route definitions.
+
+Use an array when one route file should expose multiple method definitions for the same resource. Use `HtmlRouteDefinition.path` as an array when one HTML bundle should be served from multiple URLs.
 
 ```ts
 type RouteExport<WebSocketData = undefined> =
     | RouteDefinition<any, HttpMethod, WebSocketData>
-    | readonly RouteDefinition<any, HttpMethod, WebSocketData>[];
+    | HtmlRouteDefinition<any>
+    | readonly (
+        | RouteDefinition<any, HttpMethod, WebSocketData>
+        | HtmlRouteDefinition<any>
+    )[];
 ```
 
 ## RouteCollection
 
-Named route map accepted by `compileRoutes()` and by `createServer()` when `routeMode` is omitted or set to `'defined'`. Each key can point to a single route definition or a readonly array of route definitions.
+Named route map accepted by `compileRoutes()` and by `createServer()` when `routeMode` is omitted or set to `'defined'`. Each key can point to a method route definition, an HTML route definition, or a readonly array of route definitions.
 
 This type is intentionally based on `RouteExport` instead of a fixed `RouteDefinition<string, ...>` shape so namespace imports from a route barrel can be passed directly:
 
 ```ts
-import { createServer } from '@almighty-shogun/bun-server';
 import * as routes from './routes';
+import { createServer } from '@almighty-shogun/bun-server';
 
 createServer({ routes });
 ```
