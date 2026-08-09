@@ -1,6 +1,6 @@
 # Prototype Extensions
 
-A small package that adds extensions to existing prototypes like string, array, etc.
+Side-effect prototype extensions for Array, String, and Number helpers.
 
 ## 📃 Prerequisites
 - **[Bun](https://bun.sh)**: >= 1.3.10
