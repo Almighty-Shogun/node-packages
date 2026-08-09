@@ -1,8 +1,27 @@
+import getVueI18n from './internal/getVueI18n';
+import type { Nullable, Undefinable } from '@almighty-shogun/utils';
 import type { I18n, Translate, TranslateExists, TranslationParams } from './internal/types';
 
 type I18nMethod = 't' | 'te';
 
-let i18nGlobal: I18n | null = null;
+let i18nGlobal: Nullable<I18n> = null;
+
+function resolveI18n(): Nullable<I18n> {
+    return i18nGlobal ?? getVueI18n() ?? null;
+}
+
+function getMethod<T extends Translate | TranslateExists>(method: I18nMethod, fallback: T): T {
+    const i18n = resolveI18n();
+
+    if (!i18n) {
+        return fallback;
+    }
+
+    const legacyMethod = method === 't' ? '$t' : '$te';
+    const resolvedMethod = i18n[method] ?? i18n[legacyMethod];
+
+    return (resolvedMethod as Undefinable<T>) ?? fallback;
+}
 
 export function registerI18n(i18n: I18n): void {
     i18nGlobal = i18n;
@@ -12,7 +31,7 @@ export function clearRegisteredI18n(): void {
     i18nGlobal = null;
 }
 
-export function translate(key: string, params?: TranslationParams): string {
+export function translate(key: string, params?: Undefinable<TranslationParams>): string {
     const method = getMethod('t', ((value: string) => value) as Translate);
 
     return params === undefined ? method(key) : method(key, params);
@@ -24,15 +43,4 @@ export function translationExists(key: string, subKeys: string[] = []): boolean 
     return subKeys.length === 0
         ? method(key)
         : subKeys.every(subKey => method(`${key}.${subKey}`));
-}
-
-function getMethod<T extends Translate | TranslateExists>(method: I18nMethod, fallback: T): T {
-    if (!i18nGlobal) {
-        return fallback;
-    }
-
-    const legacyMethod = method === 't' ? '$t' : '$te';
-    const resolvedMethod = i18nGlobal[method] ?? i18nGlobal[legacyMethod];
-
-    return (resolvedMethod as T | undefined) ?? fallback;
 }
