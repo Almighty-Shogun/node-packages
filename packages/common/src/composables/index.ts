@@ -1,10 +1,16 @@
+export { default as useClipboard } from './useClipboard';
+export { default as useClickOutside } from './useClickOutside';
 export { default as useDarkTheme } from './useDarkTheme';
 export { default as useDataTable } from './useDataTable';
+export { default as useEventListener } from './useEventListener';
 export { default as useForm } from './useForm';
+export { default as useHotKey } from './useHotKey';
 export { default as useInterval } from './useInterval';
 export { default as useLoaded } from './useLoaded';
+export { default as useLocalStorage } from './useLocalStorage';
 export { default as useOpen } from './useOpen';
 export { default as usePageHeader } from './usePageHeader';
 export { default as usePagination } from './usePagination';
-export { default as useRouteParam } from './useRouteParam';
+export { default as usePersistentRef } from './usePersistentRef';
+export { default as useScrollPosition } from './useScrollPosition';
 export { default as useWebsiteLocale } from './useWebsiteLocale';
