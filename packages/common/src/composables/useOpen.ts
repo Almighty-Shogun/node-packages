@@ -1,7 +1,7 @@
-import { ref, type Ref } from 'vue';
+import { ref, toValue, type Ref, type MaybeRefOrGetter } from 'vue';
 
-export default function (): UseOpen {
-    const isOpen = ref<boolean>(false);
+export default function (state: MaybeRefOrGetter<boolean> = false): UseOpen {
+    const isOpen = ref<boolean>(toValue(state));
 
     return {
         isOpen,
