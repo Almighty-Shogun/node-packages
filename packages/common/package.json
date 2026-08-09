@@ -1,11 +1,12 @@
 {
     "name": "@almighty-shogun/common",
-    "description": "A small package that contains common application helpers used across my projects.",
+    "description": "Vue-focused application helpers for state, local storage, forms, pagination, routing, DOM targets, keyboard shortcuts, and i18n.",
     "version": "0.0.0",
     "type": "module",
     "license": "MIT",
     "scripts": {
-        "build": "tsdown"
+        "build": "tsdown",
+        "typecheck": "tsc --noEmit"
     },
     "publishConfig": {
         "access": "public",
@@ -38,26 +39,17 @@
         "CODEOWNERS"
     ],
     "dependencies": {
-        "@almighty-shogun/utils": "workspace:*",
-        "@flux-ui/types": "^3.5.0",
-        "@vueuse/core": "^14.3.0"
+        "@almighty-shogun/utils": "workspace:*"
     },
     "peerDependencies": {
-        "vue": "^3.5.25",
-        "vue-i18n": "^11.1.2",
-        "vue-router": "^4.5.1"
-    },
-    "peerDependenciesMeta": {
-        "vue-i18n": {
-            "optional": true
-        }
+        "vue": "^3.5.41",
+        "vue-router": "^5.2.0"
     },
     "devDependencies": {
-        "@types/luxon": "^3.7.2",
-        "tsdown": "^0.16.8",
+        "@types/luxon": "^3.7.3",
+        "tsdown": "^0.22.14",
         "typescript": "^5.9.3",
-        "vue": "^3.5.39",
-        "vue-i18n": "^11.4.6",
-        "vue-router": "^4.6.4"
+        "vue": "^3.5.41",
+        "vue-router": "^5.2.0"
     }
 }
