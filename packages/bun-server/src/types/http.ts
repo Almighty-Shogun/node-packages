@@ -1,4 +1,6 @@
-export type DefaultErrorResponse = 'json' | 'text' | null;
+import type { Nullable } from '@almighty-shogun/utils';
+
+export type DefaultErrorResponse = Nullable<'json' | 'text'>;
 
 export type ImageContentType =
     | 'image/avif'
@@ -9,15 +11,17 @@ export type ImageContentType =
     | 'image/svg+xml'
     | 'image/webp';
 
-export enum HttpMethod {
-    Get = 'GET',
-    Post = 'POST',
-    Put = 'PUT',
-    Patch = 'PATCH',
-    Delete = 'DELETE',
-    Head = 'HEAD',
-    Options = 'OPTIONS'
-}
+export const HttpMethod = Object.freeze({
+    Get: 'GET',
+    Post: 'POST',
+    Put: 'PUT',
+    Patch: 'PATCH',
+    Delete: 'DELETE',
+    Head: 'HEAD',
+    Options: 'OPTIONS'
+} as const);
+
+export type HttpMethod = typeof HttpMethod[keyof typeof HttpMethod];
 
 export enum HttpStatus {
     Continue = 100,
