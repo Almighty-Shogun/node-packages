@@ -8,55 +8,59 @@ params:
 
     - name: pageSize
       description: Initial number of items per page.
-      type: number
+      type: Undefinable<MaybeRefOrGetter<number>>
       optional: true
       defaultValue: '5'
 
 returns:
+    - name: filteredItems
+      description: Computed slice of `items` for the active page and page size.
+      type: Ref<T[]>
+
     - name: isEmpty
-      description: '`true` when the current source collection contains no items.'
+      description: '`true` when the current page slice contains no items.'
       type: Ref<boolean>
 
     - name: total
-      description: Total number of source items. It is updated when `items.value.length` changes.
+      description: Total number of source items, kept in sync with `items` automatically rather than set by hand.
       type: Ref<number>
 
+    - name: 'setTotal(total: number): void'
+      description: Overrides the synchronized total. Rarely needed here, since the watcher maintains it.
+
     - name: page
-      description: One-based active page number.
+      description: Passed through from [`usePagination`](./usePagination).
       type: Ref<number>
 
     - name: perPage
-      description: Active page size.
+      description: Passed through from [`usePagination`](./usePagination).
       type: Ref<number>
 
     - name: limits
-      description: 'Available page-size options: `[5, 10, 25, 50, 100]`.'
+      description: Passed through from [`usePagination`](./usePagination).
       type: Ref<number[]>
 
-    - name: filteredItems
-      description: Computed slice for the active page and page size.
-      type: Ref<T[]>
-
-    - name: 'setTotal(total: number): void'
-      description: Manually overrides the total. Usually not needed because the watcher syncs it.
-
     - name: 'setPage(page: number): void'
-      description: Changes the active page.
+      description: Passed through from [`usePagination`](./usePagination).
 
     - name: 'setPerPage(perPage: number): void'
-      description: Changes the active page size.
+      description: Passed through from [`usePagination`](./usePagination).
 ---
 
 # useDataTable
 
 Combines a reactive item collection with pagination state and exposes the current visible slice as `filteredItems`. This composable is intended for client-side tables where the full dataset is already available in memory and only the rendered page needs to change.
 
-It watches the length of the source item array and keeps `total` synchronized automatically. Changing `page` or `perPage` immediately changes the computed slice; it does not fetch data from an API and does not mutate the source items.
+It is built on [`usePagination`](./usePagination) and re-exposes that composable's entire return value unchanged, so `page`, `perPage`, `limits`, `setPage`, and `setPerPage` behave exactly as documented there. What this composable adds is the slicing and two differences in how `total` is managed.
+
+`filteredItems` is the slice of `items` for the active page, and `total` is kept in sync with `items.value.length` by a watcher, so `setTotal` is rarely needed. Changing `page` or `perPage` immediately changes the slice; it does not fetch data from an API and does not mutate the source items.
+
+`isEmpty` reports on the visible slice rather than the source collection, so it is also `true` when the source has items but the active page is out of range.
 
 ## Importing
 
 ```ts
-import { useDataTable } from '@almighty-shogun/common'
+import { useDataTable } from '@almighty-shogun/common';
 ```
 
 ## Usage
@@ -70,20 +74,11 @@ import { useDataTable } from '@almighty-shogun/common'
             <td>{{ user.name }}</td>
         </tr>
     </table>
-
-    <select :value="perPage" @change="setPerPage(Number(($event.target as HTMLSelectElement).value))">
-        <option v-for="limit in limits" :key="limit" :value="limit">
-            {{ limit }}
-        </option>
-    </select>
-
-    <button :disabled="page <= 1" @click="setPage(page - 1)">Previous</button>
-    <button :disabled="page * perPage >= total" @click="setPage(page + 1)">Next</button>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useDataTable } from '@almighty-shogun/common'
+import { ref } from 'vue';
+import { useDataTable } from '@almighty-shogun/common';
 
 type User = { id: number; name: string };
 
@@ -93,27 +88,25 @@ const users = ref<User[]>([
     { id: 3, name: 'Linus' }
 ]);
 
-const {
-    filteredItems,
-    isEmpty,
-    page,
-    perPage,
-    total,
-    limits,
-    setPage,
-    setPerPage
-} = useDataTable(users, 10);
+const { filteredItems, isEmpty } = useDataTable(users, 10);
 </script>
 ```
 
+`limits` and `setPerPage` drive a page-size control the same way they do in [`usePagination`](./usePagination), which is where that example lives.
+
 <FrontmatterDocs/>
+
+## Uses
+
+- [Undefinable](../../utils/types#undefinable)
+- [usePagination](./usePagination)
 
 ## Type signature
 
 ```ts
 declare function useDataTable<T>(
     items: Ref<T[]>,
-    pageSize?: number
+    pageSize?: Undefinable<MaybeRefOrGetter<number>>
 ): UseDataTable<T>;
 
 type UseDataTable<T> = {
@@ -129,7 +122,3 @@ type UseDataTable<T> = {
     setPerPage(perPage: number): void;
 };
 ```
-
-## Uses
-
-- [usePagination](./usePagination)
