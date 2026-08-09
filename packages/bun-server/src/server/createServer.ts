@@ -1,8 +1,8 @@
-import type { ErrorLike } from 'bun';
 import { compileRoutes } from '../routing';
 import { createDefaultErrorResponse } from '../internal';
 import { HttpStatus, type CreateServerOptions } from '../types';
 
+type ErrorLike = Bun.ErrorLike;
 type BunServeOptions<WebSocketData = undefined> = Parameters<typeof Bun.serve<WebSocketData>>[0];
 
 export default function <WebSocketData = undefined>(

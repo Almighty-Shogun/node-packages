@@ -1,21 +1,20 @@
 import type { RouteCollection } from './router';
 import type { DefaultErrorResponse } from './http';
+import type { Undefinable } from '@almighty-shogun/utils';
 
 type BunServeOptions<WebSocketData = undefined> = Parameters<typeof Bun.serve<WebSocketData>>[0];
 
 export type NativeRouteCollection<WebSocketData = undefined> = NonNullable<BunServeOptions<WebSocketData>['routes']>;
 
-export type RouteMode = 'defined' | 'native';
-
 type CreateServerBaseOptions<WebSocketData = undefined> = Omit<BunServeOptions<WebSocketData>, 'routes'> & {
-    defaultErrorResponse?: DefaultErrorResponse;
+    defaultErrorResponse?: Undefinable<DefaultErrorResponse>;
 };
 
 export type CreateServerDefinedOptions<WebSocketData = undefined> = CreateServerBaseOptions<WebSocketData> & {
-    routeMode?: 'defined';
+    routeMode?: Undefinable<'defined'>;
     routes: RouteCollection<WebSocketData>;
-    automaticHead?: boolean;
-    automaticOptions?: boolean;
+    automaticHead?: Undefinable<boolean>;
+    automaticOptions?: Undefinable<boolean>;
 };
 
 export type CreateServerNativeOptions<WebSocketData = undefined> = CreateServerBaseOptions<WebSocketData> & {

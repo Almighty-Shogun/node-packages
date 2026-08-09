@@ -1,13 +1,14 @@
+import { HttpBaseResponse } from '../responses';
+import type { Undefinable } from '@almighty-shogun/utils';
 import type { DefaultErrorResponse, HttpStatus } from '../types';
-import { JsonHttpResponse, TextHttpResponse } from '../responses';
 
-export default function (status: HttpStatus, message: string, format: DefaultErrorResponse, headers?: HeadersInit): Response {
+export default function (status: HttpStatus, message: string, format: DefaultErrorResponse, headers?: Undefinable<HeadersInit>): Response {
     if (format === 'json') {
-        return new JsonHttpResponse({ status, error: message }, status, headers);
+        return HttpBaseResponse.json({ status, error: message }, { status, headers }).unwrap();
     }
 
     if (format === 'text') {
-        return new TextHttpResponse(message, status, headers);
+        return HttpBaseResponse.text(message, { status, headers }).unwrap();
     }
 
     return new Response(null, {

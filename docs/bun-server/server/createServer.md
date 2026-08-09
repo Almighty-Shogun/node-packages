@@ -11,11 +11,13 @@ returns: The server instance returned by `Bun.serve()`.
 
 # createServer
 
-Creates a Bun HTTP server from either package route definitions or native Bun routes. By default, `createServer()` treats `options.routes` as a route collection created with `defineRoute()` and `defineHtmlRoute()`, then compiles it with `compileRoutes()` before passing it to `Bun.serve()`.
+Creates a Bun HTTP server from either package route definitions or native Bun routes. By default, `createServer()` treats `options.routes` as a route collection created with [`defineRoute()`](../routing/defineRoute) and [`defineHtmlRoute()`](../routing/defineHtmlRoute), then compiles it with [`compileRoutes()`](../routing/compileRoutes) before passing it to `Bun.serve()`.
 
-Set `routeMode: 'native'` when `routes` is already in Bun's own `Bun.serve({ routes })` format. Native mode bypasses `compileRoutes()`, so it does not add package behavior such as automatic `HEAD`, automatic `OPTIONS`, generated `405 Method Not Allowed` responses, or `Allow` headers.
+Set `routeMode: 'native'` when `routes` is already in Bun's own `Bun.serve({ routes })` format. Native mode bypasses [`compileRoutes()`](../routing/compileRoutes), so it does not add package behavior such as automatic `HEAD`, automatic `OPTIONS`, generated `405 Method Not Allowed` responses, or `Allow` headers.
 
-The default error handler uses `defaultErrorResponse` to decide how generated errors are returned. Set it to `'json'` for JSON, `'text'` for plain text, or `null` for an empty response body.
+When no `error` handler is supplied, `createServer()` installs one that reports uncaught errors as `500 Internal Server Error` using `defaultErrorResponse` for the body format: `'json'` produces `{ "status": 500, "error": "<message>" }`, `'text'` produces the message as plain text, and `null` produces an empty body. Passing your own `error` handler replaces this entirely, and `defaultErrorResponse` then only affects the `405` responses generated during route compilation.
+
+Every other option is forwarded to `Bun.serve()` unchanged, so `port`, `hostname`, `tls`, `websocket`, and the rest behave exactly as they do natively.
 
 ## Importing
 
@@ -28,10 +30,10 @@ import { createServer } from '@almighty-shogun/bun-server';
 Use defined routes for the package-managed route workflow. This is the default mode, so `routeMode` can be omitted.
 
 ```ts
-import { createServer, defineRoute, HttpMethod } from '@almighty-shogun/bun-server';
+import { createServer, defineRoute } from '@almighty-shogun/bun-server';
 
 const routes = {
-    health: defineRoute('/health', HttpMethod.Get, (_, response) => {
+    health: defineRoute('/health', 'GET', (_, response) => {
         return response.json({ ok: true });
     })
 };

@@ -1,16 +1,33 @@
----
-outline: deep
----
-
 # Bun Server
 
-`@almighty-shogun/bun-server` provides a small routing and response layer for Bun HTTP servers. It is intended for Bun applications that want typed route definitions, predictable response helpers, and simple `Bun.serve()` integration without adopting a larger framework.
+Typed routing, server setup, and response helpers for Bun HTTP servers. The package is intended for Bun applications that want typed route definitions, predictable response helpers, and simple `Bun.serve()` integration without adopting a larger framework.
 
-The package includes:
+## Categories
 
-- Routing &mdash; `defineRoute` creates typed method route definitions, `defineHtmlRoute` registers Bun HTML imports, and `compileRoutes` converts route collections into Bun routes.
-- Server setup &mdash; `createServer` wraps `Bun.serve()` with defined routes by default, native Bun routes when requested, and default error handling.
-- Responses &mdash; response classes and a `HttpResponse` factory for JSON, HTML, text, file, image, no-content, redirect, and common status responses such as not found and method not allowed.
-- Types &mdash; HTTP method/status enums and route/server type helpers for Bun request handlers.
+- [Routing](./routing/compileRoutes) &mdash; [`defineRoute`](./routing/defineRoute) creates typed method route definitions, [`defineHtmlRoute`](./routing/defineHtmlRoute) registers Bun HTML imports, and [`compileRoutes`](./routing/compileRoutes) converts route collections into Bun routes.
+- [Server](./server/createServer) &mdash; [`createServer`](./server/createServer) wraps `Bun.serve()` with defined routes by default, native Bun routes when requested, and default error handling.
+- [Responses](./responses/HttpBaseResponse) &mdash; [`HttpBaseResponse`](./responses/HttpBaseResponse) factory methods create responses for JSON, HTML, text, file, image, no-content, redirect, and common status responses such as not found and method not allowed.
+- [Types](./types) &mdash; HTTP method and status constants, enums, and route and server type helpers for Bun request handlers.
 
-This package is Bun-specific. It depends on Bun's runtime APIs, including `Bun.serve()`, `BunRequest`, `Server`, `Bun.file()`, and Bun HTML imports.
+## Dependencies
+
+- Bun runtime APIs &mdash; required for `Bun.serve()`, `BunRequest`, `Server`, `Bun.file()`, and HTML imports.
+- [`@almighty-shogun/utils`](../utils/) &mdash; a direct dependency, used for shared utility types only and never at runtime.
+
+This package is Bun-specific and does not run on Node.js or in the browser.
+
+## Quick example
+
+```ts
+import { createServer, defineRoute } from '@almighty-shogun/bun-server';
+
+const routes = {
+    health: defineRoute('/health', 'GET', (_, response) => {
+        return response.json({ ok: true });
+    })
+};
+
+createServer({ port: 3000, routes });
+```
+
+Continue with [installation](./installation) or jump to a category from the sidebar.

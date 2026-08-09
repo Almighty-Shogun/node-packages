@@ -1,10 +1,8 @@
----
-outline: deep
----
-
 # Installation
 
-Install the package in a Bun project.
+`@almighty-shogun/bun-server` ships as ESM and exposes named exports from the package root. It is designed for Bun runtime code that uses `Bun.serve()`, typed route definitions, and response helpers.
+
+## Install
 
 ::: code-group
 
@@ -26,16 +24,16 @@ yarn add @almighty-shogun/bun-server
 
 :::
 
-Use it from Bun runtime code:
+## Importing
+
+All public APIs are available from the package root.
 
 ```ts
-import { createServer, defineRoute, HttpMethod } from '@almighty-shogun/bun-server';
-
-const routes = {
-    health: defineRoute('/health', HttpMethod.Get, (_, response) => {
-        return response.json({ ok: true });
-    })
-};
-
-createServer({ port: 3000, routes });
+import { createServer, defineRoute } from '@almighty-shogun/bun-server';
 ```
+
+## Requirements
+
+- Bun 1.3+ for `Bun.serve()`, `BunRequest`, `Server`, `Bun.file()`, and HTML imports.
+- A Bun runtime entry file for server code.
+- `@types/bun` for TypeScript. The published types reference Bun's global types, so it is declared as an optional peer dependency. Bun projects normally have it already.

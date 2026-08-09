@@ -1,12 +1,12 @@
 # Bun Server
 
-Routing and response helpers for Bun HTTP servers.
+Typed routing, server setup, and response helpers for Bun HTTP servers.
 
-## Prerequisites
+## 📃 Prerequisites
 
-- [Bun](https://bun.sh): >= 1.3.10
+- **[Bun](https://bun.sh)**: >= 1.3.10
 
-## Building
+## 📦 Building
 
-- Run `bun install` in the repository root.
-- Run `bun --cwd packages/bun-server build`.
+- Use the command `bun install` in the root directory to install the required dependencies.
+- Run `bun --cwd packages/bun-server build` to build the package.
