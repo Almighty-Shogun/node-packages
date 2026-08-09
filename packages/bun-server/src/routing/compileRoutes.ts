@@ -1,8 +1,12 @@
+import { HttpBaseResponse } from '../responses';
 import { HttpMethod, HttpStatus } from '../types';
-import { NoContentHttpResponse } from '../responses';
-import type { BunRequest, Server, HTMLBundle } from 'bun';
 import { collectRouteDefinitions, createDefaultErrorResponse, executeHandler } from '../internal';
+import type { Promisable } from '@almighty-shogun/utils';
 import type { CompileRoutesOptions, HtmlRouteDefinition, RouteCollection, RouteDefinition, RouteHandler } from '../types';
+
+type HTMLBundle = Bun.HTMLBundle;
+type Server<WebSocketData = undefined> = Bun.Server<WebSocketData>;
+type BunRequest<Path extends string = string> = Bun.BunRequest<Path>;
 
 const httpMethodOrder: readonly HttpMethod[] = [
     HttpMethod.Get,
@@ -21,9 +25,9 @@ type CollectedRouteDefinition<WebSocketData = undefined> =
     | HtmlRouteDefinition;
 
 type CompiledRouteHandler<WebSocketData = undefined> = (
-    request: BunRequest<string>,
+    request: BunRequest,
     server: Server<WebSocketData>
-) => Response | Promise<Response>;
+) => Promisable<Response>;
 
 type CompiledRouteCollection<WebSocketData = undefined> = Record<string,
     | HTMLBundle
@@ -122,7 +126,7 @@ export default function <WebSocketData = undefined>(
     }
 
     for (const [path, methods] of groupedRoutes) {
-        compiledRoutes[path] = async (request: BunRequest<string>, server: Server<WebSocketData>) => {
+        compiledRoutes[path] = async (request: BunRequest, server: Server<WebSocketData>) => {
             const method = request.method.toUpperCase() as HttpMethod;
             const handler = methods.get(method);
 
@@ -157,7 +161,7 @@ export default function <WebSocketData = undefined>(
                 .join(', ');
 
             if (automaticOptions && method === HttpMethod.Options) {
-                return new NoContentHttpResponse({ Allow: allow });
+                return HttpBaseResponse.noContent(null, { headers: { Allow: allow } }).unwrap();
             }
 
             return createDefaultErrorResponse(
