@@ -1,6 +1,7 @@
 import type { NativeBridgeWindow } from '../types';
+import type { Undefinable } from '@almighty-shogun/utils';
 
-export function getDefaultWindow(): NativeBridgeWindow | undefined {
+export function getDefaultWindow(): Undefinable<NativeBridgeWindow> {
     return typeof window === 'undefined' ? undefined : window as NativeBridgeWindow;
 }
 

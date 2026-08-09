@@ -1,4 +1,5 @@
 import type { BridgeError } from '../types';
+import type { Nullable } from '@almighty-shogun/utils';
 
 export function isTransportError<TCode extends string, TDetails>(
     error: BridgeError<TCode, TDetails>
@@ -12,6 +13,6 @@ export function isNativeError<TCode extends string, TDetails>(
     return error.type === 'native';
 }
 
-export function getErrorDetailsAs<TExpectedDetails>(error: BridgeError): TExpectedDetails | null {
-    return error.details as TExpectedDetails | null;
+export function getErrorDetailsAs<TExpectedDetails>(error: BridgeError): Nullable<TExpectedDetails> {
+    return error.details as Nullable<TExpectedDetails>;
 }
