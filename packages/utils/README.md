@@ -1,6 +1,6 @@
 # Utils
 
-A small package that contains common utilities used in all my projects.
+Shared TypeScript utilities for values, formatting, locale metadata, Luxon date helpers, serialization, and browser APIs.
 
 ## 📃 Prerequisites
 - **[Bun](https://bun.sh)**: >= 1.3.10
