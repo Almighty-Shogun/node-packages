@@ -6,7 +6,7 @@ This guide shows how to install one or more `@almighty-shogun/*` packages and us
 
 - Bun, npm, pnpm, or yarn.
 - TypeScript for typed imports and declarations.
-- Vue 3 when using `@almighty-shogun/common`.
+- Vue 3.5+ and Vue Router 5.x when using `@almighty-shogun/common`. Both are required peer dependencies.
 - A browser runtime for DOM helpers and WebKit bridge runtime APIs.
 
 ## Install your first package
@@ -34,11 +34,11 @@ yarn add @almighty-shogun/utils luxon
 :::
 
 ```ts
-import { DateTime } from 'luxon'
-import { formatDate, formatCurrency } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { formatDate, formatCurrency } from '@almighty-shogun/utils';
 
-const date = formatDate(DateTime.now(), 'en')
-const total = formatCurrency(1299.5, 'EUR', 'en')
+const date = formatDate(DateTime.now(), 'en');
+const total = formatCurrency(1299.5, 'EUR', 'en');
 ```
 
 ## Common Vue setup
@@ -55,13 +55,27 @@ bun add @almighty-shogun/utils @almighty-shogun/common luxon vue vue-router
 npm install @almighty-shogun/utils @almighty-shogun/common luxon vue vue-router
 ```
 
+```sh [PNPM]
+pnpm add @almighty-shogun/utils @almighty-shogun/common luxon vue vue-router
+```
+
+```sh [Yarn]
+yarn add @almighty-shogun/utils @almighty-shogun/common luxon vue vue-router
+```
+
 :::
 
-```ts
-import { useLoaded, useOpen } from '@almighty-shogun/common'
+`utils` arrives automatically as a dependency of `common`, but declare it yourself when your own code imports from it, as below. The same applies to `luxon` once you build `DateTime` values to pass into the date helpers.
 
-const { isOpen, open, close } = useOpen()
-const { isLoading, load } = useLoaded()
+```ts
+import { DateTime } from 'luxon';
+import { formatDate } from '@almighty-shogun/utils';
+import { useLoaded, useOpen } from '@almighty-shogun/common';
+
+const { isOpen, open, close } = useOpen();
+const { isLoading, load } = useLoaded();
+
+const today = formatDate(DateTime.now(), 'en');
 ```
 
 ## Prototype extensions
@@ -70,29 +84,29 @@ const { isLoading, load } = useLoaded()
 
 ```ts
 // main.ts
-import '@almighty-shogun/prototype-extensions'
+import '@almighty-shogun/prototype-extensions';
 ```
 
 After that import, prototype methods are available anywhere in the application runtime:
 
 ```ts
-const selected = ['users', 'settings'].addOrRemove('users')
-const slug = 'User Settings'.toSlug()
+const selected = ['users', 'settings'].addOrRemove('users');
+const slug = 'User Settings'.toSlug();
 ```
 
 ## WebKit native bridge
 
-Use `@almighty-shogun/webkit-native-bridge` when JavaScript runs inside a native WebKit host and needs to call C++ code through `window.webkit.messageHandlers`.
+Use `@almighty-shogun/webkit-native-bridge` when JavaScript runs inside a native WebKit host and needs to call into that host through `window.webkit.messageHandlers`.
 
 ```ts
-import { createNativeBridge } from '@almighty-shogun/webkit-native-bridge'
+import { createNativeBridge } from '@almighty-shogun/webkit-native-bridge';
 
 type Requests = {
-    ping: { body: void; response: 'pong' }
-}
+    ping: { body: void; response: 'pong' };
+};
 
-const bridge = createNativeBridge<Requests>()
-const response = await bridge.request('ping')
+const bridge = createNativeBridge<Requests>();
+const response = await bridge.request('ping');
 ```
 
 ## Bun server
@@ -100,10 +114,10 @@ const response = await bridge.request('ping')
 Use `@almighty-shogun/bun-server` when a Bun HTTP server needs typed route definitions and consistent response helpers without a larger framework.
 
 ```ts
-import { createServer, defineRoute, HttpMethod } from '@almighty-shogun/bun-server';
+import { createServer, defineRoute } from '@almighty-shogun/bun-server';
 
 const routes = {
-    health: defineRoute('/health', HttpMethod.Get, (_, response) => {
+    health: defineRoute('/health', 'GET', (_, response) => {
         return response.json({ ok: true });
     })
 };
