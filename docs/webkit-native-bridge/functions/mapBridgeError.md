@@ -6,7 +6,7 @@ params:
       description: Bridge error to map.
       type: BridgeError<TCode, TDetails>
 
-returns: A `ResolvedBridgeError` with the original type, code, details, and a guaranteed non-null message string.
+returns: A [`ResolvedBridgeError`](../types#resolvedbridgeerror) with the original type, code, details, and a guaranteed non-null message string.
 ---
 
 # mapBridgeError
@@ -16,16 +16,32 @@ Converts a bridge error into a resolved error object with a guaranteed string me
 ## Importing
 
 ```ts
-import { mapBridgeError } from '@almighty-shogun/webkit-native-bridge'
+import { mapBridgeError } from '@almighty-shogun/webkit-native-bridge';
 ```
 
 ## Usage
 
 ```ts
-import { mapBridgeError } from '@almighty-shogun/webkit-native-bridge'
+import {
+    createNativeBridge,
+    mapBridgeError
+} from '@almighty-shogun/webkit-native-bridge';
 
-const resolved = mapBridgeError(response.error);
-console.error(resolved.message);
+type Requests = {
+    ping: {
+        body: void;
+        response: 'pong'
+    }
+};
+
+const bridge = createNativeBridge<Requests>();
+const response = await bridge.request('ping');
+
+if (!response.ok) {
+    const resolved = mapBridgeError(response.error);
+
+    console.error(resolved.message);
+}
 ```
 
 <FrontmatterDocs/>

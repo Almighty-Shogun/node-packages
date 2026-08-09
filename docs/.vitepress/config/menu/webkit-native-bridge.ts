@@ -29,5 +29,5 @@ export const webkitNativeBridge: DefaultTheme.SidebarItem[] = [
             { text: 'NativeBridgeUnavailableError', link: '/webkit-native-bridge/classes/NativeBridgeUnavailableError' },
             { text: 'NativeBridgeDisposedError', link: '/webkit-native-bridge/classes/NativeBridgeDisposedError' }
         ]
-    },
-]
+    }
+];

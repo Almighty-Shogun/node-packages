@@ -1,6 +1,6 @@
 # Installation
 
-The bridge package ships as ESM and has no runtime dependencies. It is designed for JavaScript running inside a WebKit host that exposes `window.webkit.messageHandlers`.
+`@almighty-shogun/webkit-native-bridge` ships as ESM and depends only on [`@almighty-shogun/utils`](../utils/) for shared utility types, which it uses at type level only. It is designed for JavaScript running inside a WebKit host that exposes `window.webkit.messageHandlers`.
 
 ## Install
 
@@ -29,7 +29,7 @@ yarn add @almighty-shogun/webkit-native-bridge
 All public APIs are available from the package root.
 
 ```ts
-import { createNativeBridge, normalizeBridgeResponse } from '@almighty-shogun/webkit-native-bridge'
+import { createNativeBridge } from '@almighty-shogun/webkit-native-bridge';
 ```
 
 ## Requirements

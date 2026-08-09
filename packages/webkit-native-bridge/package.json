@@ -1,11 +1,12 @@
 {
     "name": "@almighty-shogun/webkit-native-bridge",
-    "description": "Type-safe request/response bridge for communicating between JavaScript and native C++ applications embedded in WebKit.",
+    "description": "Typed request and command bridge for JavaScript running inside WebKit host applications.",
     "version": "0.0.0",
     "type": "module",
     "license": "MIT",
     "scripts": {
-        "build": "tsdown"
+        "build": "tsdown",
+        "typecheck": "tsc --noEmit"
     },
     "publishConfig": {
         "access": "public",
@@ -37,8 +38,11 @@
         "LICENSE",
         "CODEOWNERS"
     ],
+    "dependencies": {
+        "@almighty-shogun/utils": "workspace:*"
+    },
     "devDependencies": {
-        "tsdown": "^0.16.8",
+        "tsdown": "^0.22.14",
         "typescript": "^5.9.3"
     }
 }

@@ -9,7 +9,9 @@ export function mapBridgeError<TCode extends string, TDetails>(error: BridgeErro
     };
 }
 
-export function normalizeBridgeResponse<TData, TCode extends string, TDetails>(response: BridgeResponse<TData, TCode, TDetails>): NormalizedBridgeResponse<TData> {
+export function normalizeBridgeResponse<TData, TCode extends string, TDetails>(
+    response: BridgeResponse<TData, TCode, TDetails>
+): NormalizedBridgeResponse<TData> {
     if (response.ok) {
         return {
             ok: true,

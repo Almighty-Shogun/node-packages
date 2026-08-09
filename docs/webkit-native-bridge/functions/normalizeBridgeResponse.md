@@ -6,7 +6,7 @@ params:
       description: Response to normalize.
       type: BridgeResponse<TData, TCode, TDetails>
 
-returns: A response where success keeps its data payload and failure contains a normalized `ResolvedBridgeError`.
+returns: A response where success keeps its data payload and failure contains a normalized [`ResolvedBridgeError`](../types#resolvedbridgeerror).
 ---
 
 # normalizeBridgeResponse
@@ -16,15 +16,28 @@ Normalizes a bridge response so the failure branch always contains a resolved er
 ## Importing
 
 ```ts
-import { normalizeBridgeResponse } from '@almighty-shogun/webkit-native-bridge'
+import {
+    normalizeBridgeResponse
+} from '@almighty-shogun/webkit-native-bridge';
 ```
 
 ## Usage
 
 ```ts
-import { normalizeBridgeResponse } from '@almighty-shogun/webkit-native-bridge'
+import {
+    createNativeBridge,
+    normalizeBridgeResponse
+} from '@almighty-shogun/webkit-native-bridge';
 
-const normalized = normalizeBridgeResponse(response);
+type Requests = {
+    ping: {
+        body: void;
+        response: 'pong'
+    }
+};
+
+const bridge = createNativeBridge<Requests>();
+const normalized = normalizeBridgeResponse(await bridge.request('ping'));
 
 if (!normalized.ok) {
     console.error(normalized.error.message);
@@ -32,6 +45,10 @@ if (!normalized.ok) {
 ```
 
 <FrontmatterDocs/>
+
+## Uses
+
+- [mapBridgeError](./mapBridgeError)
 
 ## Type signature
 
@@ -44,8 +61,3 @@ declare function normalizeBridgeResponse<
     response: BridgeResponse<TData, TCode, TDetails>
 ): NormalizedBridgeResponse<TData>;
 ```
-
-
-## Uses
-
-- [mapBridgeError](./mapBridgeError)

@@ -16,13 +16,13 @@ Base class for native bridge runtime errors. It provides a shared parent for bri
 ## Importing
 
 ```ts
-import { NativeBridgeError } from '@almighty-shogun/webkit-native-bridge'
+import { NativeBridgeError } from '@almighty-shogun/webkit-native-bridge';
 ```
 
 ## Usage
 
 ```ts
-import { NativeBridgeError } from '@almighty-shogun/webkit-native-bridge'
+import { NativeBridgeError } from '@almighty-shogun/webkit-native-bridge';
 
 throw new NativeBridgeError('Bridge request failed');
 ```

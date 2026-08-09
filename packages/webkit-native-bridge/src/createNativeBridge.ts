@@ -1,3 +1,4 @@
+import type { Undefinable } from '@almighty-shogun/utils';
 import { createTransportError } from './utils/errorFactories';
 import { normalizeNativeError } from './utils/normalizeNativeError';
 import { NativeBridgeDisposedError, NativeBridgeUnavailableError } from './errors';
@@ -12,17 +13,16 @@ import type {
     NativeBridgePendingRequest,
     NativeBridgeRequestMap,
     NativeBridgeWindow,
-    NativeErrorCode,
-    NativeErrorDetails,
     NativeRequestBody,
     NativeRequestOptions,
-    NativeResponseBody,
-    NativeResponseEventDetail,
-    NativeTransportErrorCode,
-    NativeTransportErrorDetails
+    NativeRequestResult,
+    NativeResponseEventDetail
 } from './types';
 
-export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Record<never, never>, TCommands extends string = never>(options: NativeBridgeOptions = {}): NativeBridge<TRequests, TCommands> {
+export function createNativeBridge<
+    TRequests extends NativeBridgeRequestMap = Record<never, never>,
+    TCommands extends string = never
+>(options: NativeBridgeOptions = {}): NativeBridge<TRequests, TCommands> {
     const eventName = options.eventName ?? DEFAULT_EVENT_NAME;
     const handlerName = options.handlerName ?? DEFAULT_HANDLER_NAME;
     const requestTimeout = options.requestTimeout === undefined ? DEFAULT_REQUEST_TIMEOUT : options.requestTimeout;
@@ -36,11 +36,11 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
         handleResponse((event as CustomEvent<NativeResponseEventDetail>).detail);
     };
 
-    function getWindow(): NativeBridgeWindow | undefined {
+    function getWindow(): Undefinable<NativeBridgeWindow> {
         return options.window ?? getDefaultWindow();
     }
 
-    function getBridge(): NativeBridgeMessageHandler | undefined {
+    function getBridge(): Undefinable<NativeBridgeMessageHandler> {
         return getWindow()?.webkit?.messageHandlers?.[handlerName];
     }
 
@@ -113,7 +113,11 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
             return;
         }
 
-        const resolvedMessage = typeof detail.error === 'object' && detail.error !== null && 'message' in detail.error && typeof (detail.error as { message?: unknown }).message === 'string'
+        const resolvedMessage =
+            typeof detail.error === 'object'
+            && detail.error !== null
+            && 'message' in detail.error
+            && typeof (detail.error as { message?: unknown }).message === 'string'
             ? (detail.error as { message: string }).message : typeof detail.error === 'string' ? detail.error : null;
 
         pendingRequest.resolve({
@@ -130,11 +134,13 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
 
         if (responseListenerRegistered) {
             getWindow()?.removeEventListener(eventName, responseListener);
+
             responseListenerRegistered = false;
         }
 
         for (const [requestId, pendingRequest] of pendingRequests) {
             clearPendingRequest(requestId);
+
             pendingRequest.resolve({
                 ok: false,
                 message: new NativeBridgeDisposedError().message,
@@ -145,23 +151,15 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
 
     function request<TMethod extends keyof TRequests>(
         method: TMethod,
-        body?: NativeRequestBody<TRequests, TMethod>,
-        maybeOptions?: NativeRequestOptions
-    ): Promise<BridgeResponse<
-        NativeResponseBody<TRequests, TMethod>,
-        NativeErrorCode<TRequests, TMethod> | NativeTransportErrorCode,
-        NativeErrorDetails<TRequests, TMethod> | NativeTransportErrorDetails
-    >> {
+        body?: Undefinable<NativeRequestBody<TRequests, TMethod>>,
+        maybeOptions?: Undefinable<NativeRequestOptions>
+    ): Promise<NativeRequestResult<TRequests, TMethod>> {
         ensureActive();
         registerResponseListener();
 
         const requestOptions = maybeOptions;
 
-        return new Promise<BridgeResponse<
-            NativeResponseBody<TRequests, TMethod>,
-            NativeErrorCode<TRequests, TMethod> | NativeTransportErrorCode,
-            NativeErrorDetails<TRequests, TMethod> | NativeTransportErrorDetails
-        >>((resolve) => {
+        return new Promise<NativeRequestResult<TRequests, TMethod>>((resolve) => {
             const requestId = createRequestId();
             const timeout = requestOptions?.timeout ?? requestTimeout;
 
@@ -187,7 +185,8 @@ export function createNativeBridge<TRequests extends NativeBridgeRequestMap = Re
                 clearPendingRequest(requestId);
 
                 const transportError = error instanceof NativeBridgeUnavailableError
-                    ? createTransportError('UNAVAILABLE', error.message, { cause: error }) : error instanceof NativeBridgeDisposedError
+                    ? createTransportError('UNAVAILABLE', error.message, { cause: error })
+                    : error instanceof NativeBridgeDisposedError
                         ? createTransportError('DISPOSED', error.message, { cause: error })
                         : createTransportError('UNKNOWN', error instanceof Error ? error.message : 'Unknown native bridge error.', { cause: error });
 

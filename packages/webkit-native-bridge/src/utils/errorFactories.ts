@@ -1,9 +1,10 @@
+import type { Nullable, NullableOrUndefinable } from '@almighty-shogun/utils';
 import type { BridgeError, NativeTransportErrorCode, NativeTransportErrorDetails } from '../types';
 
 export function createTransportError<TCode extends string = NativeTransportErrorCode, TDetails = NativeTransportErrorDetails>(
     code: TCode,
-    message: string | null,
-    details?: TDetails | null
+    message: Nullable<string>,
+    details?: NullableOrUndefinable<TDetails>
 ): BridgeError<TCode, TDetails> {
     return {
         type: 'transport',
@@ -15,8 +16,8 @@ export function createTransportError<TCode extends string = NativeTransportError
 
 export function createNativeError<TCode extends string = string, TDetails = unknown>(
     code: TCode,
-    message: string | null,
-    details?: TDetails | null
+    message: Nullable<string>,
+    details?: NullableOrUndefinable<TDetails>
 ): BridgeError<TCode, TDetails> {
     return {
         type: 'native',

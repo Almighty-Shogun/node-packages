@@ -1,19 +1,21 @@
+import type { Nullable } from '@almighty-shogun/utils';
+
 export type BridgeSuccess<T> = {
     ok: true;
-    message: string | null;
+    message: Nullable<string>;
     data: T;
 };
 
 export type BridgeError<TCode extends string = string, TDetails = unknown> = {
     type: 'native' | 'transport';
     code: TCode;
-    message: string | null;
-    details: TDetails | null;
+    message: Nullable<string>;
+    details: Nullable<TDetails>;
 };
 
 export type BridgeFailure<TCode extends string = string, TDetails = unknown> = {
     ok: false;
-    message: string | null;
+    message: Nullable<string>;
     error: BridgeError<TCode, TDetails>;
 };
 

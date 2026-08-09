@@ -6,6 +6,8 @@ outline: deep
 
 Shared TypeScript types exported by `@almighty-shogun/webkit-native-bridge`.
 
+Some signatures reuse utility types from [`@almighty-shogun/utils`](../utils/types): [`Nullable`](../utils/types#nullable), [`NullableOrUndefinable`](../utils/types#nullableorundefinable), and [`Undefinable`](../utils/types#undefinable).
+
 ## BridgeSuccess
 
 Successful native bridge response. It carries the typed response data and keeps `message` nullable because native code may omit a human-readable message for successful responses.
@@ -13,7 +15,7 @@ Successful native bridge response. It carries the typed response data and keeps 
 ```ts
 type BridgeSuccess<T> = {
     ok: true;
-    message: string | null;
+    message: Nullable<string>;
     data: T;
 };
 ```
@@ -26,35 +28,38 @@ Error payload returned by native code or produced by the JavaScript transport la
 type BridgeError<TCode extends string = string, TDetails = unknown> = {
     type: 'native' | 'transport';
     code: TCode;
-    message: string | null;
-    details: TDetails | null;
+    message: Nullable<string>;
+    details: Nullable<TDetails>;
 };
 ```
 
 ## BridgeFailure
 
-Failed native bridge response. It keeps the top-level nullable `message` from the raw response and includes the structured `BridgeError` for code, type, and details handling.
+Failed native bridge response. It keeps the top-level nullable `message` from the raw response and includes the structured [`BridgeError`](./types#bridgeerror) for code, type, and details handling.
 
 ```ts
 type BridgeFailure<TCode extends string = string, TDetails = unknown> = {
     ok: false;
-    message: string | null;
+    message: Nullable<string>;
     error: BridgeError<TCode, TDetails>;
 };
 ```
 
 ## BridgeResponse
 
-Discriminated union returned by `NativeBridge.request()`. Branch on `response.ok` to safely access either typed data or typed error details.
+Discriminated union returned by [`NativeBridge.request()`](./types#nativebridge). Branch on `response.ok` to safely access either typed data or typed error details.
 
 ```ts
-type BridgeResponse<TData, TCode extends string = string, TDetails = unknown> =
-    BridgeSuccess<TData> | BridgeFailure<TCode, TDetails>;
+type BridgeResponse<
+    TData,
+    TCode extends string = string,
+    TDetails = unknown
+> = BridgeSuccess<TData> | BridgeFailure<TCode, TDetails>;
 ```
 
 ## ResolvedBridgeError
 
-Normalized error shape returned by `mapBridgeError()` and used by failed `NormalizedBridgeResponse` values. Unlike `BridgeError`, the message is always a string.
+Normalized error shape returned by [`mapBridgeError()`](./functions/mapBridgeError) and used by failed [`NormalizedBridgeResponse`](./types#normalizedbridgeresponse) values. Unlike [`BridgeError`](./types#bridgeerror), the message is always a string.
 
 ```ts
 type ResolvedBridgeError = {
@@ -67,7 +72,7 @@ type ResolvedBridgeError = {
 
 ## NormalizedBridgeResponse
 
-Response union returned by `normalizeBridgeResponse()`. Success responses keep the original success shape, while failures expose a `ResolvedBridgeError` with a non-null message.
+Response union returned by [`normalizeBridgeResponse()`](./functions/normalizeBridgeResponse). Success responses keep the original success shape, while failures expose a [`ResolvedBridgeError`](./types#resolvedbridgeerror) with a non-null message.
 
 ```ts
 type NormalizedBridgeResponse<TData> = BridgeSuccess<TData> | {
@@ -81,7 +86,11 @@ type NormalizedBridgeResponse<TData> = BridgeSuccess<TData> | {
 Transport error code union produced by the JavaScript bridge runtime for failures that happen before or outside native application handling.
 
 ```ts
-type NativeTransportErrorCode = 'TIMEOUT' | 'UNAVAILABLE' | 'DISPOSED' | 'UNKNOWN';
+type NativeTransportErrorCode =
+    | 'TIMEOUT'
+    | 'UNAVAILABLE'
+    | 'DISPOSED'
+    | 'UNKNOWN';
 ```
 
 ## NativeTransportErrorDetails
@@ -112,14 +121,14 @@ Contract map used to type native request method names, request bodies, response 
 type NativeBridgeRequestMap = Record<string, {
     body: unknown;
     response: unknown;
-    errorCode?: string;
+    errorCode?: Undefinable<string>;
     errorDetails?: unknown;
 }>;
 ```
 
 ## NativeRequestBody
 
-Extracts the request body type for one method from a `NativeBridgeRequestMap`. It is used by `NativeBridge.request()` overloads to require bodies only for methods that define them.
+Extracts the request body type for one method from a [`NativeBridgeRequestMap`](./types#nativebridgerequestmap). It is used by [`NativeBridge.request()`](./types#nativebridge) overloads to require bodies only for methods that define them.
 
 ```ts
 type NativeRequestBody<
@@ -130,7 +139,7 @@ type NativeRequestBody<
 
 ## NativeResponseBody
 
-Extracts the response payload type for one method from a `NativeBridgeRequestMap`.
+Extracts the response payload type for one method from a [`NativeBridgeRequestMap`](./types#nativebridgerequestmap).
 
 ```ts
 type NativeResponseBody<
@@ -147,9 +156,9 @@ Extracts the native error code union for one method. When the method contract do
 type NativeErrorCode<
     TRequests extends NativeBridgeRequestMap,
     TMethod extends keyof TRequests
-> = TRequests[TMethod] extends { errorCode?: infer TErrorCode extends string }
-    ? TErrorCode
-    : string;
+> = TRequests[TMethod] extends {
+    errorCode?: Undefinable<infer TErrorCode extends string>
+} ? TErrorCode : string;
 ```
 
 ## NativeErrorDetails
@@ -160,25 +169,65 @@ Extracts the native error details type for one method. When the method contract 
 type NativeErrorDetails<
     TRequests extends NativeBridgeRequestMap,
     TMethod extends keyof TRequests
-> = TRequests[TMethod] extends { errorDetails?: infer TErrorDetails }
-    ? TErrorDetails
-    : unknown;
+> = TRequests[TMethod] extends {
+    errorDetails?: Undefinable<infer TErrorDetails>
+} ? TErrorDetails : unknown;
+```
+
+## BridgeErrorCode
+
+Every error code a request can resolve with: the codes the method contract declares, plus the transport codes the bridge itself produces. This is the `code` you read off a failed [`BridgeResponse`](./types#bridgeresponse), and the reason a `switch` over it has to handle `TIMEOUT`, `UNAVAILABLE`, `DISPOSED`, and `UNKNOWN` alongside your own.
+
+```ts
+type BridgeErrorCode<
+    TRequests extends NativeBridgeRequestMap,
+    TMethod extends keyof TRequests
+> = NativeErrorCode<TRequests, TMethod> | NativeTransportErrorCode;
+```
+
+## BridgeErrorDetails
+
+The matching details union: whatever the method contract declares under `errorDetails`, plus [`NativeTransportErrorDetails`](./types#nativetransporterrordetails) for transport failures. Narrow with [`isNativeError`](./functions/isNativeError) before treating the details as your own shape.
+
+```ts
+type BridgeErrorDetails<
+    TRequests extends NativeBridgeRequestMap,
+    TMethod extends keyof TRequests
+> = NativeErrorDetails<TRequests, TMethod> | NativeTransportErrorDetails;
+```
+
+## NativeRequestResult
+
+The full response type for one request method, assembled from the contract's response body and the two error unions above. [`NativeBridge.request()`](./types#nativebridge) resolves to this, so it is what you branch on with `response.ok`.
+
+```ts
+type NativeRequestResult<
+    TRequests extends NativeBridgeRequestMap,
+    TMethod extends keyof TRequests
+> = BridgeResponse<
+    NativeResponseBody<TRequests, TMethod>,
+    BridgeErrorCode<TRequests, TMethod>,
+    BridgeErrorDetails<TRequests, TMethod>
+>;
 ```
 
 ## NativeMethodsWithoutBody
 
-Builds a union of request method names whose body type is `void` or `undefined`. `NativeBridge.request()` uses it to make the body argument optional for those methods.
+Builds a union of request method names whose body type is `void` or `undefined`. [`NativeBridge.request()`](./types#nativebridge) uses it to make the body argument optional for those methods.
 
 ```ts
 type NativeMethodsWithoutBody<TRequests extends NativeBridgeRequestMap> = {
-    [TMethod in keyof TRequests]: [NativeRequestBody<TRequests, TMethod>] extends [void]
-        ? TMethod : [NativeRequestBody<TRequests, TMethod>] extends [undefined] ? TMethod : never
+    [TMethod in keyof TRequests]:
+    [NativeRequestBody<TRequests, TMethod>] extends [void]
+        ? TMethod
+        : [NativeRequestBody<TRequests, TMethod>] extends [undefined]
+            ? TMethod : never
 }[keyof TRequests];
 ```
 
 ## NativeMethodsWithBody
 
-Builds a union of request method names that require a body by excluding methods covered by `NativeMethodsWithoutBody`.
+Builds a union of request method names that require a body by excluding methods covered by [`NativeMethodsWithoutBody`](./types#nativemethodswithoutbody).
 
 ```ts
 type NativeMethodsWithBody<TRequests extends NativeBridgeRequestMap> =
@@ -187,7 +236,7 @@ type NativeMethodsWithBody<TRequests extends NativeBridgeRequestMap> =
 
 ## NativeResponseEventDetail
 
-DOM event detail shape expected by `NativeBridge.handleResponse()` and the automatic response listener. Native code dispatches this detail back to JavaScript to resolve a pending request.
+DOM event detail shape expected by [`NativeBridge.handleResponse()`](./types#nativebridge) and the automatic response listener. Native code dispatches this detail back to JavaScript to resolve a pending request.
 
 ```ts
 type NativeResponseEventDetail = {
@@ -200,36 +249,39 @@ type NativeResponseEventDetail = {
 
 ## NativeBridgeWindow
 
-Window-like object used by the bridge runtime. Pass this through `NativeBridgeOptions.window` for tests, alternate runtimes, or explicit WebKit window injection.
+Window-like object used by the bridge runtime. Pass this through [`NativeBridgeOptions.window`](./types#nativebridgeoptions) for tests, alternate runtimes, or explicit WebKit window injection.
 
 ```ts
 type NativeBridgeWindow = Window & {
-    webkit?: {
-        messageHandlers?: Record<string, NativeBridgeMessageHandler | undefined>;
-    }
+    webkit?: Undefinable<{
+        messageHandlers?: Undefinable<Record<
+            string,
+            Undefinable<NativeBridgeMessageHandler>
+        >>;
+    }>
 };
 ```
 
 ## NativeRequestOptions
 
-Per-request options accepted by `NativeBridge.request()`. Use `timeout` to override the bridge default for one request, or `null` to disable that request timeout.
+Per-request options accepted by [`NativeBridge.request()`](./types#nativebridge). Use `timeout` to override the bridge default for one request, or `null` to disable that request timeout.
 
 ```ts
 type NativeRequestOptions = {
-    timeout?: number | null;
+    timeout?: NullableOrUndefinable<number>;
 };
 ```
 
 ## NativeBridgeOptions
 
-Configuration accepted by `createNativeBridge()`. It controls the response event name, WebKit handler name, default request timeout, and window-like runtime object.
+Configuration accepted by [`createNativeBridge()`](./functions/createNativeBridge). It controls the response event name, WebKit handler name, default request timeout, and window-like runtime object.
 
 ```ts
 type NativeBridgeOptions = {
-    eventName?: string;
-    handlerName?: string;
-    requestTimeout?: number | null;
-    window?: NativeBridgeWindow;
+    eventName?: Undefinable<string>;
+    handlerName?: Undefinable<string>;
+    requestTimeout?: NullableOrUndefinable<number>;
+    window?: Undefinable<NativeBridgeWindow>;
 };
 ```
 
@@ -241,16 +293,19 @@ Internal pending-request state stored while a native request is waiting for a re
 type NativeBridgePendingRequest = {
     method: string;
     resolve(value: BridgeResponse<unknown>): void;
-    timeoutId: ReturnType<typeof setTimeout> | null;
+    timeoutId: Nullable<ReturnType<typeof setTimeout>>;
 };
 ```
 
 ## NativeBridge
 
-Runtime bridge object returned by `createNativeBridge()`. It exposes low-level posting, typed request/response calls, fire-and-forget commands, availability checks, manual response handling, and disposal.
+Runtime bridge object returned by [`createNativeBridge()`](./functions/createNativeBridge). It exposes low-level posting, typed request/response calls, fire-and-forget commands, availability checks, manual response handling, and disposal.
 
 ```ts
-type NativeBridge<TRequests extends NativeBridgeRequestMap, TCommands extends string = never> = {
+type NativeBridge<
+    TRequests extends NativeBridgeRequestMap,
+    TCommands extends string = never
+> = {
     call(method: TCommands): void;
     dispose(): void;
     handleResponse(detail: NativeResponseEventDetail): void;
@@ -260,22 +315,13 @@ type NativeBridge<TRequests extends NativeBridgeRequestMap, TCommands extends st
         <TMethod extends NativeMethodsWithoutBody<TRequests>>(
             method: TMethod,
             body?: undefined,
-            options?: NativeRequestOptions
-        ): Promise<BridgeResponse<
-            NativeResponseBody<TRequests, TMethod>,
-            NativeErrorCode<TRequests, TMethod> | NativeTransportErrorCode,
-            NativeErrorDetails<TRequests, TMethod> | NativeTransportErrorDetails
-        >>;
+            options?: Undefinable<NativeRequestOptions>
+        ): Promise<NativeRequestResult<TRequests, TMethod>>;
         <TMethod extends NativeMethodsWithBody<TRequests>>(
             method: TMethod,
             body: NativeRequestBody<TRequests, TMethod>,
-            options?: NativeRequestOptions
-        ): Promise<BridgeResponse<
-            NativeResponseBody<TRequests, TMethod>,
-            NativeErrorCode<TRequests, TMethod> | NativeTransportErrorCode,
-            NativeErrorDetails<TRequests, TMethod> | NativeTransportErrorDetails
-        >>;
+            options?: Undefinable<NativeRequestOptions>
+        ): Promise<NativeRequestResult<TRequests, TMethod>>;
     };
 };
 ```
-
