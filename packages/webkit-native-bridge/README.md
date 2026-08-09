@@ -1,5 +1,6 @@
 # WebKit Native Bridge
-Type-safe request/response bridge for communicating between JavaScript and native C++ applications embedded in WebKit.
+
+Typed request and command bridge for JavaScript running inside WebKit host applications.
 
 ## 📃 Prerequisites
 - **[Bun](https://bun.sh)**: >= 1.3.10
