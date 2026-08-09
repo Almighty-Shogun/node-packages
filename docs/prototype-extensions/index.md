@@ -10,6 +10,10 @@ Because this package patches prototypes at runtime, import it once near applicat
 - [String](./string/toSlug) &mdash; formatting and comparison helpers for string values.
 - [Number](./number/add) &mdash; small arithmetic and comparison helpers for number values.
 
+## Dependencies
+
+- None. The package installs its methods with plain JavaScript and pulls nothing else in.
+
 ## Runtime behavior
 
 The package is marked as side-effectful. It does not provide named runtime exports; importing the package installs the methods and makes the TypeScript augmentations available.
@@ -17,7 +21,7 @@ The package is marked as side-effectful. It does not provide named runtime expor
 ## Quick example
 
 ```ts
-import '@almighty-shogun/prototype-extensions'
+import '@almighty-shogun/prototype-extensions';
 
 const selected = ['users', 'settings'].addOrRemove('users');
 const slug = 'User Settings'.toSlug();

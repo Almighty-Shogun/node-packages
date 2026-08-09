@@ -1,6 +1,6 @@
 # Installation
 
-Import the package once for side effects. It patches the built-in prototypes at runtime and exposes TypeScript augmentations for `Array`, `String`, and `Number`.
+`@almighty-shogun/prototype-extensions` ships as ESM for side effects. Import it once because it patches the built-in prototypes at runtime and exposes TypeScript augmentations for `Array`, `String`, and `Number`.
 
 ## Install
 
@@ -29,9 +29,9 @@ yarn add @almighty-shogun/prototype-extensions
 Import this package once in your application entry file, before application code calls any prototype methods. In most Vue/Vite projects that means `main.ts`.
 
 ```ts
-import App from './App.vue'
-import { createApp } from 'vue'
-import '@almighty-shogun/prototype-extensions'
+import App from './App.vue';
+import { createApp } from 'vue';
+import '@almighty-shogun/prototype-extensions';
 
 createApp(App).mount('#app');
 ```
