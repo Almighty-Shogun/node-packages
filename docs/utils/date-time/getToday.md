@@ -1,7 +1,7 @@
 ---
 outline: deep
 
-returns: Today as a date string.
+returns: The current local date formatted as `yyyy-MM-dd`.
 ---
 
 # getToday
@@ -11,13 +11,13 @@ Returns the current local date as `yyyy-MM-dd`. This is useful for date input de
 ## Importing
 
 ```ts
-import { getToday } from '@almighty-shogun/utils'
+import { getToday } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { getToday } from '@almighty-shogun/utils'
+import { getToday } from '@almighty-shogun/utils';
 
 const today = getToday();
 

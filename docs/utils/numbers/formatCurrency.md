@@ -8,13 +8,13 @@ params:
 
     - name: currency
       description: Currency code.
-      type: string
+      type: Undefinable<string>
       optional: true
       defaultValue: 'EUR'
 
     - name: locale
       description: Locale override.
-      type: string
+      type: Undefinable<string>
       optional: true
 
 returns: A localized currency string with exactly two fraction digits. When no currency is provided, Euro formatting is used.
@@ -27,25 +27,29 @@ Formats a number as localized currency using `Intl.NumberFormat`. The locale fol
 ## Importing
 
 ```ts
-import { formatCurrency } from '@almighty-shogun/utils'
+import { formatCurrency } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { formatCurrency } from '@almighty-shogun/utils'
+import { formatCurrency } from '@almighty-shogun/utils';
 
 const total = formatCurrency(1299.5, 'EUR', 'nl');
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
 declare function formatCurrency(
     value: number,
-    currency?: string,
-    locale?: string
+    currency?: Undefinable<string>,
+    locale?: Undefinable<string>
 ): string;
 ```

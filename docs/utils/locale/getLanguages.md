@@ -11,13 +11,13 @@ Returns the full list of supported language metadata. The result can be used to 
 ## Importing
 
 ```ts
-import { getLanguages } from '@almighty-shogun/utils'
+import { getLanguages } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { getLanguages } from '@almighty-shogun/utils'
+import { getLanguages } from '@almighty-shogun/utils';
 
 const languages = getLanguages();
 const codes = languages.map(language => language.code);

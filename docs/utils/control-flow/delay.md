@@ -16,13 +16,13 @@ Returns a promise that resolves after the requested number of milliseconds. Use 
 ## Importing
 
 ```ts
-import { delay } from '@almighty-shogun/utils'
+import { delay } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { delay } from '@almighty-shogun/utils'
+import { delay } from '@almighty-shogun/utils';
 
 await delay(300);
 

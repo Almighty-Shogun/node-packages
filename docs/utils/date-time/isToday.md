@@ -8,7 +8,7 @@ params:
 
     - name: today
       description: Comparison date.
-      type: DateTime
+      type: Undefinable<DateTime>
       optional: true
 
 returns: '`true` when both values share the same day.'
@@ -21,14 +21,14 @@ Checks whether a Luxon `DateTime` falls on the same calendar day as another `Dat
 ## Importing
 
 ```ts
-import { isToday } from '@almighty-shogun/utils'
+import { isToday } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { DateTime } from 'luxon'
-import { isToday } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { isToday } from '@almighty-shogun/utils';
 
 const shouldHighlight = isToday(DateTime.now());
 
@@ -37,8 +37,15 @@ const shouldHighlight = isToday(DateTime.now());
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
-declare function isToday(dateTime: DateTime, today?: DateTime): boolean;
+declare function isToday(
+    dateTime: DateTime,
+    today?: Undefinable<DateTime>
+): boolean;
 ```

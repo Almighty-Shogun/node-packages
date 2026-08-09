@@ -6,7 +6,7 @@ params:
       description: Temperature value.
       type: number
 
-returns: A formatted Celsius string.
+returns: A whole-degree Celsius label with the `°C` suffix.
 ---
 
 # formatCelsius
@@ -16,13 +16,13 @@ Rounds a temperature and appends the Celsius unit. It is intended for display la
 ## Importing
 
 ```ts
-import { formatCelsius } from '@almighty-shogun/utils'
+import { formatCelsius } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { formatCelsius } from '@almighty-shogun/utils'
+import { formatCelsius } from '@almighty-shogun/utils';
 
 const label = formatCelsius(21.6);
 

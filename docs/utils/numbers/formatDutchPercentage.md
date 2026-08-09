@@ -16,26 +16,25 @@ Formats a number as a Dutch localized percentage. The input should be a ratio, s
 ## Importing
 
 ```ts
-import { formatDutchPercentage } from '@almighty-shogun/utils'
+import { formatDutchPercentage } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { formatDutchPercentage } from '@almighty-shogun/utils'
+import { formatDutchPercentage } from '@almighty-shogun/utils';
 
 const conversion = formatDutchPercentage(0.153);
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [formatPercentage](./formatPercentage)
+
 ## Type signature
 
 ```ts
 declare function formatDutchPercentage(value: number): string;
 ```
-
-
-## Uses
-
-- [formatPercentage](./formatPercentage)

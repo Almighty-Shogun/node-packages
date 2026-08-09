@@ -14,13 +14,13 @@ Applies common document-level startup settings in one call. It sets the website 
 ## Importing
 
 ```ts
-import { initApplication } from '@almighty-shogun/utils'
+import { initApplication } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { initApplication } from '@almighty-shogun/utils'
+import { initApplication } from '@almighty-shogun/utils';
 
 initApplication({
     locale: 'nl',
@@ -31,21 +31,21 @@ initApplication({
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+- [disableZoom](./disableZoom)
+- [setDarkTheme](./setDarkTheme)
+- [setWebsiteLocale](./setWebsiteLocale)
+
 ## Type signature
 
 ```ts
-type ApplicationConfig = {
-    locale?: string;
-    isDarkTheme?: boolean;
-    isZoomDisabled?: boolean;
-};
-
 declare function initApplication(config: ApplicationConfig): void;
+
+type ApplicationConfig = {
+    locale?: Undefinable<string>;
+    isDarkTheme?: Undefinable<boolean>;
+    isZoomDisabled?: Undefinable<boolean>;
+};
 ```
-
-
-## Uses
-
-- [setWebsiteLocale](./setWebsiteLocale)
-- [setDarkTheme](./setDarkTheme)
-- [disableZoom](./disableZoom)

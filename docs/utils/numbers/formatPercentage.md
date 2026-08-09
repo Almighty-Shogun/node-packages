@@ -8,7 +8,7 @@ params:
 
     - name: locale
       description: Locale override.
-      type: string
+      type: Undefinable<string>
       optional: true
 
 returns: A localized percentage string. The input is treated as a ratio, so `0.5` represents fifty percent.
@@ -21,24 +21,28 @@ Formats a number as a localized percentage. The input is treated as a ratio, so 
 ## Importing
 
 ```ts
-import { formatPercentage } from '@almighty-shogun/utils'
+import { formatPercentage } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { formatPercentage } from '@almighty-shogun/utils'
+import { formatPercentage } from '@almighty-shogun/utils';
 
 const completion = formatPercentage(0.875, 'en');
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
 declare function formatPercentage(
     value: number,
-    locale?: string
+    locale?: Undefinable<string>
 ): string;
 ```

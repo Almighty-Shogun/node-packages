@@ -16,26 +16,25 @@ Formats a number as Euro currency using Dutch locale rules. It is a focused shor
 ## Importing
 
 ```ts
-import { formatDutchCurrency } from '@almighty-shogun/utils'
+import { formatDutchCurrency } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { formatDutchCurrency } from '@almighty-shogun/utils'
+import { formatDutchCurrency } from '@almighty-shogun/utils';
 
 const total = formatDutchCurrency(1299.5);
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [formatCurrency](./formatCurrency)
+
 ## Type signature
 
 ```ts
 declare function formatDutchCurrency(value: number): string;
 ```
-
-
-## Uses
-
-- [formatCurrency](./formatCurrency)

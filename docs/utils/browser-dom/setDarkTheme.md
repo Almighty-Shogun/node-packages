@@ -14,13 +14,13 @@ Adds or removes the `dark` attribute on the root HTML element. This pairs well w
 ## Importing
 
 ```ts
-import { setDarkTheme } from '@almighty-shogun/utils'
+import { setDarkTheme } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { setDarkTheme } from '@almighty-shogun/utils'
+import { setDarkTheme } from '@almighty-shogun/utils';
 
 setDarkTheme(true);
 
