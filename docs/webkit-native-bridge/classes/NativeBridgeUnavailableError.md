@@ -16,13 +16,17 @@ Error used when the configured WebKit message handler cannot be found. It usuall
 ## Importing
 
 ```ts
-import { NativeBridgeUnavailableError } from '@almighty-shogun/webkit-native-bridge'
+import {
+    NativeBridgeUnavailableError
+} from '@almighty-shogun/webkit-native-bridge';
 ```
 
 ## Usage
 
 ```ts
-import { NativeBridgeUnavailableError } from '@almighty-shogun/webkit-native-bridge'
+import {
+    NativeBridgeUnavailableError
+} from '@almighty-shogun/webkit-native-bridge';
 
 throw new NativeBridgeUnavailableError('nativeBridge');
 ```

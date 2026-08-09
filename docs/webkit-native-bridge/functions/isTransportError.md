@@ -16,13 +16,26 @@ Narrows a bridge error to a transport error. Transport errors come from the Java
 ## Importing
 
 ```ts
-import { isTransportError } from '@almighty-shogun/webkit-native-bridge'
+import { isTransportError } from '@almighty-shogun/webkit-native-bridge';
 ```
 
 ## Usage
 
 ```ts
-import { isTransportError } from '@almighty-shogun/webkit-native-bridge'
+import {
+    createNativeBridge,
+    isTransportError
+} from '@almighty-shogun/webkit-native-bridge';
+
+type Requests = {
+    ping: {
+        body: void;
+        response: 'pong'
+    }
+};
+
+const bridge = createNativeBridge<Requests>();
+const response = await bridge.request('ping');
 
 if (!response.ok && isTransportError(response.error)) {
     console.warn('Request did not reach native code');

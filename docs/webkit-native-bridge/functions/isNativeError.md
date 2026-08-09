@@ -16,13 +16,30 @@ Narrows a bridge error to a native error. Native errors are returned by the host
 ## Importing
 
 ```ts
-import { isNativeError } from '@almighty-shogun/webkit-native-bridge'
+import { isNativeError } from '@almighty-shogun/webkit-native-bridge';
 ```
 
 ## Usage
 
 ```ts
-import { isNativeError } from '@almighty-shogun/webkit-native-bridge'
+import {
+    createNativeBridge,
+    isNativeError
+} from '@almighty-shogun/webkit-native-bridge';
+
+type Requests = {
+    getUser: {
+        body: {
+            id: string;
+        };
+        response: {
+            name: string;
+        }
+    }
+};
+
+const bridge = createNativeBridge<Requests>();
+const response = await bridge.request('getUser', { id: '1' });
 
 if (!response.ok && isNativeError(response.error)) {
     console.warn('Native code rejected the request');

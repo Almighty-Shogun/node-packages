@@ -11,13 +11,17 @@ Error used when bridge methods are called after `dispose()`. This protects calle
 ## Importing
 
 ```ts
-import { NativeBridgeDisposedError } from '@almighty-shogun/webkit-native-bridge'
+import {
+    NativeBridgeDisposedError
+} from '@almighty-shogun/webkit-native-bridge';
 ```
 
 ## Usage
 
 ```ts
-import { NativeBridgeDisposedError } from '@almighty-shogun/webkit-native-bridge'
+import {
+    NativeBridgeDisposedError
+} from '@almighty-shogun/webkit-native-bridge';
 
 throw new NativeBridgeDisposedError();
 ```
