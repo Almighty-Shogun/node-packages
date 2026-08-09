@@ -8,7 +8,7 @@ params:
 
     - name: locale
       description: Locale override.
-      type: string
+      type: Undefinable<string>
       optional: true
 
 returns: A localized date-time label containing weekday, day, month, hour, and minute. The exact punctuation and ordering come from Luxon and the active locale.
@@ -21,25 +21,29 @@ Formats a Luxon `DateTime` with weekday, day, month, hour, and minute. Use it fo
 ## Importing
 
 ```ts
-import { formatDateTime } from '@almighty-shogun/utils'
+import { formatDateTime } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { DateTime } from 'luxon'
-import { formatDateTime } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { formatDateTime } from '@almighty-shogun/utils';
 
 const label = formatDateTime(DateTime.fromISO('2026-05-20T14:30:00'), 'en');
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
 declare function formatDateTime(
     date: DateTime,
-    locale?: string
+    locale?: Undefinable<string>
 ): string;
 ```

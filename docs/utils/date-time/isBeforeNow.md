@@ -16,14 +16,14 @@ Checks whether a Luxon `DateTime` is earlier than the current moment. Use it for
 ## Importing
 
 ```ts
-import { isBeforeNow } from '@almighty-shogun/utils'
+import { isBeforeNow } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { DateTime } from 'luxon'
-import { isBeforeNow } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { isBeforeNow } from '@almighty-shogun/utils';
 
 const expired = isBeforeNow(DateTime.now().minus({ minutes: 1 }));
 

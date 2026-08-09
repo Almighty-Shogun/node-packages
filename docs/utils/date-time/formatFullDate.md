@@ -8,7 +8,7 @@ params:
 
     - name: locale
       description: Locale override.
-      type: string
+      type: Undefinable<string>
       optional: true
 
 returns: A localized date label containing weekday, day, and month. The year is intentionally omitted.
@@ -21,25 +21,29 @@ Formats a Luxon `DateTime` with weekday, day, and month, but no year. This works
 ## Importing
 
 ```ts
-import { formatFullDate } from '@almighty-shogun/utils'
+import { formatFullDate } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { DateTime } from 'luxon'
-import { formatFullDate } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { formatFullDate } from '@almighty-shogun/utils';
 
 const label = formatFullDate(DateTime.fromISO('2026-05-20'), 'en');
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
 declare function formatFullDate(
     date: DateTime,
-    locale?: string
+    locale?: Undefinable<string>
 ): string;
 ```

@@ -9,11 +9,12 @@ params:
     - name: isLong
       description: Use long weekday names when `true`; short names when `false`.
       type: boolean
+      optional: true
       defaultValue: 'true'
 
     - name: locale
       description: Locale override.
-      type: string
+      type: Undefinable<string>
       optional: true
 
 returns: A localized weekday name. When `isLong` is `true`, the long weekday form is used; when `false`, the short form is used.
@@ -26,26 +27,30 @@ Formats the weekday from a Luxon `DateTime`. Pass `false` for `isLong` to use sh
 ## Importing
 
 ```ts
-import { formatWeekday } from '@almighty-shogun/utils'
+import { formatWeekday } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { DateTime } from 'luxon'
-import { formatWeekday } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { formatWeekday } from '@almighty-shogun/utils';
 
 const weekday = formatWeekday(DateTime.fromISO('2026-05-20'), true, 'en');
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
 declare function formatWeekday(
     date: DateTime,
-    isLong: boolean,
-    locale?: string
+    isLong?: boolean,
+    locale?: Undefinable<string>
 ): string;
 ```

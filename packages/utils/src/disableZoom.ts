@@ -13,9 +13,7 @@ export default function (): void {
         lastTouchEnd = now;
     });
 
-    document.addEventListener('gesturestart', (event: Event) => {
-        event.preventDefault();
-    }, { passive: false });
+    document.addEventListener('gesturestart', (event: Event) => event.preventDefault(), { passive: false });
 
     const meta = document.querySelector('meta[name="viewport"]');
 

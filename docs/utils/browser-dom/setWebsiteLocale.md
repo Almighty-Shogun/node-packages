@@ -4,7 +4,7 @@ outline: deep
 params:
     - name: locale
       description: Locale to apply. Falls back to document or navigator language, or `en`.
-      type: string
+      type: Undefinable<string>
       optional: true
 ---
 
@@ -15,13 +15,13 @@ Sets the root HTML `lang` attribute. When no locale is provided, the helper fall
 ## Importing
 
 ```ts
-import { setWebsiteLocale } from '@almighty-shogun/utils'
+import { setWebsiteLocale } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { setWebsiteLocale } from '@almighty-shogun/utils'
+import { setWebsiteLocale } from '@almighty-shogun/utils';
 
 setWebsiteLocale('nl');
 
@@ -30,8 +30,12 @@ setWebsiteLocale('nl');
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
-declare function setWebsiteLocale(locale?: string): void;
+declare function setWebsiteLocale(locale?: Undefinable<string>): void;
 ```

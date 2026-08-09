@@ -1,11 +1,13 @@
 {
     "name": "@almighty-shogun/utils",
-    "description": "A small package that contains common utilities used in all my projects.",
+    "description": "Shared TypeScript utilities for values, formatting, locale metadata, Luxon date helpers, serialization, and browser APIs.",
     "version": "0.0.0",
     "type": "module",
     "license": "MIT",
     "scripts": {
-        "build": "tsdown"
+        "build": "tsdown",
+        "typecheck": "tsc --noEmit",
+        "dev": "tsdown --watch --no-clean"
     },
     "publishConfig": {
         "access": "public",
@@ -38,10 +40,11 @@
         "CODEOWNERS"
     ],
     "dependencies": {
+        "@types/luxon": "^3.7.3",
         "luxon": "^3.7.2"
     },
     "devDependencies": {
-        "tsdown": "^0.16.8",
+        "tsdown": "^0.22.14",
         "typescript": "^5.9.3"
     }
 }

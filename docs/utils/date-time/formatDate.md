@@ -8,7 +8,7 @@ params:
 
     - name: locale
       description: Locale override.
-      type: string
+      type: Undefinable<string>
       optional: true
 
 returns: A localized date string such as `May 20, 2026` in English locales. The exact output depends on the locale data available in the runtime.
@@ -21,14 +21,14 @@ Formats a Luxon `DateTime` as a localized calendar date with year, month, and da
 ## Importing
 
 ```ts
-import { formatDate } from '@almighty-shogun/utils'
+import { formatDate } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { DateTime } from 'luxon'
-import { formatDate } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { formatDate } from '@almighty-shogun/utils';
 
 const label = formatDate(DateTime.fromISO('2026-05-20'), 'en');
 
@@ -37,8 +37,15 @@ const label = formatDate(DateTime.fromISO('2026-05-20'), 'en');
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
-declare function formatDate(date: DateTime, locale?: string): string;
+declare function formatDate(
+    date: DateTime,
+    locale?: Undefinable<string>
+): string;
 ```

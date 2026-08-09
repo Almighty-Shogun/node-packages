@@ -6,7 +6,7 @@ params:
       description: Language code such as `en`, `nl`, `fr`, `de`, or `pl`.
       type: LanguageCode
 
-returns: A `Language` object for known language codes, otherwise `null`. The object contains the display name, language code, and flag asset paths.
+returns: A `Nullable<Language>` for known language codes. The object contains the display name, language code, and flag asset paths.
 ---
 
 # getLanguage
@@ -16,13 +16,13 @@ Looks up one supported language by code and returns its display metadata. Use th
 ## Importing
 
 ```ts
-import { getLanguage } from '@almighty-shogun/utils'
+import { getLanguage } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { getLanguage } from '@almighty-shogun/utils'
+import { getLanguage } from '@almighty-shogun/utils';
 
 const language = getLanguage('nl');
 
@@ -31,10 +31,14 @@ const language = getLanguage('nl');
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Nullable](../types#nullable)
+
 ## Type signature
 
 ```ts
-declare function getLanguage(code: LanguageCode): Language | null;
+declare function getLanguage(code: LanguageCode): Nullable<Language>;
 
 type Language = {
     name: string;

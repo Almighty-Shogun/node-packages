@@ -8,7 +8,7 @@ params:
 
     - name: locale
       description: Locale override.
-      type: string
+      type: Undefinable<string>
       optional: true
 
 returns: A localized hour string. Locale rules decide whether the result uses 12-hour or 24-hour formatting.
@@ -21,22 +21,29 @@ Formats only the hour component from a Luxon `DateTime`. Use it for hour labels 
 ## Importing
 
 ```ts
-import { formatHour } from '@almighty-shogun/utils'
+import { formatHour } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { DateTime } from 'luxon'
-import { formatHour } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { formatHour } from '@almighty-shogun/utils';
 
 const hour = formatHour(DateTime.fromISO('2026-05-20T09:45:00'), 'en');
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
-declare function formatHour(date: DateTime, locale?: string): string;
+declare function formatHour(
+    date: DateTime,
+    locale?: Undefinable<string>
+): string;
 ```

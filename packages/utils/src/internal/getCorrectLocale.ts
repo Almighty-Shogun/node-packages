@@ -1,4 +1,6 @@
-export default function (locale?: string): string {
+import type { Undefinable } from '../types';
+
+export default function (locale?: Undefinable<string>): string {
     if (locale) {
         return locale;
     }

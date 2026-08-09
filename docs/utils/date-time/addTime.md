@@ -16,13 +16,13 @@ Creates a Luxon `DateTime` for the current moment plus the provided duration. It
 ## Importing
 
 ```ts
-import { addTime } from '@almighty-shogun/utils'
+import { addTime } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { addTime } from '@almighty-shogun/utils'
+import { addTime } from '@almighty-shogun/utils';
 
 const expiresAt = addTime({ minutes: 15 });
 ```

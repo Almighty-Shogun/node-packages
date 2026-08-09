@@ -8,7 +8,7 @@ params:
 
     - name: locale
       description: Locale override.
-      type: string
+      type: Undefinable<string>
       optional: true
 
 returns: A localized time string containing hour and minute.
@@ -21,22 +21,29 @@ Formats hour and minute from a Luxon `DateTime`. Use it when the date is already
 ## Importing
 
 ```ts
-import { formatTime } from '@almighty-shogun/utils'
+import { formatTime } from '@almighty-shogun/utils';
 ```
 
 ## Usage
 
 ```ts
-import { DateTime } from 'luxon'
-import { formatTime } from '@almighty-shogun/utils'
+import { DateTime } from 'luxon';
+import { formatTime } from '@almighty-shogun/utils';
 
 const time = formatTime(DateTime.fromISO('2026-05-20T14:30:00'), 'en');
 ```
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../types#undefinable)
+
 ## Type signature
 
 ```ts
-declare function formatTime(date: DateTime, locale?: string): string;
+declare function formatTime(
+    date: DateTime,
+    locale?: Undefinable<string>
+): string;
 ```
