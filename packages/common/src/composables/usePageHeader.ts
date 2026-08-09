@@ -1,16 +1,16 @@
 import { ref, type Ref } from 'vue';
-import type { FluxIconName } from '@flux-ui/types';
+import type { Undefinable } from '@almighty-shogun/utils';
 
-type HeaderData = {
+type HeaderData<TIcon = string> = {
     title: string;
-    icon: FluxIconName;
-    page?: string;
+    icon: TIcon;
+    page?: Undefinable<string>;
 };
 
 const pageTitle = ref<string>('Dashboard');
-const pageIcon = ref<FluxIconName>('grid-2');
+const pageIcon = ref<unknown>('grid-2');
 
-export default function (config?: HeaderData): UsePageHeader {
+export default function <TIcon = string>(config?: Undefinable<HeaderData<TIcon>>): UsePageHeader<TIcon> {
     if (config) {
         pageIcon.value = config.icon;
         pageTitle.value = config.title;
@@ -19,12 +19,12 @@ export default function (config?: HeaderData): UsePageHeader {
     }
 
     return {
-        pageIcon,
+        pageIcon: pageIcon as Ref<TIcon>,
         pageTitle
     };
 };
 
-type UsePageHeader = {
+type UsePageHeader<TIcon = string> = {
     readonly pageTitle: Ref<string>;
-    readonly pageIcon: Ref<FluxIconName>;
+    readonly pageIcon: Ref<TIcon>;
 };
