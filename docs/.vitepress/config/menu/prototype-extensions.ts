@@ -47,4 +47,4 @@ export const prototypeExtensions: DefaultTheme.SidebarItem[] = [
             { text: 'isGreaterThan', link: '/prototype-extensions/number/isGreaterThan' }
         ]
     }
-]
+];

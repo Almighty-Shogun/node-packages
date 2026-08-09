@@ -1,11 +1,12 @@
 {
     "name": "@almighty-shogun/prototype-extensions",
-    "description": "A small package that adds extensions to existing prototypes like string, array, etc.",
+    "description": "Side-effect prototype extensions for Array, String, and Number helpers.",
     "version": "0.0.0",
     "type": "module",
     "license": "MIT",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "typecheck": "tsc --noEmit"
     },
     "publishConfig": {
         "access": "public",
@@ -36,5 +37,8 @@
         "dist",
         "LICENSE",
         "CODEOWNERS"
-    ]
+    ],
+    "devDependencies": {
+        "typescript": "^5.9.3"
+    }
 }

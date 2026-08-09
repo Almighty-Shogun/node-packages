@@ -9,6 +9,7 @@ params:
     - name: appending
       description: Suffix used when the string is truncated.
       type: string | null
+      optional: true
       defaultValue: 'null'
 
 returns: The original string when it fits, otherwise the truncated string plus `appending`.
@@ -32,6 +33,6 @@ const label = 'Dashboard overview'.limit(9, '...');
 
 ```ts
 interface String {
-    limit(length: number, appending: string | null): string;
+    limit(length: number, appending?: string | null): string;
 }
 ```

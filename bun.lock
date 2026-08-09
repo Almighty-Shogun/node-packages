@@ -62,6 +62,9 @@
     "packages/prototype-extensions": {
       "name": "@almighty-shogun/prototype-extensions",
       "version": "0.0.0",
+      "devDependencies": {
+        "typescript": "^5.9.3",
+      },
     },
     "packages/utils": {
       "name": "@almighty-shogun/utils",

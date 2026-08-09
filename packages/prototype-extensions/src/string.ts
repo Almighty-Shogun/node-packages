@@ -4,7 +4,7 @@ declare global {
 
         append(value: string): string;
 
-        limit(length: number, appending: string | null): string;
+        limit(length: number, appending?: string | null): string;
 
         toNumber(): number;
 

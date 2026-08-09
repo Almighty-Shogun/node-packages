@@ -13,6 +13,8 @@ returns: A new array with the value toggled.
 
 Toggles a string or number inside an array. If the value already exists, the method returns a new array without it. If it does not exist, the method returns a new array with the value appended. This is useful for selected IDs, active filters, and checkbox-like state.
 
+The method is declared with a `this` type of `Array<string | number>`, so TypeScript only allows it on string or number arrays. Membership is decided with `includes()`, which uses strict equality and therefore does not match across types.
+
 ## Usage
 
 ```ts
@@ -24,6 +26,10 @@ const nextSelected = selected.addOrRemove('users');
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [delete](./delete)
+
 ## Type signature
 
 ```ts
@@ -31,7 +37,3 @@ interface Array<T> {
     addOrRemove(value: string | number): (string | number)[];
 }
 ```
-
-## Uses
-
-- [delete](./delete)
