@@ -1,6 +1,6 @@
 # Installation
 
-The common package ships as ESM and exposes named exports from the package root. Install Vue and Vue Router alongside it because the composables, refs, and route helpers use Vue runtime APIs.
+`@almighty-shogun/common` ships as ESM and exposes named exports from the package root. Install Vue and Vue Router alongside it because the composables, refs, and route helpers use Vue runtime APIs.
 
 ## Install
 
@@ -29,11 +29,11 @@ yarn add @almighty-shogun/common vue vue-router
 All public APIs are available from the package root.
 
 ```ts
-import { useOpen, isCurrentRoute, translate } from '@almighty-shogun/common'
+import { translate, useIsCurrentRoute } from '@almighty-shogun/common';
 ```
 
 ## Requirements
 
 - Vue 3.5+ for composables and refs.
-- Vue Router 4.x for route helpers.
-- Vue I18n 11.x when using i18n helpers such as `registerI18n`, `translate`, and `translationExists`.
+- Vue Router 5.x for route helpers.
+- No translation library. Helpers such as [`translate`](./i18n/translate) and [`translationExists`](./i18n/translationExists) detect Vue I18n automatically when it is installed, and otherwise use whatever instance you pass to [`registerI18n`](./i18n/registerI18n). Any object with `t`/`te` or `$t`/`$te` methods works, so Vue I18n is supported but never imported or required.

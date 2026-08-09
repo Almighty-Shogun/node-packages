@@ -1,7 +1,8 @@
-import { onMounted, onUnmounted, ref, unref, watch, type MaybeRef } from 'vue';
+import type { Nullable } from '@almighty-shogun/utils';
+import { onMounted, onUnmounted, ref, watch, toValue, type MaybeRefOrGetter } from 'vue';
 
-export default function (ms: MaybeRef<number>, fn: Function): UseInterval {
-    const intervalId = ref<number | null>(null);
+export default function (ms: MaybeRefOrGetter<number>, fn: Function): UseInterval {
+    const intervalId = ref<Nullable<number>>(null);
 
     function stop(): void {
         if (!intervalId.value) return;
@@ -12,13 +13,13 @@ export default function (ms: MaybeRef<number>, fn: Function): UseInterval {
 
     function start(): void {
         stop();
-        intervalId.value = setInterval(fn, unref(ms));
+        intervalId.value = setInterval(fn, toValue(ms));
     }
 
     onMounted(() => start());
     onUnmounted(() => stop());
 
-    watch(() => unref(ms), () => start());
+    watch(() => toValue(ms), () => start());
 
     return {
         start,

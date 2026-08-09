@@ -1,9 +1,16 @@
 ---
 outline: deep
 
+params:
+    - name: state
+      description: Initial open state.
+      type: MaybeRefOrGetter<boolean>
+      optional: true
+      defaultValue: 'false'
+
 returns:
     - name: isOpen
-      description: Current open state. Starts as `false`.
+      description: Current open state. Starts with `state`.
       type: Ref<boolean>
 
     - name: 'open(): void'
@@ -25,7 +32,7 @@ The returned functions are intentionally simple and synchronous, which makes the
 ## Importing
 
 ```ts
-import { useOpen } from '@almighty-shogun/common'
+import { useOpen } from '@almighty-shogun/common';
 ```
 
 ## Usage
@@ -41,7 +48,7 @@ import { useOpen } from '@almighty-shogun/common'
 </template>
 
 <script setup lang="ts">
-import { useOpen } from '@almighty-shogun/common'
+import { useOpen } from '@almighty-shogun/common';
 
 const { isOpen, open, close } = useOpen();
 </script>
@@ -52,7 +59,7 @@ const { isOpen, open, close } = useOpen();
 ## Type signature
 
 ```ts
-declare function useOpen(): UseOpen;
+declare function useOpen(state?: MaybeRefOrGetter<boolean>): UseOpen;
 
 type UseOpen = {
     readonly isOpen: Ref<boolean>;

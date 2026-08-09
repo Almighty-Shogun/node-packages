@@ -1,7 +1,8 @@
 import usePagination from './usePagination';
-import { computed, unref, watch, type Ref } from 'vue';
+import type { Undefinable } from '@almighty-shogun/utils';
+import { computed, unref, watch, type Ref, type MaybeRefOrGetter } from 'vue';
 
-export default function <T>(items: Ref<T[]>, pageSize?: number): UseDataTable<T> {
+export default function <T>(items: Ref<T[]>, pageSize?: Undefinable<MaybeRefOrGetter<number>>): UseDataTable<T> {
     const {
         total,
         page,

@@ -1,6 +1,6 @@
 # Common
 
-A small package that contains common application helpers used across my projects, including Vue, Vue Router and vue-i18n integrations.
+Vue-focused application helpers for state, local storage, forms, pagination, routing, DOM targets, keyboard shortcuts, and i18n.
 
 ## 📃 Prerequisites
 - **[Bun](https://bun.sh)**: >= 1.3.10

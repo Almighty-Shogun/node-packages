@@ -1,25 +1,25 @@
 ---
 outline: deep
 
-returns: A required ref.
+returns: A Vue ref that throws when read before assignment.
 ---
 
 # requiredRef
 
 Creates a Vue ref that must be assigned before it can be read. Accessing it too early throws immediately, which makes missing initialization obvious during development instead of failing later with `undefined` behavior.
 
-The helper returns a normal `Ref<T>`, so it works anywhere a Vue ref is accepted. The difference is runtime behavior: the first read before assignment throws an error, which is useful for template refs, injected state, or values that are initialized by a lifecycle step.
+The helper returns a normal `Ref<T>`, so it works anywhere a Vue ref is accepted. The difference is runtime behavior: the first read before assignment throws an error.
 
 ## Importing
 
 ```ts
-import { requiredRef } from '@almighty-shogun/common'
+import { requiredRef } from '@almighty-shogun/common';
 ```
 
 ## Usage
 
 ```ts
-import { requiredRef } from '@almighty-shogun/common'
+import { requiredRef } from '@almighty-shogun/common';
 
 const user = requiredRef<{ id: string; name: string }>();
 

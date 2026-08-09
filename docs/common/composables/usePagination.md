@@ -4,7 +4,8 @@ outline: deep
 params:
     - name: pageSize
       description: Initial `perPage` value.
-      type: number
+      type: MaybeRefOrGetter<number>
+      optional: true
       defaultValue: '5'
 
 returns:
@@ -43,19 +44,22 @@ The composable keeps state deliberately simple: setters only assign values and d
 ## Importing
 
 ```ts
-import { usePagination } from '@almighty-shogun/common'
+import { usePagination } from '@almighty-shogun/common';
 ```
 
 ## Usage
 
 ```ts
-import { watch } from 'vue'
-import { usePagination } from '@almighty-shogun/common'
+import { watch } from 'vue';
+import { usePagination } from '@almighty-shogun/common';
 
 const { page, perPage, setPage, setPerPage, setTotal } = usePagination(25);
 
 watch([page, perPage], async () => {
-    const response = await fetch('/api/users?page=' + page.value + '&limit=' + perPage.value);
+    const newPage = page.value;
+    const newPerPage = perPage.value;
+
+    const response = await fetch(`/..?page=${newPage}&limit=${newPerPage}`);
     const result = await response.json();
 
     setTotal(result.total);
@@ -70,7 +74,9 @@ setPerPage(50);
 ## Type signature
 
 ```ts
-declare function usePagination(pageSize: number): UsePagination;
+declare function usePagination(
+    pageSize?: MaybeRefOrGetter<number>
+): UsePagination;
 
 type UsePagination = {
     readonly limits: Ref<number[]>;

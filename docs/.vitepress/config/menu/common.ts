@@ -12,15 +12,21 @@ export const common: DefaultTheme.SidebarItem[] = [
         text: 'Composables',
         collapsed: false,
         items: [
+            { text: 'useClickOutside', link: '/common/composables/useClickOutside' },
+            { text: 'useClipboard', link: '/common/composables/useClipboard' },
             { text: 'useDarkTheme', link: '/common/composables/useDarkTheme' },
             { text: 'useDataTable', link: '/common/composables/useDataTable' },
+            { text: 'useEventListener', link: '/common/composables/useEventListener' },
             { text: 'useForm', link: '/common/composables/useForm' },
+            { text: 'useHotKey', link: '/common/composables/useHotKey' },
             { text: 'useInterval', link: '/common/composables/useInterval' },
             { text: 'useLoaded', link: '/common/composables/useLoaded' },
+            { text: 'useLocalStorage', link: '/common/composables/useLocalStorage' },
             { text: 'useOpen', link: '/common/composables/useOpen' },
             { text: 'usePageHeader', link: '/common/composables/usePageHeader' },
             { text: 'usePagination', link: '/common/composables/usePagination' },
-            { text: 'useRouteParam', link: '/common/composables/useRouteParam' },
+            { text: 'usePersistentRef', link: '/common/composables/usePersistentRef' },
+            { text: 'useScrollPosition', link: '/common/composables/useScrollPosition' },
             { text: 'useWebsiteLocale', link: '/common/composables/useWebsiteLocale' }
         ]
     },
@@ -28,18 +34,22 @@ export const common: DefaultTheme.SidebarItem[] = [
         text: 'Router',
         collapsed: false,
         items: [
-            { text: 'containsRoutePrefix', link: '/common/router/containsRoutePrefix' },
-            { text: 'getCurrentRouteName', link: '/common/router/getCurrentRouteName' },
-            { text: 'hasCurrentRoute', link: '/common/router/hasCurrentRoute' },
-            { text: 'isCurrentRoute', link: '/common/router/isCurrentRoute' }
+            { text: 'useIsCurrentRoute', link: '/common/router/useIsCurrentRoute' },
+            { text: 'useRouteName', link: '/common/router/useRouteName' },
+            { text: 'useRouteNames', link: '/common/router/useRouteNames' },
+            { text: 'useRouteParam', link: '/common/router/useRouteParam' }
         ]
     },
     {
-        text: 'Refs',
+        text: 'Util',
         collapsed: false,
         items: [
-            { text: 'localStorageRef', link: '/common/refs/localStorageRef' },
-            { text: 'requiredRef', link: '/common/refs/requiredRef' }
+            { text: 'componentRef', link: '/common/util/componentRef' },
+            { text: 'debouncedRef', link: '/common/util/debouncedRef' },
+            { text: 'nullableRef', link: '/common/util/nullableRef' },
+            { text: 'requiredRef', link: '/common/util/requiredRef' },
+            { text: 'unwrapElement', link: '/common/util/unwrapElement' },
+            { text: 'unwrapTarget', link: '/common/util/unwrapTarget' }
         ]
     },
     {
@@ -52,4 +62,4 @@ export const common: DefaultTheme.SidebarItem[] = [
             { text: 'translationExists', link: '/common/i18n/translationExists' }
         ]
     }
-]
+];

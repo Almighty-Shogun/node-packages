@@ -1,10 +1,10 @@
-import { ref, type Ref } from 'vue';
+import { ref, toValue, type Ref, type MaybeRefOrGetter } from 'vue';
 
-export default function (pageSize: number = 5): UsePagination {
+export default function (pageSize: MaybeRefOrGetter<number> = 5): UsePagination {
     const total = ref<number>(0);
 
     const page = ref<number>(1);
-    const perPage = ref<number>(pageSize);
+    const perPage = ref<number>(toValue(pageSize));
 
     const limits = ref<number[]>([5, 10, 25, 50, 100]);
 

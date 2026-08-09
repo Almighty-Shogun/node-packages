@@ -1,15 +1,15 @@
 import { watch, type Ref } from 'vue';
-import { useLocalStorage } from '@vueuse/core';
+import useLocalStorage from './useLocalStorage';
 import { setWebsiteLocale } from '@almighty-shogun/utils';
 
-export default function (): UseWebsiteLocale {
-    const locale = useLocalStorage('application-locale', 'en');
+export default function (key: string = 'application-locale'): UseWebsiteLocale {
+    const locale = useLocalStorage(key, 'en');
 
     function setLocale(newLocale: string): void {
         locale.value = newLocale;
     }
 
-    watch(() => locale.value, (newLocale) => setWebsiteLocale(newLocale));
+    watch(() => locale.value, (newLocale: string) => setWebsiteLocale(newLocale));
 
     return {
         locale,

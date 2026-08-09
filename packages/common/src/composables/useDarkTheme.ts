@@ -1,15 +1,15 @@
 import { watch, type Ref } from 'vue';
-import { useLocalStorage } from '@vueuse/core';
+import useLocalStorage from './useLocalStorage';
 import { setDarkTheme } from '@almighty-shogun/utils';
 
-export default function (): UseDarkTheme {
-    const darkMode = useLocalStorage('application-theme', false);
+export default function (key: string = 'application-theme'): UseDarkTheme {
+    const darkMode = useLocalStorage(key, false);
 
     function toggle(): void {
         darkMode.value = !darkMode.value;
     }
 
-    watch(() => darkMode.value, (newTheme) => setDarkTheme(newTheme));
+    watch(() => darkMode.value, (newTheme: boolean) => setDarkTheme(newTheme));
 
     return {
         darkMode,
