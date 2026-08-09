@@ -4,7 +4,7 @@ outline: deep
 params:
     - name: path
       description: One route path, or multiple route paths, that should serve the same HTML bundle.
-      type: Path | readonly Path[]
+      type: Arrayable<Path>
 
     - name: bundle
       description: HTML bundle imported from an `.html` file through Bun.
@@ -17,9 +17,11 @@ returns: An immutable HTML route definition that can be included in a route coll
 
 Creates a route definition for Bun HTML imports. Use it when an HTML file should be served through the package's normal route collection workflow instead of being placed directly in Bun's native `routes` object.
 
-`defineHtmlRoute()` is useful for React and other client-side applications that use Bun's HTML bundling. The imported HTML file remains a native Bun `HTMLBundle`; `compileRoutes()` simply places that bundle at the configured path so Bun can handle asset bundling, generated scripts, stylesheets, development mode, and production caching.
+`defineHtmlRoute()` is useful for React and other client-side applications that use Bun's HTML bundling. The imported HTML file remains a native Bun `HTMLBundle`; [`compileRoutes()`](./compileRoutes) simply places that bundle at the configured path so Bun can handle asset bundling, generated scripts, stylesheets, development mode, and production caching.
 
 Pass a single path when the bundle should only serve one entry point. Pass a path array when the same frontend should be available from multiple URLs, such as a single-page application that handles client-side routing.
+
+The returned object is frozen, so route definitions are treated as static configuration after creation. A path array is copied into the definition, so later changes to the array you passed in do not affect the route.
 
 ## Importing
 
@@ -56,11 +58,15 @@ createServer({
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Arrayable](../../utils/types#arrayable)
+
 ## Type signature
 
 ```ts
 declare function defineHtmlRoute<const Path extends string>(
-    path: Path | readonly Path[],
+    path: Arrayable<Path>,
     bundle: HTMLBundle
 ): HtmlRouteDefinition<Path>;
 ```

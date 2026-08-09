@@ -19,7 +19,7 @@ returns: An immutable route definition that can be included in a route collectio
 
 # defineRoute
 
-Creates a typed route definition for a single path and HTTP method. Use it to describe routes before passing a collection to `compileRoutes` or `createServer`.
+Creates a typed route definition for a single path and HTTP method. Use it to describe routes before passing a collection to [`compileRoutes`](./compileRoutes) or [`createServer`](../server/createServer).
 
 The returned object is frozen, so route definitions are treated as static configuration after creation.
 
@@ -32,12 +32,16 @@ import { defineRoute } from '@almighty-shogun/bun-server';
 ## Usage
 
 ```ts
-import { defineRoute, HttpMethod } from '@almighty-shogun/bun-server';
+import { defineRoute } from '@almighty-shogun/bun-server';
 
-const route = defineRoute('/users/:id', HttpMethod.Get, (request, response) => {
+const route = defineRoute('/users/:id', 'GET', (request, response) => {
     return response.json({ id: request.params.id });
 });
 ```
+
+::: tip
+You can pass either `HttpMethod.Get` or the equivalent `'GET'` method string.
+:::
 
 <FrontmatterDocs/>
 
@@ -54,4 +58,3 @@ declare function defineRoute<
     handler: RouteHandler<Path, WebSocketData>
 ): RouteDefinition<Path, Method, WebSocketData>;
 ```
-
