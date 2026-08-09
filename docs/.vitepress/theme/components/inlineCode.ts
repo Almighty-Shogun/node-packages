@@ -6,4 +6,5 @@ const escapeHtml = (value: string) => value
     .replace(/'/g, '&#39;');
 
 export const renderInlineCode = (value: string) => escapeHtml(value)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
     .replace(/`([^`]+)`/g, '<code>$1</code>');

@@ -20,6 +20,7 @@ export default defineConfig({
     description: 'Documentation for all the node/bun packages in the @almighty-shogun monorepo.',
     cleanUrls: true,
     lastUpdated: true,
+    srcExclude: ['AGENTS.md', 'CLAUDE.md'],
     sitemap: {
         hostname: 'https://node-packages.shogun.ms'
     },

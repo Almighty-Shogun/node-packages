@@ -19,31 +19,31 @@ hero:
             link: /guide/
         -   theme: alt
             text: View packages
-            link: /utils
+            link: /packages
 
 features:
     -   title: Prototype Extensions
-        details: Side-effect imports that add focused helpers to Array, String, and Number prototypes.
+        details: Side-effect prototype extensions for Array, String, and Number helpers.
         link: /prototype-extensions/
         linkText: View package
 
     -   title: Utils
-        details: Date, number, locale, DOM, theme, and browser utilities.
+        details: Shared TypeScript utilities for values, formatting, locale metadata, Luxon date helpers, serialization, and browser APIs.
         link: /utils/
         linkText: View package
 
     -   title: Common
-        details: Vue composables, route helpers, required refs, and i18n helpers.
+        details: Vue-focused application helpers for state, local storage, forms, pagination, routing, DOM targets, keyboard shortcuts, and i18n.
         link: /common/
         linkText: View package
 
     -   title: WebKit Native Bridge
-        details: Type-safe request and command bridge for WebKit-hosted native integrations.
+        details: Typed request and command bridge for JavaScript running inside WebKit host applications.
         link: /webkit-native-bridge/
         linkText: View package
 
     -   title: Bun Server
-        details: Typed route definitions, compiled Bun routes, and response helpers for HTTP servers.
+        details: Typed routing, server setup, and response helpers for Bun HTTP servers.
         link: /bun-server/
         linkText: View package
 ---
