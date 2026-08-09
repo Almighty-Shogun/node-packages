@@ -1,3 +1,5 @@
+import type { Nullable } from '../types';
+
 export type Language = {
     name: string;
     code: string;
@@ -52,7 +54,7 @@ const languagesMap: Record<string, Language> = {
 
 export const languages: LocalizationCountries = languagesMap as LocalizationCountries;
 
-export function getLanguage(code: LanguageCode): Language | null {
+export function getLanguage(code: LanguageCode): Nullable<Language> {
     return languages[code] ?? null;
 }
 

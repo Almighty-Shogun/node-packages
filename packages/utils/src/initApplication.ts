@@ -1,11 +1,12 @@
 import disableZoom from './disableZoom';
 import setDarkTheme from './setDarkTheme';
+import type { Undefinable } from './types';
 import setWebsiteLocale from './setWebsiteLocale';
 
 type ApplicationConfig = {
-    locale?: string;
-    isDarkTheme?: boolean;
-    isZoomDisabled?: boolean;
+    locale?: Undefinable<string>;
+    isDarkTheme?: Undefinable<boolean>;
+    isZoomDisabled?: Undefinable<boolean>;
 };
 
 export default function (config: ApplicationConfig): void {

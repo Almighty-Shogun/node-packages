@@ -1,6 +1,7 @@
+import type { Undefinable } from './types';
 import getCorrectLocale from './internal/getCorrectLocale';
 
-export default function (value: number, decimals: number = 2, locale?: string): string {
+export default function (value: number, decimals: number = 2, locale?: Undefinable<string>): string {
     const localization = getCorrectLocale(locale);
 
     return new Intl.NumberFormat(localization, {
