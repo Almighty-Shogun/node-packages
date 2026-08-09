@@ -14,7 +14,7 @@ Workspace packages live in `packages/*`:
 - `@almighty-shogun/webkit-native-bridge` &mdash; typed JavaScript/native WebKit bridge helpers. Depends on `utils` for types only.
 - `@almighty-shogun/bun-server` &mdash; Bun HTTP server routing and response helpers. Depends on `utils` for types only; `@types/bun` is an optional peer dependency.
 
-Documentation lives in `docs/` and has its own detailed instructions in `docs/AGENTS.md`.
+Documentation lives in `docs/` and has its own detailed instructions in `docs/CLAUDE.md`.
 
 ## Package Conventions
 
@@ -84,7 +84,7 @@ Be careful how results are printed. `JSON.stringify(NaN)` produces `"null"`, whi
 
 ## Documentation
 
-When creating or updating documentation, read `docs/AGENTS.md` first and follow it exactly.
+When creating or updating documentation, read `docs/CLAUDE.md` first and follow it exactly.
 
 Important defaults:
 
