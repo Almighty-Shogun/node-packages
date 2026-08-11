@@ -5,7 +5,8 @@ export const common: DefaultTheme.SidebarItem[] = [
         text: 'Common',
         items: [
             { text: 'Introduction', link: '/common/' },
-            { text: 'Installation', link: '/common/installation' }
+            { text: 'Installation', link: '/common/installation' },
+            { text: 'Types', link: '/common/types' }
         ]
     },
     {
@@ -28,6 +29,14 @@ export const common: DefaultTheme.SidebarItem[] = [
             { text: 'usePersistentRef', link: '/common/composables/usePersistentRef' },
             { text: 'useScrollPosition', link: '/common/composables/useScrollPosition' },
             { text: 'useWebsiteLocale', link: '/common/composables/useWebsiteLocale' }
+        ]
+    },
+    {
+        text: 'Middleware',
+        collapsed: false,
+        items: [
+            { text: 'defineMiddleware', link: '/common/middleware/defineMiddleware' },
+            { text: 'registerMiddleware', link: '/common/middleware/registerMiddleware' }
         ]
     },
     {
