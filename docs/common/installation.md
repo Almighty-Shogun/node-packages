@@ -29,7 +29,7 @@ yarn add @almighty-shogun/common vue vue-router
 All public APIs are available from the package root.
 
 ```ts
-import { translate, useIsCurrentRoute } from '@almighty-shogun/common';
+import { translate, useIsRoute } from '@almighty-shogun/common';
 ```
 
 ## Requirements
