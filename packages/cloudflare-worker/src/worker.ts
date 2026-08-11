@@ -1,6 +1,7 @@
 import HttpResponse from './response';
 import { compileRoutes } from './routing';
 import { compileScheduled } from './scheduling';
+import { ScheduledTasksFailedError } from './errors';
 import type { Nullable } from '@almighty-shogun/utils';
 import { HttpMethod, HttpStatus } from '@almighty-shogun/http-core';
 import { createDefaultErrorResponse, executeHandler, matchRoute } from './internal';
@@ -156,7 +157,7 @@ export default function (options: CreateWorkerOptions): WorkerModule {
             }
 
             if (errors.length > 1) {
-                throw new AggregateError(errors, `${errors.length} scheduled tasks failed for "${controller.cron}".`);
+                throw new ScheduledTasksFailedError(controller.cron, errors);
             }
         }
     };

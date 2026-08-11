@@ -1,3 +1,4 @@
+import { EmptyCronExpressionError } from '../errors';
 import { collectScheduledDefinitions } from '../internal';
 import type { CompiledScheduled, CompiledScheduledCollection, ScheduledCollection, ScheduledHandler } from '../types';
 
@@ -9,7 +10,7 @@ export default function (collection: ScheduledCollection): CompiledScheduledColl
         const cron = definition.cron.trim();
 
         if (cron.length === 0) {
-            throw new Error('A scheduled task cannot have an empty cron expression.');
+            throw new EmptyCronExpressionError();
         }
 
         const handlers = grouped.get(cron) ?? [];
