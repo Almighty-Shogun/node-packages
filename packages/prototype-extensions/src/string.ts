@@ -1,15 +1,10 @@
 declare global {
     interface String {
         toSlug(): string;
-
         append(value: string): string;
-
         limit(length: number, appending?: string | null): string;
-
         toNumber(): number;
-
         isEmpty(): boolean;
-
         equals(value: string): boolean;
     }
 }

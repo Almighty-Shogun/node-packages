@@ -1,21 +1,13 @@
 declare global {
     interface Number {
         add(value: number): number;
-
         subtract(value: number): number;
-
         multiply(value: number): number;
-
         divide(value: number): number;
-
         equals(value: number): boolean;
-
         isInRange(min: number, max: number): boolean;
-
         isEven(): boolean;
-
         isLowerThan(value: number, allowEqual?: boolean): boolean;
-
         isGreaterThan(value: number, allowEqual?: boolean): boolean;
     }
 }

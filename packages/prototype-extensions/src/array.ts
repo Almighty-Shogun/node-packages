@@ -1,15 +1,10 @@
 declare global {
     interface Array<T> {
         first(): T;
-
         last(): T;
-
         delete(index: number): T[];
-
         removeDuplicates(this: Array<string | number>): (string | number)[];
-
         addOrRemove(this: Array<string | number>, value: string | number): (string | number)[];
-
         isEmpty(): boolean;
     }
 }
