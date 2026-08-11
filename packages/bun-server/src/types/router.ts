@@ -1,14 +1,11 @@
-import { HttpBaseResponse } from '../responses';
-import type { DefaultErrorResponse, HttpMethod } from './http';
+import HttpResponse from '../response';
+import type { BunRequest, HTMLBundle, Server } from '../internal';
 import type { Arrayable, Promisable, Undefinable } from '@almighty-shogun/utils';
-
-type HTMLBundle = Bun.HTMLBundle;
-type Server<WebSocketData = undefined> = Bun.Server<WebSocketData>;
-type BunRequest<Path extends string = string> = Bun.BunRequest<Path>;
+import type { DefaultErrorResponse, HttpBaseResponse, HttpMethod } from '@almighty-shogun/http-core';
 
 export type RouteHandler<Path extends string = string, WebSocketData = undefined> = (
     request: BunRequest<Path>,
-    response: typeof HttpBaseResponse,
+    response: typeof HttpResponse,
     server: Server<WebSocketData>
 ) => Promisable<HttpBaseResponse>;
 

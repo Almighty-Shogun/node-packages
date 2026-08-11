@@ -1,12 +1,11 @@
-import { HttpBaseResponse } from '../responses';
-import { HttpMethod, HttpStatus } from '../types';
-import { collectRouteDefinitions, createDefaultErrorResponse, executeHandler } from '../internal';
-import type { Promisable } from '@almighty-shogun/utils';
-import type { CompileRoutesOptions, HtmlRouteDefinition, RouteCollection, RouteDefinition, RouteHandler } from '../types';
-
-type HTMLBundle = Bun.HTMLBundle;
-type Server<WebSocketData = undefined> = Bun.Server<WebSocketData>;
-type BunRequest<Path extends string = string> = Bun.BunRequest<Path>;
+import HttpResponse from '../response';
+import type { CompileRoutesOptions, RouteCollection, RouteHandler } from '../types';
+import type { CompiledRouteCollection, BunRequest, HTMLBundle, Server } from '../internal';
+import { ConflictingRoutePathsError, DuplicateRouteError, HttpMethod, HttpStatus } from '@almighty-shogun/http-core';
+import {
+    collectRouteDefinitions, createDefaultErrorResponse, executeHandler,
+    getHtmlRoutePaths, getRoutePattern, isHtmlRouteDefinition
+} from '../internal';
 
 const httpMethodOrder: readonly HttpMethod[] = [
     HttpMethod.Get,
@@ -17,45 +16,6 @@ const httpMethodOrder: readonly HttpMethod[] = [
     HttpMethod.Delete,
     HttpMethod.Options
 ];
-
-type MethodRouteDefinition<WebSocketData = undefined> = RouteDefinition<string, HttpMethod, WebSocketData>;
-
-type CollectedRouteDefinition<WebSocketData = undefined> =
-    | MethodRouteDefinition<WebSocketData>
-    | HtmlRouteDefinition;
-
-type CompiledRouteHandler<WebSocketData = undefined> = (
-    request: BunRequest,
-    server: Server<WebSocketData>
-) => Promisable<Response>;
-
-type CompiledRouteCollection<WebSocketData = undefined> = Record<string,
-    | HTMLBundle
-    | CompiledRouteHandler<WebSocketData>
->;
-
-function isHtmlRouteDefinition<WebSocketData>(
-    definition: CollectedRouteDefinition<WebSocketData>
-): definition is HtmlRouteDefinition {
-    return 'bundle' in definition;
-}
-
-function getHtmlRoutePaths(definition: HtmlRouteDefinition): readonly string[] {
-    const paths = Array.isArray(definition.path) ? definition.path : [definition.path];
-
-    if (paths.length === 0) {
-        throw new Error('HTML route path array cannot be empty.');
-    }
-
-    return paths;
-}
-
-function getRoutePattern(path: string): string {
-    return path
-        .split('/')
-        .map((segment) => segment.startsWith(':') ? ':' : segment)
-        .join('/');
-}
 
 export default function <WebSocketData = undefined>(
     collection: RouteCollection<WebSocketData>,
@@ -78,7 +38,7 @@ export default function <WebSocketData = undefined>(
                 const existingPath = routePatterns.get(routePattern);
 
                 if (existingPath && existingPath !== path) {
-                    throw new Error(`Conflicting route paths: "${existingPath}" and "${path}".`);
+                    throw new ConflictingRoutePathsError(existingPath, path);
                 }
 
                 if (htmlRoutes.has(path)) {
@@ -100,7 +60,7 @@ export default function <WebSocketData = undefined>(
         const existingPath = routePatterns.get(routePattern);
 
         if (existingPath && existingPath !== definition.path) {
-            throw new Error(`Conflicting route paths: "${existingPath}" and "${definition.path}".`);
+            throw new ConflictingRoutePathsError(existingPath, definition.path);
         }
 
         if (htmlRoutes.has(definition.path)) {
@@ -112,7 +72,7 @@ export default function <WebSocketData = undefined>(
         const methods = groupedRoutes.get(definition.path) ?? new Map();
 
         if (methods.has(definition.method)) {
-            throw new Error(`Duplicate route: ${definition.method} ${definition.path}`);
+            throw new DuplicateRouteError(definition.method, definition.path);
         }
 
         groupedRoutes.set(definition.path, methods);
@@ -161,7 +121,7 @@ export default function <WebSocketData = undefined>(
                 .join(', ');
 
             if (automaticOptions && method === HttpMethod.Options) {
-                return HttpBaseResponse.noContent(null, { headers: { Allow: allow } }).unwrap();
+                return HttpResponse.noContent({ headers: { Allow: allow } }).unwrap();
             }
 
             return createDefaultErrorResponse(
