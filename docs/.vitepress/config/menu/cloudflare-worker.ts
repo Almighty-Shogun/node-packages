@@ -6,7 +6,8 @@ export const cloudflareWorker: DefaultTheme.SidebarItem[] = [
         items: [
             { text: 'Introduction', link: '/cloudflare-worker/' },
             { text: 'Installation', link: '/cloudflare-worker/installation' },
-            { text: 'Types', link: '/cloudflare-worker/types' }
+            { text: 'Types', link: '/cloudflare-worker/types' },
+            { text: 'Errors', link: '/cloudflare-worker/errors' }
         ]
     },
     {
