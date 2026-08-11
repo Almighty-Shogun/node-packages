@@ -49,7 +49,6 @@ const slug = optional(projectId, value => value.toLowerCase());
 
 ## Uses
 
-- [Arrayable](../types#arrayable)
 - [Nullable](../types#nullable)
 - [NullableOrUndefinable](../types#nullableorundefinable)
 
