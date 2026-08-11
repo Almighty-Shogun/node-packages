@@ -1,8 +1,8 @@
 import { deepMerge } from '../internal';
-import { computed, type ComputedRef } from 'vue';
+import { computed, type ComputedRef, type DeepReadonly } from 'vue';
 import { useRoute, type RouteMeta } from 'vue-router';
 
-export default function (): ComputedRef<RouteMeta> {
+export default function (): ComputedRef<DeepReadonly<RouteMeta>> {
     const route = useRoute();
 
     return computed(() => {
@@ -12,6 +12,6 @@ export default function (): ComputedRef<RouteMeta> {
             meta = deepMerge(meta, record.meta);
         }
 
-        return meta;
+        return meta as DeepReadonly<RouteMeta>;
     });
 };
