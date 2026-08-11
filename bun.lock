@@ -44,6 +44,25 @@
         "@types/bun",
       ],
     },
+    "packages/cloudflare-worker": {
+      "name": "@almighty-shogun/cloudflare-worker",
+      "version": "0.0.0",
+      "dependencies": {
+        "@almighty-shogun/http-core": "workspace:*",
+        "@almighty-shogun/utils": "workspace:*",
+      },
+      "devDependencies": {
+        "@cloudflare/workers-types": "^5.20260809.1",
+        "tsdown": "^0.22.14",
+        "typescript": "^5.9.3",
+      },
+      "peerDependencies": {
+        "@cloudflare/workers-types": "^5.20260809.1",
+      },
+      "optionalPeers": [
+        "@cloudflare/workers-types",
+      ],
+    },
     "packages/common": {
       "name": "@almighty-shogun/common",
       "version": "0.0.0",
@@ -144,6 +163,8 @@
     "@algolia/requester-node-http": ["@algolia/requester-node-http@5.56.0", "", { "dependencies": { "@algolia/client-common": "5.56.0" } }, "sha512-PIOUXlSnrqM0S+WOgDRb4RzotydJH7ZoT6tOyL7tAO7qJOfvX5wsEW8Pe+PMKMwvuI4/gIyK9cg2H7lJXqnc4Q=="],
 
     "@almighty-shogun/bun-server": ["@almighty-shogun/bun-server@workspace:packages/bun-server"],
+
+    "@almighty-shogun/cloudflare-worker": ["@almighty-shogun/cloudflare-worker@workspace:packages/cloudflare-worker"],
 
     "@almighty-shogun/common": ["@almighty-shogun/common@workspace:packages/common"],
 
