@@ -6,7 +6,7 @@
         "docs"
     ],
     "scripts": {
-        "typecheck": "bun --cwd packages/prototype-extensions typecheck && bun --cwd packages/utils typecheck && bun --cwd packages/common typecheck && bun --cwd packages/webkit-native-bridge typecheck && bun --cwd packages/bun-server typecheck",
+        "typecheck": "bun --cwd packages/prototype-extensions typecheck && bun --cwd packages/utils typecheck && bun --cwd packages/http-core typecheck && bun --cwd packages/common typecheck && bun --cwd packages/webkit-native-bridge typecheck && bun --cwd packages/bun-server typecheck",
         "docs:dev": "bun --cwd docs dev",
         "docs:build": "bun --cwd docs build",
         "docs:preview": "bun --cwd docs preview",
