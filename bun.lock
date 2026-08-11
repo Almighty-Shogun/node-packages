@@ -29,6 +29,7 @@
       "name": "@almighty-shogun/bun-server",
       "version": "0.0.0",
       "dependencies": {
+        "@almighty-shogun/http-core": "workspace:*",
         "@almighty-shogun/utils": "workspace:*",
       },
       "devDependencies": {
