@@ -76,8 +76,6 @@ declare function useClickOutside(
 ): UseClickOutside;
 
 type UseClickOutside = () => void;
-
-type OutsideClickHandler = (event: PointerEvent) => Promisable<void>;
-
 type ComponentElement = HTMLElement | ComponentPublicInstance;
+type OutsideClickHandler = (event: PointerEvent) => Promisable<void>;
 ```
