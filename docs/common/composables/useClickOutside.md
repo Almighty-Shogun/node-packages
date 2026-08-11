@@ -68,7 +68,9 @@ useClickOutside(panel, close);
 
 ```ts
 declare function useClickOutside(
-    targets: Arrayable<MaybeRefOrGetter<NullableOrUndefinable<ComponentElement>>>,
+    targets: Arrayable<
+        MaybeRefOrGetter<NullableOrUndefinable<ComponentElement>>
+    >,
     callback: OutsideClickHandler,
     enabled?: MaybeRefOrGetter<boolean>
 ): UseClickOutside;
