@@ -11,13 +11,7 @@ returns: The server instance returned by `Bun.serve()`.
 
 # createServer
 
-Creates a Bun HTTP server from either package route definitions or native Bun routes. By default, `createServer()` treats `options.routes` as a route collection created with [`defineRoute()`](../routing/defineRoute) and [`defineHtmlRoute()`](../routing/defineHtmlRoute), then compiles it with [`compileRoutes()`](../routing/compileRoutes) before passing it to `Bun.serve()`.
-
-Set `routeMode: 'native'` when `routes` is already in Bun's own `Bun.serve({ routes })` format. Native mode bypasses [`compileRoutes()`](../routing/compileRoutes), so it does not add package behavior such as automatic `HEAD`, automatic `OPTIONS`, generated `405 Method Not Allowed` responses, or `Allow` headers.
-
-When no `error` handler is supplied, `createServer()` installs one that reports uncaught errors as `500 Internal Server Error` using `defaultErrorResponse` for the body format: `'json'` produces `{ "status": 500, "error": "<message>" }`, `'text'` produces the message as plain text, and `null` produces an empty body. Passing your own `error` handler replaces this entirely, and `defaultErrorResponse` then only affects the `405` responses generated during route compilation.
-
-Every other option is forwarded to `Bun.serve()` unchanged, so `port`, `hostname`, `tls`, `websocket`, and the rest behave exactly as they do natively.
+Creates a Bun HTTP server from a route collection. It compiles `options.routes` with [`compileRoutes()`](../routing/compileRoutes) before handing them to `Bun.serve()`, and forwards every other option unchanged, so `port`, `hostname`, `tls`, `websocket`, and the rest behave exactly as they do natively.
 
 ## Importing
 
@@ -51,7 +45,10 @@ HTML route definitions can be mixed into the same route collection. This keeps R
 
 ```ts
 import app from './public/app.html';
-import { createServer, defineHtmlRoute } from '@almighty-shogun/bun-server';
+import {
+    createServer,
+    defineHtmlRoute
+} from '@almighty-shogun/bun-server';
 
 const routes = {
     app: defineHtmlRoute(['/', '/dashboard'], app)
@@ -82,6 +79,18 @@ const server = createServer({
 
 console.log(server.url);
 ```
+
+## Route modes
+
+By default `options.routes` is a route collection built with [`defineRoute()`](../routing/defineRoute) and [`defineHtmlRoute()`](../routing/defineHtmlRoute).
+
+Set `routeMode: 'native'` when `routes` is already in Bun's own `Bun.serve({ routes })` format. Native mode bypasses [`compileRoutes()`](../routing/compileRoutes), so it adds none of the package behavior: no automatic `HEAD`, no automatic `OPTIONS`, no generated `405 Method Not Allowed` responses, and no `Allow` headers.
+
+## Error handling
+
+With no `error` handler supplied, uncaught errors are reported as `500 Internal Server Error` in the format `defaultErrorResponse` selects: `'json'` produces `{ "status": 500, "error": "<message>" }`, `'text'` produces the message as plain text, and `null` produces an empty body.
+
+Passing your own `error` handler replaces that entirely, and `defaultErrorResponse` then only affects the `405` responses generated during route compilation.
 
 <FrontmatterDocs/>
 

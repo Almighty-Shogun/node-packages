@@ -6,148 +6,25 @@ outline: deep
 
 Shared TypeScript types exported by `@almighty-shogun/bun-server`.
 
-Some signatures reuse utility types from [`@almighty-shogun/utils`](../utils/types): [`Arrayable`](../utils/types#arrayable), [`Nullable`](../utils/types#nullable), [`Promisable`](../utils/types#promisable), and [`Undefinable`](../utils/types#undefinable).
+Some signatures reuse utility types from [`@almighty-shogun/utils`](../utils/types): [`Arrayable`](../utils/types#arrayable), [`Promisable`](../utils/types#promisable), and [`Undefinable`](../utils/types#undefinable).
 
-## DefaultErrorResponse
-
-Controls how generated default errors are rendered by [`compileRoutes()`](./routing/compileRoutes) and [`createServer()`](./server/createServer). Use `'json'` for a JSON body, `'text'` for a plain-text body, or `null` for an empty response body.
-
-```ts
-type DefaultErrorResponse = Nullable<'json' | 'text'>;
-```
-
-## ImageContentType
-
-Restricts image response content types to common browser-supported image MIME types. It is used by [`HttpBaseResponse.image()`](./responses/HttpBaseResponse) while [`HttpBaseResponse.file()`](./responses/HttpBaseResponse) accepts any string content type.
-
-```ts
-type ImageContentType =
-    | 'image/avif'
-    | 'image/bmp'
-    | 'image/gif'
-    | 'image/jpeg'
-    | 'image/png'
-    | 'image/svg+xml'
-    | 'image/webp';
-```
-
-## RedirectHttpStatus
-
-Restricts redirect responses to HTTP status codes that are valid for redirects. It is used by [`HttpBaseResponse.redirect()`](./responses/HttpBaseResponse) so callers do not accidentally create a redirect with a non-redirect status code.
-
-```ts
-type RedirectHttpStatus =
-    | HttpStatus.MovedPermanently
-    | HttpStatus.Found
-    | HttpStatus.SeeOther
-    | HttpStatus.TemporaryRedirect
-    | HttpStatus.PermanentRedirect;
-```
-
-## HttpMethod
-
-Const object and string-literal union used by route definitions and route compilation to identify supported HTTP methods. Pass either `HttpMethod.Get` or the equivalent `'GET'` string to [`defineRoute()`](./routing/defineRoute). [`compileRoutes()`](./routing/compileRoutes) also uses it when adding automatic `HEAD` and `OPTIONS` behavior.
-
-```ts
-declare const HttpMethod: Readonly<{
-    Get: 'GET';
-    Post: 'POST';
-    Put: 'PUT';
-    Patch: 'PATCH';
-    Delete: 'DELETE';
-    Head: 'HEAD';
-    Options: 'OPTIONS';
-}>;
-
-type HttpMethod = typeof HttpMethod[keyof typeof HttpMethod];
-```
-
-## HttpStatus
-
-Enum of HTTP status codes used by response factory methods. Use it instead of hard-coded numeric status values when creating responses.
-
-```ts
-enum HttpStatus {
-    Continue = 100,
-    SwitchingProtocols = 101,
-    Processing = 102,
-    EarlyHints = 103,
-
-    Ok = 200,
-    Created = 201,
-    Accepted = 202,
-    NonAuthoritativeInformation = 203,
-    NoContent = 204,
-    ResetContent = 205,
-    PartialContent = 206,
-    MultiStatus = 207,
-    AlreadyReported = 208,
-    ImUsed = 226,
-
-    MultipleChoices = 300,
-    MovedPermanently = 301,
-    Found = 302,
-    SeeOther = 303,
-    NotModified = 304,
-    UseProxy = 305,
-    SwitchProxy = 306,
-    TemporaryRedirect = 307,
-    PermanentRedirect = 308,
-
-    BadRequest = 400,
-    Unauthorized = 401,
-    PaymentRequired = 402,
-    Forbidden = 403,
-    NotFound = 404,
-    MethodNotAllowed = 405,
-    NotAcceptable = 406,
-    ProxyAuthenticationRequired = 407,
-    RequestTimeout = 408,
-    Conflict = 409,
-    Gone = 410,
-    LengthRequired = 411,
-    PreconditionFailed = 412,
-    PayloadTooLarge = 413,
-    UriTooLong = 414,
-    UnsupportedMediaType = 415,
-    RangeNotSatisfiable = 416,
-    ExpectationFailed = 417,
-    ImATeapot = 418,
-    MisdirectedRequest = 421,
-    UnprocessableEntity = 422,
-    Locked = 423,
-    FailedDependency = 424,
-    UpgradeRequired = 426,
-    PreconditionRequired = 428,
-    TooManyRequests = 429,
-    RequestHeaderFieldsTooLarge = 431,
-    UnavailableForLegalReasons = 451,
-
-    InternalServerError = 500,
-    NotImplemented = 501,
-    BadGateway = 502,
-    ServiceUnavailable = 503,
-    GatewayTimeout = 504,
-    HttpVersionNotSupported = 505,
-    VariantAlsoNegotiates = 506,
-    InsufficientStorage = 507,
-    LoopDetected = 508,
-    NotExtended = 510,
-    NetworkAuthenticationRequired = 511
-}
-```
+Types re-exported from [`@almighty-shogun/http-core`](../http-core/) are documented on its own [types page](../http-core/types) rather than repeated below. That includes [`HttpBaseResponse`](../http-core/helpers/response), the class [`HttpResponse`](./responses/HttpResponse) extends and the type a handler returns.
 
 ## RouteHandler
 
-Function shape used by [`defineRoute()`](./routing/defineRoute). A route handler receives Bun's typed request, the [`HttpBaseResponse`](./responses/HttpBaseResponse) class with its static factory methods, and the active Bun server, then returns an `HttpBaseResponse` synchronously or asynchronously.
+Function shape used by [`defineRoute()`](./routing/defineRoute). A route handler receives Bun's typed request, the [`HttpResponse`](./responses/HttpResponse) class with its static factory methods, and the active Bun server, then returns a response synchronously or asynchronously.
+
+The two response types in the signature are related, not interchangeable. The `response` argument is [`HttpResponse`](./responses/HttpResponse), this package's class, so it offers `file()` on top of the shared factories. The return type is [`HttpBaseResponse`](../http-core/helpers/response), the class it extends, which is what every factory produces, so a handler can return the result of any of them.
 
 ```ts
+import type { HttpBaseResponse } from '@almighty-shogun/http-core';
+
 type RouteHandler<
     Path extends string = string,
     WebSocketData = undefined
 > = (
     request: BunRequest<Path>,
-    response: typeof HttpBaseResponse,
+    response: typeof HttpResponse,
     server: Server<WebSocketData>
 ) => Promisable<HttpBaseResponse>;
 ```
@@ -233,16 +110,16 @@ type CompileRoutesOptions = {
 Native Bun route map accepted by [`createServer()`](./server/createServer) when `routeMode` is set to `'native'`. Use this when you already have handlers in Bun's `Bun.serve({ routes })` format and do not want [`createServer()`](./server/createServer) to run [`compileRoutes()`](./routing/compileRoutes).
 
 ```ts
-type NativeRouteCollection<WebSocketData = undefined> = NonNullable<
-    BunServeOptions<WebSocketData>['routes']
->;
+type NativeRouteCollection<
+    WebSocketData = undefined
+> = NonNullable<BunServeOptions<WebSocketData>['routes']>;
 ```
 
 ## CreateServerDefinedOptions
 
 Options for the default [`createServer()`](./server/createServer) route mode. `routes` is a package route collection and is compiled with [`compileRoutes()`](./routing/compileRoutes) before the server is created.
 
-Both server option types extend the same internal base, which is every `Bun.serve()` option except `routes`, plus [`defaultErrorResponse`](./types#defaulterrorresponse):
+Both server option types extend the same internal base, which is every `Bun.serve()` option except `routes`, plus [`defaultErrorResponse`](../http-core/types#defaulterrorresponse):
 
 ```ts
 type CreateServerBaseOptions<WebSocketData = undefined> = Omit<

@@ -43,7 +43,19 @@ const route = defineRoute('/users/:id', 'GET', (request, response) => {
 You can pass either `HttpMethod.Get` or the equivalent `'GET'` method string.
 :::
 
+## Route handler
+
+The handler receives three arguments: Bun's typed `BunRequest`, which is a `Request` carrying the decoded `params` for the path; the [`HttpResponse`](../responses/HttpResponse) class with its static factory methods; and the active `Bun.Server`.
+
+The path is a literal type, so parameter names come straight out of it. A path of `'/users/:userId/posts/:postId'` gives `params` the type `{ userId: string; postId: string }`.
+
+Handlers must resolve to an `HttpResponse`. Returning a native `Response` throws an [`InvalidHandlerResultError`](../../http-core/helpers/errors#invalidhandlerresulterror) naming the offending method and path.
+
 <FrontmatterDocs/>
+
+## Uses
+
+- [HttpMethod](../../http-core/types#httpmethod)
 
 ## Type signature
 

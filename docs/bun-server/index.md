@@ -6,12 +6,13 @@ Typed routing, server setup, and response helpers for Bun HTTP servers. The pack
 
 - [Routing](./routing/compileRoutes) &mdash; [`defineRoute`](./routing/defineRoute) creates typed method route definitions, [`defineHtmlRoute`](./routing/defineHtmlRoute) registers Bun HTML imports, and [`compileRoutes`](./routing/compileRoutes) converts route collections into Bun routes.
 - [Server](./server/createServer) &mdash; [`createServer`](./server/createServer) wraps `Bun.serve()` with defined routes by default, native Bun routes when requested, and default error handling.
-- [Responses](./responses/HttpBaseResponse) &mdash; [`HttpBaseResponse`](./responses/HttpBaseResponse) factory methods create responses for JSON, HTML, text, file, image, no-content, redirect, and common status responses such as not found and method not allowed.
-- [Types](./types) &mdash; HTTP method and status constants, enums, and route and server type helpers for Bun request handlers.
+- [Response](./responses/HttpResponse) &mdash; [`HttpResponse`](./responses/HttpResponse) adds a Bun `file()` factory to the shared [`@almighty-shogun/http-core`](../http-core/helpers/response) class, whose methods create responses for JSON, HTML, text, image, no-content, redirect, and common status responses such as not found and method not allowed.
+- [Types](./types) &mdash; route, handler, and server option type helpers for Bun request handlers.
 
 ## Dependencies
 
 - Bun runtime APIs &mdash; required for `Bun.serve()`, `BunRequest`, `Server`, `Bun.file()`, and HTML imports.
+- [`@almighty-shogun/http-core`](../http-core/) &mdash; a direct dependency providing the HTTP vocabulary, the query helpers, the error classes, and the response class.
 - [`@almighty-shogun/utils`](../utils/) &mdash; a direct dependency, used for shared utility types only and never at runtime.
 
 This package is Bun-specific and does not run on Node.js or in the browser.

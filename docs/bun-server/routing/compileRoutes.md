@@ -17,13 +17,7 @@ returns: A Bun-compatible route map keyed by route path.
 
 # compileRoutes
 
-Compiles a route collection into Bun routes. Method route definitions become Bun route handlers, while HTML route definitions become native Bun `HTMLBundle` route values. During compilation, it groups method definitions by path, rejects duplicate method/path pairs, rejects conflicting parameterized paths with the same shape, and adds automatic `HEAD` and `OPTIONS` behavior unless disabled.
-
-When a route exists for a path but not for the request method, the compiled handler returns a `405 Method Not Allowed` response with an `Allow` header. `OPTIONS` responses return `204 No Content` with the same header.
-
-Use `compileRoutes()` when you want route files to stay declarative but still need the native route object yourself. A route file can export a single [`defineRoute()`](./defineRoute) result, a [`defineHtmlRoute()`](./defineHtmlRoute) result, or an array of route definitions. The route barrel then re-exports those files, and `compileRoutes()` turns the imported collection into the object expected by `Bun.serve({ routes })`.
-
-When you use [`createServer()`](../server/createServer) with the default route mode, you can pass the same route collection directly and let [`createServer()`](../server/createServer) call `compileRoutes()` for you.
+Compiles a route collection into the route object `Bun.serve()` expects, turning method definitions into route handlers and HTML definitions into native `HTMLBundle` values. [`createServer()`](../server/createServer) calls it for you in the default route mode, so reach for it directly only when you want the native object yourself.
 
 ## Importing
 
@@ -49,7 +43,9 @@ Bun.serve({
 });
 ```
 
-For larger servers, keep each route in `src/routes/*.ts`, export them from `src/routes/index.ts`, and pass the namespace import to `compileRoutes()`. This keeps the server entry point small while still making all registered routes explicit.
+## Route files
+
+A route file can export a single [`defineRoute()`](./defineRoute) result, a [`defineHtmlRoute()`](./defineHtmlRoute) result, or an array of definitions. Keep each in `src/routes/*.ts`, export them from `src/routes/index.ts`, and pass the namespace import to `compileRoutes()`. This keeps the server entry point small while still making all registered routes explicit.
 
 ::: code-group
 
@@ -63,11 +59,23 @@ export default defineHtmlRoute(['/', '/dashboard'], app);
 ```ts [routes/users.ts]
 import { defineRoute, HttpMethod } from '@almighty-shogun/bun-server';
 
-export default defineRoute('/users', HttpMethod.Get, (_, response) => {
-    return response.json([
-        { id: 1, name: 'Shogun' }
-    ]);
-});
+export default [
+    defineRoute('/users', HttpMethod.Get, (_, response) => {
+        return response.json([
+            { id: 1, name: 'Shogun' }
+        ]);
+    }),
+
+    defineRoute('/users/:id', HttpMethod.Get, (request, response) => {
+        return response.json({ id: request.params.id });
+    }),
+
+    defineRoute('/users', HttpMethod.Post, async (request, response) => {
+        return response.created(JSON.stringify(await request.json()), {
+            contentType: 'application/json; charset=utf-8'
+        });
+    })
+];
 ```
 
 ```ts [routes/index.ts]
@@ -90,6 +98,12 @@ Bun.serve({
 A route file can also export an array when one path has multiple supported methods. `compileRoutes()` flattens those arrays, registers every method route definition, and still handles unsupported methods with the correct `Allow` header. HTML routes can use a path array when one bundle should be served from multiple paths.
 :::
 
+## Automatic methods
+
+Method definitions are grouped by path, so one path carries every method registered for it. Unless disabled, `HEAD` is answered from the matching `GET` handler and `OPTIONS` is answered automatically.
+
+When a path exists but the request method does not, the compiled handler returns `405 Method Not Allowed` with an `Allow` header. `OPTIONS` responses return `204 No Content` with the same header.
+
 ## Validation
 
 Compilation is strict and throws rather than silently dropping a route. It rejects:
@@ -101,9 +115,13 @@ Compilation is strict and throws rather than silently dropping a route. It rejec
 - a path registered as both an HTML route and a method route
 - two paths that differ only in parameter name, such as `/users/:id` and `/users/:userId`
 
-At request time, a handler that returns anything other than an [`HttpBaseResponse`](../responses/HttpBaseResponse) throws a `TypeError` naming the offending method and path.
+At request time, a handler that returns anything other than an [`HttpResponse`](../responses/HttpResponse) throws a `TypeError` naming the offending method and path.
 
 <FrontmatterDocs/>
+
+## Uses
+
+- [Promisable](../../utils/types#promisable)
 
 ## Type signature
 
@@ -113,11 +131,6 @@ declare function compileRoutes<WebSocketData = undefined>(
     options?: CompileRoutesOptions
 ): CompiledRouteCollection<WebSocketData>;
 
-type CompiledRouteCollection<WebSocketData = undefined> = Record<string,
-    | HTMLBundle
-    | ((
-        request: BunRequest<string>,
-        server: Server<WebSocketData>
-    ) => Promisable<Response>)
->;
+type CompiledRouteCollection<WebSocketData = undefined>
+    = Record<string, HTMLBundle | CompiledRouteHandler<WebSocketData>>;
 ```

@@ -26,10 +26,10 @@ export const bunServer: DefaultTheme.SidebarItem[] = [
         ]
     },
     {
-        text: 'Responses',
+        text: 'Response',
         collapsed: false,
         items: [
-            { text: 'HttpBaseResponse', link: '/bun-server/responses/HttpBaseResponse' }
+            { text: 'HttpResponse', link: '/bun-server/responses/HttpResponse' }
         ]
     }
 ];
