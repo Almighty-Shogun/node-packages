@@ -183,7 +183,11 @@ This works against anything in the chain: middleware declared by a parent record
 }
 ```
 
-Skips are collected from every matched record, so a child can opt out of a parent's middleware but never the reverse.
+Skips are collected from every matched record and applied to the whole chain, so they are not directional. A child can drop something its parent declared, and a parent can equally drop something declared by a child below it.
+
+::: warning
+A `skipMiddleware` on a parent therefore reaches every route beneath it. Put the skip on the specific record that should opt out, rather than on a parent, unless removing that middleware from the whole subtree is what you mean.
+:::
 
 `skipMiddleware` holds definitions rather than name strings, so a typo is a compile error and deleting a middleware makes every skip mentioning it fail to compile. Matching is by name, as described above, so a middleware built by a factory is skipped by calling that factory again.
 
@@ -199,6 +203,8 @@ Skips are collected from every matched record, so a child can opt out of a paren
 Middleware runs on **every** navigation that matches its record, not only when the record is first entered. Moving between `/admin/users` and `/admin/posts` re-runs the middleware on `/admin` both times, so a check cannot go stale while the parent stays mounted.
 
 Handlers run one after another, and an asynchronous handler is awaited before the next begins.
+
+A handler that throws is not the same as one returning `false`. The rejection propagates out of the guard to Vue Router's own error handling, rather than cancelling the navigation quietly, so reach for `return false` when refusing a navigation is the intended outcome.
 
 <FrontmatterDocs/>
 

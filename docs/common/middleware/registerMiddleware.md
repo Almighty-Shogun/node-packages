@@ -99,8 +99,8 @@ Calling it twice on the same router installs two guards, so every handler runs t
 
 ## Uses
 
-- [defineMiddleware](./defineMiddleware)
 - [RegisterMiddlewareOptions](../types#registermiddlewareoptions)
+- [defineMiddleware](./defineMiddleware)
 
 ## Type signature
 
