@@ -7,7 +7,7 @@ All exports are named exports from the package root. Composables are small and p
 ## Categories
 
 - [Composables](./composables/useOpen) &mdash; reusable Vue state helpers such as [`useOpen`](./composables/useOpen), [`useLoaded`](./composables/useLoaded), [`useHotKey`](./composables/useHotKey), and [`useDataTable`](./composables/useDataTable).
-- [Router](./router/useRouteParam) &mdash; helpers for reading route params and matching named Vue Router views.
+- [Router](./router/useRouteParam) &mdash; helpers for reading route params, merging matched route meta, and matching named Vue Router views.
 - [Util](./util/requiredRef) &mdash; lower-level Vue ref and DOM target helpers.
 - [i18n](./i18n/translate) &mdash; module-level translation helpers backed by a registered i18n instance.
 

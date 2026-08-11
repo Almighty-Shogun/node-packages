@@ -1,6 +1,6 @@
-import useEventListener from './useEventListener';
 import { unwrapTarget } from '../util';
-import type { ComponentTarget } from '../internal/types';
+import useEventListener from './useEventListener';
+import type { ComponentTarget } from '../internal';
 import type { NullableOrUndefinable } from '@almighty-shogun/utils';
 import { ref, watch, onMounted, type Ref, type MaybeRefOrGetter } from 'vue';
 

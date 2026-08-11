@@ -1,7 +1,6 @@
 import useEventListener from './useEventListener';
 import { toValue, type MaybeRefOrGetter } from 'vue';
-import { parseHotKey, matchesHotKey, isOnApplePlatform, isEditable } from '../internal/hotKeys';
-import type { ComponentTarget } from '../internal/types';
+import { parseHotKey, matchesHotKey, isOnApplePlatform, isEditable, type ComponentTarget } from '../internal';
 import { hasValue, type Undefinable, type NullableOrUndefinable, type Arrayable } from '@almighty-shogun/utils';
 
 type HotKeyHandler = (event: KeyboardEvent) => void;

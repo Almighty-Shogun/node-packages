@@ -10,7 +10,7 @@ Reads the name of the active Vue Router route as a computed value. It tracks nav
 
 Routes without a name resolve to `null` rather than an empty string, so a missing name is distinguishable from a name that happens to be empty and the usual `??` and `hasValue` handling applies.
 
-Use [`useRouteNames`](./useRouteNames) when you need the whole matched chain rather than the leaf route, or [`useIsCurrentRoute`](./useIsCurrentRoute) to test against a specific name.
+Use [`useRouteNames`](./useRouteNames) when you need the whole matched chain rather than the leaf route, or [`useIsRoute`](./useIsRoute) to test against a specific name.
 
 ## Importing
 

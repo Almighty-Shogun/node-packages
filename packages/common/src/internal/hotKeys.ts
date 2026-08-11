@@ -19,7 +19,7 @@ export const hotKeyAliasMap: Record<string, string> = {
     right: 'arrowright',
     space: ' ',
     spacebar: ' ',
-    plus: '+',
+    plus: '+'
 };
 
 export function parseHotKey(value: string): ParsedHotKey {
@@ -65,10 +65,7 @@ export function isEditable(target: Nullable<EventTarget>): boolean {
         return false;
     }
 
-    return target.tagName === 'INPUT'
-        || target.tagName === 'TEXTAREA'
-        || target.tagName === 'SELECT'
-        || target.isContentEditable;
+    return target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT' || target.isContentEditable;
 }
 
 export function isOnApplePlatform(): boolean {

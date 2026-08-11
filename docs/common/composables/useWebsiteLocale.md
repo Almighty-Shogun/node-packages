@@ -21,9 +21,7 @@ returns:
 
 Creates persistent website-locale state backed by local storage. Whenever the locale changes, the composable updates the root document language through [`setWebsiteLocale`](../../utils/browser-dom/setWebsiteLocale).
 
-::: warning
-The document language is applied by a watcher, so it is written on every locale change but not when the composable first reads the stored value. Call [`setWebsiteLocale`](../../utils/browser-dom/setWebsiteLocale) with `locale.value` during startup when the persisted locale should also be applied on the initial render.
-:::
+The stored locale is applied as soon as the composable runs, so the document language matches a returning visitor's choice on the first render without any startup code. It is applied again on every change.
 
 ## Importing
 

@@ -1,12 +1,16 @@
 import { unwrapElement } from '../util';
 import useEventListener from './useEventListener';
 import { toValue, type MaybeRefOrGetter } from 'vue';
-import type { ComponentElement } from '../internal/types';
+import type { ComponentElement } from '../internal';
 import type { Arrayable, NullableOrUndefinable, Promisable } from '@almighty-shogun/utils';
 
 type OutsideClickHandler = (event: PointerEvent) => Promisable<void>;
 
-export default function (targets: Arrayable<MaybeRefOrGetter<NullableOrUndefinable<ComponentElement>>>, callback: OutsideClickHandler, enabled: MaybeRefOrGetter<boolean> = true): UseClickOutside {
+export default function (
+    targets: Arrayable<MaybeRefOrGetter<NullableOrUndefinable<ComponentElement>>>,
+    callback: OutsideClickHandler,
+    enabled: MaybeRefOrGetter<boolean> = true
+): UseClickOutside {
     const sources = Array.isArray(targets) ? targets : [targets];
     const source = typeof document === 'undefined' ? null : document;
 

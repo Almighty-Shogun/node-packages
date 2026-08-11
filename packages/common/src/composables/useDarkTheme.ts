@@ -9,7 +9,9 @@ export default function (key: string = 'application-theme'): UseDarkTheme {
         darkMode.value = !darkMode.value;
     }
 
-    watch(() => darkMode.value, (newTheme: boolean) => setDarkTheme(newTheme));
+    if (typeof document !== 'undefined') {
+        watch(() => darkMode.value, (newTheme: boolean) => setDarkTheme(newTheme), { immediate: true });
+    }
 
     return {
         darkMode,

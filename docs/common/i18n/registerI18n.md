@@ -57,6 +57,10 @@ registerI18n({
 
 <FrontmatterDocs/>
 
+## Uses
+
+- [Undefinable](../../utils/types#undefinable)
+
 ## Type signature
 
 ```ts

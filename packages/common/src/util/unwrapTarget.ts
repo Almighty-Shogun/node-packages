@@ -1,4 +1,4 @@
-import type { ComponentTarget } from '../internal/types';
+import type { ComponentTarget } from '../internal';
 import { toValue, type ComponentPublicInstance, type MaybeRefOrGetter } from 'vue';
 import { isHtmlElement, type NullableOrUndefinable, type Nullable, type HTMLTarget } from '@almighty-shogun/utils';
 

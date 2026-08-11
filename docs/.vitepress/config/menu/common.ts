@@ -34,7 +34,8 @@ export const common: DefaultTheme.SidebarItem[] = [
         text: 'Router',
         collapsed: false,
         items: [
-            { text: 'useIsCurrentRoute', link: '/common/router/useIsCurrentRoute' },
+            { text: 'useIsRoute', link: '/common/router/useIsRoute' },
+            { text: 'useRouteMeta', link: '/common/router/useRouteMeta' },
             { text: 'useRouteName', link: '/common/router/useRouteName' },
             { text: 'useRouteNames', link: '/common/router/useRouteNames' },
             { text: 'useRouteParam', link: '/common/router/useRouteParam' }
