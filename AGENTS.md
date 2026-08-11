@@ -2,6 +2,8 @@
 
 Use this file as the root guidance for the `@almighty-shogun/node-packages` monorepo.
 
+`AGENTS.md` and `CLAUDE.md` are the same document, differing only where they name themselves. Any change to one must be made to the other in the same commit, or they drift apart. The same rule applies to `docs/AGENTS.md` and `docs/CLAUDE.md`.
+
 ## Project
 
 This repository contains shared Node/Bun packages maintained in one Bun workspace.
@@ -10,9 +12,13 @@ Workspace packages live in `packages/*`:
 
 - `@almighty-shogun/prototype-extensions` &mdash; prototype methods for built-in JavaScript types. No dependencies.
 - `@almighty-shogun/utils` &mdash; framework-agnostic utility functions. Depends on `luxon` and `@types/luxon`.
+- `@almighty-shogun/http-core` &mdash; runtime-agnostic HTTP vocabulary, the shared `HttpBaseResponse` class, query-string helpers, and the error classes both server packages throw. Depends on `utils` for types only and on `luxon` at runtime, used solely by `queryDate`.
 - `@almighty-shogun/common` &mdash; Vue application helpers. Depends on `utils` at runtime; `vue` and `vue-router` are peer dependencies.
 - `@almighty-shogun/webkit-native-bridge` &mdash; typed JavaScript/native WebKit bridge helpers. Depends on `utils` for types only.
-- `@almighty-shogun/bun-server` &mdash; Bun HTTP server routing and response helpers. Depends on `utils` for types only; `@types/bun` is an optional peer dependency.
+- `@almighty-shogun/bun-server` &mdash; Bun HTTP server routing and response helpers. Depends on `http-core` at runtime and `utils` for types only; `@types/bun` is an optional peer dependency.
+- `@almighty-shogun/cloudflare-worker` &mdash; Cloudflare Worker routing, scheduling, and response helpers. Depends on `http-core` at runtime and `utils` for types only; `@cloudflare/workers-types` is an optional peer dependency.
+
+Both server packages re-export every `http-core` export from their own root with a single `export * from '@almighty-shogun/http-core';`, so applications install one package and never name `http-core`. Do not replace that with an enumerated list; it would need hand-maintaining in step with every `http-core` addition.
 
 Documentation lives in `docs/` and has its own detailed instructions in `docs/AGENTS.md`.
 
@@ -61,9 +67,11 @@ Package builds:
 ```bash
 bun --cwd packages/prototype-extensions build
 bun --cwd packages/utils build
+bun --cwd packages/http-core build
 bun --cwd packages/common build
 bun --cwd packages/webkit-native-bridge build
 bun --cwd packages/bun-server build
+bun --cwd packages/cloudflare-worker build
 ```
 
 Documentation build:
