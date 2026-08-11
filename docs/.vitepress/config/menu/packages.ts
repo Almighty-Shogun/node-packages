@@ -11,6 +11,7 @@ export const packages: DefaultTheme.SidebarItem[] = [
         text: 'Foundations',
         collapsed: false,
         items: [
+            { text: 'HTTP Core', link: '/http-core/' },
             { text: 'Prototype Extensions', link: '/prototype-extensions/' },
             { text: 'Utils', link: '/utils/' }
         ]
@@ -27,6 +28,7 @@ export const packages: DefaultTheme.SidebarItem[] = [
         collapsed: false,
         items: [
             { text: 'Bun Server', link: '/bun-server/' },
+            { text: 'Cloudflare Worker', link: '/cloudflare-worker/' },
             { text: 'WebKit Native Bridge', link: '/webkit-native-bridge/' }
         ]
     }
