@@ -1,6 +1,7 @@
 import splitPath from './splitPath';
 import type { Nullable } from '@almighty-shogun/utils';
-import type { CompiledRouteCollection, RouteMatch } from '../types';
+import type { CompiledRouteCollection } from '../types';
+import type { RouteMatch } from '../types/router';
 
 function matchSegments(pattern: readonly string[], segments: readonly string[]): Nullable<Record<string, string>> {
     if (pattern.length !== segments.length) {
