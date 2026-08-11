@@ -1,10 +1,7 @@
-import type { HttpMethod, RouteDefinition, RouteHandler } from '../types';
+import type { HttpMethod } from '@almighty-shogun/http-core';
+import type { RouteDefinition, RouteHandler } from '../types';
 
-export default function <
-    const Path extends string,
-    const Method extends HttpMethod,
-    WebSocketData = undefined>
-(
+export default function <const Path extends string, const Method extends HttpMethod, WebSocketData = undefined>(
     path: Path,
     method: Method,
     handler: RouteHandler<Path, WebSocketData>

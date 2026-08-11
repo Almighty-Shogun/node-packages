@@ -1,8 +1,7 @@
 import type { RouteCollection } from './router';
-import type { DefaultErrorResponse } from './http';
+import type { BunServeOptions } from '../internal';
 import type { Undefinable } from '@almighty-shogun/utils';
-
-type BunServeOptions<WebSocketData = undefined> = Parameters<typeof Bun.serve<WebSocketData>>[0];
+import type { DefaultErrorResponse } from '@almighty-shogun/http-core';
 
 export type NativeRouteCollection<WebSocketData = undefined> = NonNullable<BunServeOptions<WebSocketData>['routes']>;
 

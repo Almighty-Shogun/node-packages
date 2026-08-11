@@ -39,6 +39,7 @@
         "CODEOWNERS"
     ],
     "dependencies": {
+        "@almighty-shogun/http-core": "workspace:*",
         "@almighty-shogun/utils": "workspace:*"
     },
     "peerDependencies": {

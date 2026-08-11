@@ -1,13 +1,9 @@
-import { compileRoutes } from '../routing';
-import { createDefaultErrorResponse } from '../internal';
-import { HttpStatus, type CreateServerOptions } from '../types';
+import { compileRoutes } from './routing';
+import type { CreateServerOptions } from './types';
+import { HttpStatus } from '@almighty-shogun/http-core';
+import { createDefaultErrorResponse, type BunServeOptions, type ErrorLike } from './internal';
 
-type ErrorLike = Bun.ErrorLike;
-type BunServeOptions<WebSocketData = undefined> = Parameters<typeof Bun.serve<WebSocketData>>[0];
-
-export default function <WebSocketData = undefined>(
-    options: CreateServerOptions<WebSocketData>
-): ReturnType<typeof Bun.serve> {
+export default function <WebSocketData = undefined>(options: CreateServerOptions<WebSocketData>): ReturnType<typeof Bun.serve> {
     const {
         automaticHead,
         automaticOptions,
@@ -20,11 +16,7 @@ export default function <WebSocketData = undefined>(
 
     const resolvedRoutes = routeMode === 'native'
         ? routes
-        : compileRoutes(routes, {
-            automaticHead,
-            automaticOptions,
-            defaultErrorResponse
-        });
+        : compileRoutes(routes, { automaticHead, automaticOptions, defaultErrorResponse });
 
     return Bun.serve({
         ...serveOptions,
