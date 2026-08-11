@@ -40,7 +40,7 @@ jobs:
                   bun pm version --cwd packages/bun-server $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/cloudflare-worker $RELEASE_VERSION --no-git-tag-version
 
-                  sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/common/package.json packages/cloudflare-worker/package.json
+                  sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/common/package.json packages/bun-server/package.json packages/cloudflare-worker/package.json
 
             - name: 🔨 Build packages
               run: |
