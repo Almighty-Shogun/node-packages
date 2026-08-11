@@ -6,7 +6,8 @@ export const bunServer: DefaultTheme.SidebarItem[] = [
         items: [
             { text: 'Introduction', link: '/bun-server/' },
             { text: 'Installation', link: '/bun-server/installation' },
-            { text: 'Types', link: '/bun-server/types' }
+            { text: 'Types', link: '/bun-server/types' },
+            { text: 'Errors', link: '/bun-server/errors' }
         ]
     },
     {
