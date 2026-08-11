@@ -1,10 +1,11 @@
 import HttpResponse from '../response';
+import { ConflictingRouteTypeError, DuplicateHtmlRouteError } from '../errors';
 import type { CompileRoutesOptions, RouteCollection, RouteHandler } from '../types';
-import type { CompiledRouteCollection, BunRequest, HTMLBundle, Server } from '../internal';
 import { ConflictingRoutePathsError, DuplicateRouteError, HttpMethod, HttpStatus } from '@almighty-shogun/http-core';
 import {
     collectRouteDefinitions, createDefaultErrorResponse, executeHandler,
-    getHtmlRoutePaths, getRoutePattern, isHtmlRouteDefinition
+    getHtmlRoutePaths, getRoutePattern, isHtmlRouteDefinition,
+    type CompiledRouteCollection, type BunRequest, type HTMLBundle, type Server
 } from '../internal';
 
 const httpMethodOrder: readonly HttpMethod[] = [
@@ -42,11 +43,11 @@ export default function <WebSocketData = undefined>(
                 }
 
                 if (htmlRoutes.has(path)) {
-                    throw new Error(`Duplicate HTML route: ${path}`);
+                    throw new DuplicateHtmlRouteError(path);
                 }
 
                 if (groupedRoutes.has(path)) {
-                    throw new Error(`Route path "${path}" cannot be both an HTML route and a method route.`);
+                    throw new ConflictingRouteTypeError(path);
                 }
 
                 routePatterns.set(routePattern, path);
@@ -64,7 +65,7 @@ export default function <WebSocketData = undefined>(
         }
 
         if (htmlRoutes.has(definition.path)) {
-            throw new Error(`Route path "${definition.path}" cannot be both an HTML route and a method route.`);
+            throw new ConflictingRouteTypeError(definition.path);
         }
 
         routePatterns.set(routePattern, definition.path);
