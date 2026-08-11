@@ -1,6 +1,6 @@
 # Common
 
-Common application helpers for state, local-storage refs, forms, pagination, route data, DOM targets, keyboard shortcuts, and i18n access. Every export is Vue-focused today, including the i18n helpers, which read the current component instance. The package exists for shared application utilities that do not belong in lower-level `utils`.
+Common application helpers for state, local-storage refs, forms, pagination, route data, DOM targets, keyboard shortcuts, and i18n access. Every export is Vue-focused today, including the i18n helpers, which read the current component instance. The package exists for shared application utilities that do not belong in lower-level [`@almighty-shogun/utils`](../utils/).
 
 All exports are named exports from the package root. Composables are small and predictable: they return refs and actions, but leave rendering, API fetching, and application-specific validation to the caller.
 
