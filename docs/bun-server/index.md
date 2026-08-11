@@ -8,6 +8,7 @@ Typed routing, server setup, and response helpers for Bun HTTP servers. The pack
 - [Server](./server/createServer) &mdash; [`createServer`](./server/createServer) wraps `Bun.serve()` with defined routes by default, native Bun routes when requested, and default error handling.
 - [Response](./responses/HttpResponse) &mdash; [`HttpResponse`](./responses/HttpResponse) adds a Bun `file()` factory to the shared [`@almighty-shogun/http-core`](../http-core/helpers/response) class, whose methods create responses for JSON, HTML, text, image, no-content, redirect, and common status responses such as not found and method not allowed.
 - [Types](./types) &mdash; route, handler, and server option type helpers for Bun request handlers.
+- [Errors](./errors) &mdash; the HTML route failures raised while compiling a route collection.
 
 ## Dependencies
 
