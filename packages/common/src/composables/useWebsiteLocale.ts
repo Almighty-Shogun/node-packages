@@ -9,7 +9,9 @@ export default function (key: string = 'application-locale'): UseWebsiteLocale {
         locale.value = newLocale;
     }
 
-    watch(() => locale.value, (newLocale: string) => setWebsiteLocale(newLocale));
+    if (typeof document !== 'undefined') {
+        watch(() => locale.value, (newLocale: string) => setWebsiteLocale(newLocale), { immediate: true });
+    }
 
     return {
         locale,
