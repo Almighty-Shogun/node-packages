@@ -38,8 +38,9 @@ jobs:
                   bun pm version --cwd packages/common $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/webkit-native-bridge $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/bun-server $RELEASE_VERSION --no-git-tag-version
+                  bun pm version --cwd packages/cloudflare-worker $RELEASE_VERSION --no-git-tag-version
 
-                  sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/common/package.json
+                  sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/common/package.json packages/bun-server/package.json packages/cloudflare-worker/package.json
 
             - name: 🔨 Build packages
               run: |
@@ -49,6 +50,7 @@ jobs:
                   bun --cwd packages/common build
                   bun --cwd packages/webkit-native-bridge build
                   bun --cwd packages/bun-server build
+                  bun --cwd packages/cloudflare-worker build
 
             - name: 🚀 Publish packages
               run: |
@@ -58,5 +60,6 @@ jobs:
                   bun publish --cwd packages/common --access public
                   bun publish --cwd packages/webkit-native-bridge --access public
                   bun publish --cwd packages/bun-server --access public
+                  bun publish --cwd packages/cloudflare-worker --access public
               env:
                   NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
