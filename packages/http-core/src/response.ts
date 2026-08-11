@@ -1,3 +1,4 @@
+import { InvalidJsonBodyError } from './errors';
 import type { NullableOrUndefinable, Undefinable } from '@almighty-shogun/utils';
 import { HttpStatus, type CoreOptions, type FixedStatusOptions, type ImageOptions, type RedirectOptions } from './types';
 
@@ -201,7 +202,7 @@ export default class HttpBaseResponse {
         try {
             return JSON.stringify(data);
         } catch (error) {
-            throw new TypeError('Failed to serialize JSON response body.', { cause: error });
+            throw new InvalidJsonBodyError(error);
         }
     }
 }
