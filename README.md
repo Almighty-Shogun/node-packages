@@ -10,9 +10,11 @@ A collection of Node / Bun packages I use in (personal) projects.
 ## 📦 Packages
 - The [**Prototype Extensions**](/packages/prototype-extensions) package is available under `@almighty-shogun/prototype-extensions`
 - The [**Utils**](/packages/utils) package is available under `@almighty-shogun/utils`
+- The [**HTTP Core**](/packages/http-core) package is available under `@almighty-shogun/http-core`
 - The [**Common**](/packages/common) package is available under `@almighty-shogun/common`
 - The [**WebKit Native Bridge**](/packages/webkit-native-bridge) package is available under `@almighty-shogun/webkit-native-bridge`
 - The [**Bun Server**](/packages/bun-server) package is available under `@almighty-shogun/bun-server`
+- The [**Cloudflare Worker**](/packages/cloudflare-worker) package is available under `@almighty-shogun/cloudflare-worker`
 
 ## 📃 Prerequisites
 - **[Bun](https://bun.sh)**: >= 1.3.10
