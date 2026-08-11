@@ -36,18 +36,7 @@ declare module '@almighty-shogun/cloudflare-worker' {
 The file must be a module, so it needs a top-level `import` or `export`. Without one, TypeScript reads `declare module` as an ambient declaration that replaces the package's types instead of merging into them, and every import from it silently resolves to `any`.
 :::
 
-Until it is augmented the interface is empty, so reading any binding is a compile error and [`EnvAssetsBinding`](#envassetsbinding) resolves to `never`.
-
-## RouteParams
-
-Extracts the named parameters out of a route path literal. Every segment beginning with a colon becomes a required string key, and a path without parameters resolves to an empty record, so reading any key off it is a compile error.
-
-```ts
-type RouteParams<Path extends string> =
-    Path extends `${infer Segment}/${infer Rest}`
-        ? Record<PathSegmentParam<Segment>, string> & RouteParams<Rest>
-        : Record<PathSegmentParam<Path>, string>;
-```
+Until it is augmented the interface is empty, so reading any binding is a compile error and the `assets` option of [`createWorker()`](./worker/createWorker) accepts nothing.
 
 ## RouteRequest
 
@@ -127,17 +116,6 @@ The full compiled route list, ordered so that static segments are matched before
 type CompiledRouteCollection = readonly CompiledRoute[];
 ```
 
-## RouteMatch
-
-The result of matching a pathname against a compiled route list: the route that matched and the decoded parameters taken from the path.
-
-```ts
-type RouteMatch = {
-    readonly route: CompiledRoute;
-    readonly params: Record<string, string>;
-};
-```
-
 ## AssetsBinding
 
 The minimum shape the worker needs from a static assets binding. Cloudflare's `Fetcher` satisfies it.
@@ -146,17 +124,6 @@ The minimum shape the worker needs from a static assets binding. Cloudflare's `F
 type AssetsBinding = {
     fetch(request: Request): Promise<Response>;
 };
-```
-
-## EnvAssetsBinding
-
-The keys of [`WorkerEnv`](#workerenv) whose binding can serve assets. [`CreateWorkerOptions`](#createworkeroptions) uses it to constrain `assets`, so naming a binding that is not a fetcher, such as a KV namespace, fails to compile.
-
-```ts
-type EnvAssetsBinding = {
-    [Key in keyof WorkerEnv]: WorkerEnv[Key] extends AssetsBinding
-        ? Key : never;
-}[keyof WorkerEnv];
 ```
 
 ## WorkerErrorHandler

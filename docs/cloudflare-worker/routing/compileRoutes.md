@@ -126,7 +126,7 @@ Compilation is strict and throws rather than silently dropping a route. It rejec
 - a duplicate `method` and `path` pair
 - two paths that differ only in parameter name, such as `/users/:id` and `/users/:userId`
 
-At request time, a handler that returns anything other than an [`HttpResponse`](../responses/HttpResponse) throws a `TypeError` naming the offending method and path.
+At request time, a handler that returns anything other than an [`HttpResponse`](../responses/HttpResponse) throws an [`InvalidHandlerResultError`](../../http-core/errors#invalidhandlerresulterror) carrying the offending method and pathname.
 
 <FrontmatterDocs/>
 

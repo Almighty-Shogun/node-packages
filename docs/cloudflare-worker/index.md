@@ -9,6 +9,7 @@ Typed routing, worker setup, and response helpers for Cloudflare Workers. The pa
 - [Worker](./worker/createWorker) &mdash; [`createWorker`](./worker/createWorker) builds the `fetch` and `scheduled` module export, dispatching requests, falling back to static assets, running scheduled tasks, and handling errors.
 - [Response](./responses/HttpResponse) &mdash; [`HttpResponse`](./responses/HttpResponse) adds a `from()` factory for forwarding an upstream response to the shared [`@almighty-shogun/http-core`](../http-core/helpers/response) class, whose methods create responses for JSON, HTML, text, images, redirects, and common status responses such as not found and too many requests.
 - [Types](./types) &mdash; the augmentable [`WorkerEnv`](./types#workerenv) interface, route and request type helpers, and worker option types.
+- [Errors](./errors) &mdash; the scheduled collection failures raised while compiling tasks, and the aggregate raised when tasks fail.
 
 ## Dependencies
 

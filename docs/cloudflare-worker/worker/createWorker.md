@@ -106,7 +106,7 @@ A Cron Trigger runs every task registered for the expression that fired, in the 
 
 Route errors never reach the client verbatim. Anything thrown inside a handler is caught, passed to `onError` when one is supplied, and otherwise answered with a generic `500` whose body follows `defaultErrorResponse`. The thrown message is never included, so an internal failure cannot leak a token, a query, or a stack trace through a public route. Returning `null` from `onError` falls through to that same generated response.
 
-Scheduled tasks fail independently. A task that throws does not cancel the tasks after it: the rest still run, and the failure is rethrown once they finish, or wrapped in an `AggregateError` when more than one failed.
+Scheduled tasks fail independently. A task that throws does not cancel the tasks after it: the rest still run, and the failure is rethrown once they finish, or collected into a [`ScheduledTasksFailedError`](../errors#scheduledtasksfailederror) when more than one failed.
 
 <FrontmatterDocs/>
 
