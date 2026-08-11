@@ -159,7 +159,7 @@ The path is a literal type, so `request.params` is typed from it: `/users/:id` g
 
 ## Shared HTTP helpers
 
-`bun-server` and `cloudflare-worker` both build on [`@almighty-shogun/http-core`](/http-core/), and both re-export **every** one of its exports from their own root. The status vocabulary, the [query helpers](/http-core/helpers/requests), and the [error classes](/http-core/helpers/errors) come from the package you already installed:
+`bun-server` and `cloudflare-worker` both build on [`@almighty-shogun/http-core`](/http-core/), and both re-export **every** one of its exports from their own root. The status vocabulary, the [query helpers](/http-core/helpers/requests), and the [error classes](/http-core/errors) come from the package you already installed:
 
 ```ts
 import {

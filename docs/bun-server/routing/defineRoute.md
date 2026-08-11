@@ -49,7 +49,7 @@ The handler receives three arguments: Bun's typed `BunRequest`, which is a `Requ
 
 The path is a literal type, so parameter names come straight out of it. A path of `'/users/:userId/posts/:postId'` gives `params` the type `{ userId: string; postId: string }`.
 
-Handlers must resolve to an `HttpResponse`. Returning a native `Response` throws an [`InvalidHandlerResultError`](../../http-core/helpers/errors#invalidhandlerresulterror) naming the offending method and path.
+Handlers must resolve to an `HttpResponse`. Returning a native `Response` throws an [`InvalidHandlerResultError`](../../http-core/errors#invalidhandlerresulterror) naming the offending method and path.
 
 <FrontmatterDocs/>
 
