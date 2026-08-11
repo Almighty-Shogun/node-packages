@@ -33,6 +33,8 @@ This is deliberate and applies to `http-core` alone: the exports are small, high
 
 `response.md` is not grouped. It documents `HttpBaseResponse` on its own and follows the normal API page schema below.
 
+The same grouping applies to `docs/bun-server/errors.md` and `docs/cloudflare-worker/errors.md`, for the same reason: each package's own error classes are small, repetitive, and share one contract. Group them on one `errors.md` per package rather than one page per class. This grouping is limited to error classes and to `http-core`; do not extend it to other exports or other packages.
+
 ## Formatting And Code Style
 
 Follow the project-root `.editorconfig` for formatting and code style. This applies to documentation source and fenced code examples.
@@ -544,6 +546,10 @@ type UsePagination = {
 ```
 
 Do not collapse structured declarations into unreadable single lines.
+
+A signature block may carry accompanying `type` blocks alongside the declaration. Expand a type when the page is the only place its shape is stated, and name it without expanding when it is documented in the package `types.md` or its meaning is already carried by `returns` or a parameter description.
+
+Never expand halfway. If expanding a type introduces further names that are themselves undocumented, expand those too or name the original and leave it. Stopping at an arbitrary depth hands the reader a dead end instead of an answer.
 
 Code blocks must not scroll horizontally. Keep every line at or under 75 characters, wrapping declarations, imports, and examples as needed. The rendered code column fits roughly 78 characters, so 75 leaves a margin. Shell commands are exempt, because breaking an install command across lines reads worse than letting it scroll:
 
