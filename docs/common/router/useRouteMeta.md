@@ -1,7 +1,7 @@
 ---
 outline: deep
 
-returns: A computed `RouteMeta` holding the merged meta of every matched route record.
+returns: A computed, deeply readonly `RouteMeta` holding the merged meta of every matched route record.
 ---
 
 # useRouteMeta
@@ -10,7 +10,7 @@ Collects the `meta` of every route record matched by the current route into one 
 
 Vue Router already exposes `route.meta`, but it merges the matched records shallowly. A nested object declared on a parent is replaced outright as soon as a child declares the same key, so the parent's other entries under that key are lost. This merges key by key at any depth, so a parent and a child can each own part of the same nested value.
 
-The result is computed, so it follows navigation without needing a watcher.
+The result is computed, so it follows navigation without needing a watcher. It is a new object rather than a view onto the route records, and it is deeply readonly, so route configuration cannot be edited through it by accident.
 
 ## Importing
 
@@ -108,7 +108,7 @@ Anything that is not a plain object is replaced rather than combined. An array d
 
 ## Typing the result
 
-The return type is Vue Router's `RouteMeta`, which is empty until you declare your own keys on it. Augment it once and every call is typed, including the nested values.
+The return type is Vue Router's `RouteMeta`, which is empty until you declare your own keys on it. Augment it once and every call is typed, including the nested values. Vue's `DeepReadonly` is applied on top, so a nested object comes back with readonly properties and an array comes back as a `readonly` array, and assigning to either is a compile error.
 
 ```ts
 declare module 'vue-router' {
@@ -125,5 +125,5 @@ declare module 'vue-router' {
 ## Type signature
 
 ```ts
-declare function useRouteMeta(): ComputedRef<RouteMeta>;
+declare function useRouteMeta(): ComputedRef<DeepReadonly<RouteMeta>>;
 ```
