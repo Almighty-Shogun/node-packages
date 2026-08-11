@@ -21,9 +21,7 @@ returns:
 
 Creates persistent dark-theme state backed by local storage. The returned ref controls whether the document has the `dark` attribute, and `toggle()` flips that state for UI switches or menu actions.
 
-::: warning
-The document attribute is applied by a watcher, so it is written whenever `darkMode` changes but not when the composable first reads the stored value. Call [`setDarkTheme`](../../utils/browser-dom/setDarkTheme) with `darkMode.value` during startup when the persisted theme should also be applied on the initial render.
-:::
+The stored preference is applied as soon as the composable runs, so a visitor who chose dark on a previous visit gets it on the first render without any startup code. It is applied again on every change.
 
 ## Importing
 
