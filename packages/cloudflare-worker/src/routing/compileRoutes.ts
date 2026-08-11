@@ -32,11 +32,7 @@ export default function (collection: RouteCollection): CompiledRouteCollection {
     const compiledRoutes: CompiledRoute[] = [];
 
     for (const [path, methods] of groupedRoutes) {
-        compiledRoutes.push({
-            path,
-            segments: splitPath(path),
-            methods
-        });
+        compiledRoutes.push({ path, segments: splitPath(path), methods });
     }
 
     return compiledRoutes.sort(compareRoutes);

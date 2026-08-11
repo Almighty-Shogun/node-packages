@@ -6,8 +6,7 @@ export default function (routes: RouteCollection): RouteDefinition[] {
         throw new InvalidRouteCollectionError();
     }
 
-    const entries = Object.entries(routes)
-        .sort(([left], [right]) => left.localeCompare(right));
+    const entries = Object.entries(routes).sort(([left], [right]) => left.localeCompare(right));
 
     if (entries.length === 0) {
         throw new EmptyRouteCollectionError();
