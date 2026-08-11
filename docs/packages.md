@@ -48,7 +48,7 @@ Everything pointing at `utils` uses it for types alone, so nothing from it reach
 
 What the other packages take from `utils` is the [shared type vocabulary](./utils/types), [`Nullable`](./utils/types#nullable) and [`Undefinable`](./utils/types#undefinable) among them. `common` takes more than types: composables such as [`useLocalStorage`](./common/composables/useLocalStorage) use [`serialize`](./utils/serialization/serialize) and [`deserialize`](./utils/serialization/deserialize), and [`useDarkTheme`](./common/composables/useDarkTheme) uses [`setDarkTheme`](./utils/browser-dom/setDarkTheme).
 
-`http-core` is the layer between `utils` and the server packages. It owns the HTTP vocabulary, the [`HttpBaseResponse`](./http-core/helpers/response) class, the [query helpers](./http-core/helpers/requests), and the [error classes](./http-core/helpers/errors), so a status code, a JSON response, or a thrown error has one definition across every runtime. Adding a runtime package means adding a line to the diagram above, not a new set of response and error types.
+`http-core` is the layer between `utils` and the server packages. It owns the HTTP vocabulary, the [`HttpBaseResponse`](./http-core/helpers/response) class, the [query helpers](./http-core/helpers/requests), and the [error classes](./http-core/errors), so a status code, a JSON response, or a thrown error has one definition across every runtime. Adding a runtime package means adding a line to the diagram above, not a new set of response and error types.
 
 Both server packages re-export **every** `http-core` export from their own root, so an application installs one package and imports everything from it. `http-core` is published and documented for the rarer case of building your own server wrapper.
 

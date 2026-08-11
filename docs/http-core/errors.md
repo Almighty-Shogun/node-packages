@@ -6,7 +6,7 @@ Each constructor takes the values that describe the failure and builds the messa
 
 ## MissingParameterError
 
-Thrown by the [request helpers](./requests) when a required parameter is absent, meaning no fallback was passed and the query string has no such key. It carries the parameter name, so a handler can answer `400 Bad Request` naming the field without parsing the message.
+Thrown by the [request helpers](./helpers/requests) when a required parameter is absent, meaning no fallback was passed and the query string has no such key. It carries the parameter name, so a handler can answer `400 Bad Request` naming the field without parsing the message.
 
 ```ts
 import { MissingParameterError } from '@almighty-shogun/http-core';
@@ -26,7 +26,7 @@ declare class MissingParameterError extends Error {
 
 ## InvalidParameterError
 
-Thrown by the [request helpers](./requests) when a required parameter is present but cannot be parsed as the requested type. It carries the parameter name and a description of what was expected, so a handler can explain the rejection precisely.
+Thrown by the [request helpers](./helpers/requests) when a required parameter is present but cannot be parsed as the requested type. It carries the parameter name and a description of what was expected, so a handler can explain the rejection precisely.
 
 ```ts
 import { InvalidParameterError } from '@almighty-shogun/http-core';
@@ -140,6 +140,24 @@ declare class ConflictingRoutePathsError extends Error {
     readonly incoming: string;
 
     constructor(existing: string, incoming: string);
+}
+```
+
+## InvalidJsonBodyError
+
+Thrown by [`HttpBaseResponse.json()`](./helpers/response) when the body cannot be serialized, which usually means it contains a circular reference or a value `JSON.stringify()` refuses. The `TypeError` that `JSON.stringify()` threw is kept as the error's `cause`, so the underlying reason is not lost.
+
+```ts
+import { InvalidJsonBodyError } from '@almighty-shogun/http-core';
+
+throw new InvalidJsonBodyError(error);
+```
+
+### Type signature
+
+```ts
+declare class InvalidJsonBodyError extends Error {
+    constructor(cause: unknown);
 }
 ```
 

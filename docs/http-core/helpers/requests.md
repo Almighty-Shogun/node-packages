@@ -2,7 +2,7 @@
 
 Typed readers for a request's query string. Each takes the `Request`, the parameter name, and an optional fallback, parses the raw string, and hands back a usable value.
 
-Omitting `fallback` makes the parameter **required**: a missing or unparseable value throws instead of returning a placeholder, a [`MissingParameterError`](./errors#missingparametererror) or an [`InvalidParameterError`](./errors#invalidparametererror) respectively.
+Omitting `fallback` makes the parameter **required**: a missing or unparseable value throws instead of returning a placeholder, a [`MissingParameterError`](../errors#missingparametererror) or an [`InvalidParameterError`](../errors#invalidparametererror) respectively.
 
 ## queryString
 
@@ -143,7 +143,7 @@ declare function queryList(
 
 Reads the same shapes as [`queryList()`](#querylist) and parses every value as a number, so `?id=1,2&id=3` gives `[1, 2, 3]`. Splitting, trimming, and dropping empty values all work identically, which means `?id=1,%202,,3` gives the same result.
 
-A value that is not a finite number is treated as an unparseable parameter: the fallback is returned when there is one, and an [`InvalidParameterError`](./errors#invalidparametererror) is thrown when there is not. The list is never returned half-parsed.
+A value that is not a finite number is treated as an unparseable parameter: the fallback is returned when there is one, and an [`InvalidParameterError`](../errors#invalidparametererror) is thrown when there is not. The list is never returned half-parsed.
 
 ```ts
 import { queryNumericList } from '@almighty-shogun/http-core';

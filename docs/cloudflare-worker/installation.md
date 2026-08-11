@@ -34,7 +34,7 @@ import { createWorker } from '@almighty-shogun/cloudflare-worker';
 
 ## Re-exported from HTTP Core
 
-Every export of `http-core` is available from this package, so a route file needs one import even when it mixes a route definition, a query helper, and an error class. That covers the [query helpers](../http-core/helpers/requests#queryinteger), the [error classes](../http-core/helpers/errors#missingparametererror), [`HttpStatus`](../http-core/types#httpstatus), [`HttpMethod`](../http-core/types#httpmethod), and the rest of the shared vocabulary. They are documented on the `http-core` pages, and importing them from there works too if you prefer.
+Every export of `http-core` is available from this package, so a route file needs one import even when it mixes a route definition, a query helper, and an error class. That covers the [query helpers](../http-core/helpers/requests#queryinteger), the [error classes](../http-core/errors#missingparametererror), [`HttpStatus`](../http-core/types#httpstatus), [`HttpMethod`](../http-core/types#httpmethod), and the rest of the shared vocabulary. They are documented on the `http-core` pages, and importing them from there works too if you prefer.
 
 ## Requirements
 

@@ -3,6 +3,7 @@ export { default as DuplicateRouteError } from './DuplicateRouteError';
 export { default as EmptyRouteCollectionError } from './EmptyRouteCollectionError';
 export { default as EmptyRouteExportError } from './EmptyRouteExportError';
 export { default as InvalidHandlerResultError } from './InvalidHandlerResultError';
+export { default as InvalidJsonBodyError } from './InvalidJsonBodyError';
 export { default as InvalidParameterError } from './InvalidParameterError';
 export { default as InvalidRouteCollectionError } from './InvalidRouteCollectionError';
 export { default as MissingParameterError } from './MissingParameterError';

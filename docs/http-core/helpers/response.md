@@ -76,7 +76,7 @@ Use the named status helpers when the status should be fixed by the method name:
 
 ## Failure handling
 
-`json()` serializes the body with `JSON.stringify()`. When serialization fails, for example because the value contains circular references or unsupported values, it throws a `TypeError` with the original error as the cause.
+`json()` serializes the body with `JSON.stringify()`. When serialization fails, for example because the value contains circular references or unsupported values, it throws an [`InvalidJsonBodyError`](../errors#invalidjsonbodyerror) carrying the original `TypeError` as its cause.
 
 ## Extending
 
@@ -94,7 +94,6 @@ A subclass inherits every factory above, and those inherited methods keep return
 - [ImageOptions](../types#imageoptions)
 - [NullableOrUndefinable](../../utils/types#nullableorundefinable)
 - [RedirectOptions](../types#redirectoptions)
-- [Undefinable](../../utils/types#undefinable)
 
 ## Type signature
 
