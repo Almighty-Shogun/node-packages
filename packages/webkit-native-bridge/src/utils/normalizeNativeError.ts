@@ -1,9 +1,9 @@
 import type { BridgeError } from '../types';
-import { createNativeError } from './errorFactories';
+import createNativeError from './createNativeError';
 import type { Nullable } from '@almighty-shogun/utils';
 import { DEFAULT_NATIVE_ERROR_CODE } from '../constants';
 
-export function normalizeNativeError<TCode extends string = string, TDetails = unknown>(
+export default function <TCode extends string = string, TDetails = unknown>(
     error: unknown,
     fallbackMessage: Nullable<string>
 ): BridgeError<TCode, TDetails> {

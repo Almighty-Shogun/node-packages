@@ -1,25 +1,26 @@
 import type { Undefinable } from '@almighty-shogun/utils';
-import { createTransportError } from './utils/errorFactories';
-import { normalizeNativeError } from './utils/normalizeNativeError';
 import { NativeBridgeDisposedError, NativeBridgeUnavailableError } from './errors';
 import { DEFAULT_EVENT_NAME, DEFAULT_HANDLER_NAME, DEFAULT_REQUEST_TIMEOUT } from './constants';
-import { createRequestId, encodeRequestBody, getDefaultWindow } from './utils/nativeBridgeRuntime';
+import { createRequestId, createTransportError, encodeRequestBody, getDefaultWindow, normalizeNativeError } from './utils';
 
 import type {
     BridgeResponse,
     NativeBridge,
-    NativeBridgeMessageHandler,
     NativeBridgeOptions,
-    NativeBridgePendingRequest,
     NativeBridgeRequestMap,
     NativeBridgeWindow,
-    NativeRequestBody,
     NativeRequestOptions,
     NativeRequestResult,
     NativeResponseEventDetail
 } from './types';
 
-export function createNativeBridge<
+import type {
+    NativeBridgeMessageHandler,
+    NativeBridgePendingRequest,
+    NativeRequestBody
+} from './types/nativeBridge';
+
+export default function <
     TRequests extends NativeBridgeRequestMap = Record<never, never>,
     TCommands extends string = never
 >(options: NativeBridgeOptions = {}): NativeBridge<TRequests, TCommands> {
@@ -188,7 +189,10 @@ export function createNativeBridge<
                     ? createTransportError('UNAVAILABLE', error.message, { cause: error })
                     : error instanceof NativeBridgeDisposedError
                         ? createTransportError('DISPOSED', error.message, { cause: error })
-                        : createTransportError('UNKNOWN', error instanceof Error ? error.message : 'Unknown native bridge error.', { cause: error });
+                        : createTransportError(
+                            'UNKNOWN',
+                            error instanceof Error ? error.message : 'Unknown native bridge error.', { cause: error }
+                        );
 
                 resolve({
                     ok: false,
