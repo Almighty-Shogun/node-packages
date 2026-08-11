@@ -6,9 +6,10 @@ The package is useful when a Web UI is embedded in a native application and need
 
 ## Categories
 
-- [Functions](./functions/createNativeBridge) &mdash; bridge creation, response normalization, and error helpers.
-- [Classes](./classes/NativeBridgeError) &mdash; runtime errors for unavailable and disposed bridge states.
-- [Types](./types) &mdash; bridge responses, request maps, method groups, request bodies, response bodies, and event details.
+- [Bridge](./functions/createNativeBridge) &mdash; [`createNativeBridge`](./functions/createNativeBridge) creates the typed bridge.
+- [Utilities](./functions/normalizeBridgeResponse) &mdash; [`normalizeBridgeResponse`](./functions/normalizeBridgeResponse) and [`mapBridgeError`](./functions/mapBridgeError) flatten a response into one shape, and [`isNativeError`](./functions/isNativeError), [`isTransportError`](./functions/isTransportError), and [`getErrorDetailsAs`](./functions/getErrorDetailsAs) inspect a failure.
+- [Errors](./errors) &mdash; runtime errors for unavailable and disposed bridge states.
+- [Types](./types) &mdash; bridge responses, request maps, transport error codes, bridge and request options, and event details.
 
 ## Dependencies
 
