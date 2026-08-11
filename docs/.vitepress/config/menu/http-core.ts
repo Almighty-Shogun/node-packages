@@ -6,7 +6,8 @@ export const httpCore: DefaultTheme.SidebarItem[] = [
         items: [
             { text: 'Introduction', link: '/http-core/' },
             { text: 'Installation', link: '/http-core/installation' },
-            { text: 'Types', link: '/http-core/types' }
+            { text: 'Types', link: '/http-core/types' },
+            { text: 'Errors', link: '/http-core/errors' }
         ]
     },
     {
@@ -14,8 +15,7 @@ export const httpCore: DefaultTheme.SidebarItem[] = [
         collapsed: false,
         items: [
             { text: 'Response', link: '/http-core/helpers/response' },
-            { text: 'Request', link: '/http-core/helpers/requests' },
-            { text: 'Errors', link: '/http-core/helpers/errors' }
+            { text: 'Request', link: '/http-core/helpers/requests' }
         ]
     }
 ];

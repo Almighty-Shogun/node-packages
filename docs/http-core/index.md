@@ -8,7 +8,7 @@ Most applications never install this package directly. Installing a server packa
 
 - [Response](./helpers/response) &mdash; `HttpBaseResponse` factory methods create responses for JSON, HTML, text, images, redirects, and common status responses such as not found and too many requests.
 - [Requests](./helpers/requests) &mdash; `queryString`, `queryInteger`, `queryNumber`, `queryBoolean`, `queryDate`, `queryList`, and `queryNumericList` read a typed value out of a request's query string, falling back when it is missing or unparseable and throwing when no fallback is given.
-- [Errors](./helpers/errors) &mdash; one class per failure, each extending `Error` and carrying the values that caused it, so a caller catches exactly the case it wants to handle.
+- [Errors](./errors) &mdash; one class per failure, each extending `Error` and carrying the values that caused it, so a caller catches exactly the case it wants to handle.
 - [Types](./types) &mdash; HTTP method and status constants, the image and redirect content unions, and the four option shapes the factory methods accept.
 
 ## Dependencies
