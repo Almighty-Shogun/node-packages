@@ -29,7 +29,11 @@ yarn add @almighty-shogun/utils luxon
 All public APIs are available from the package root.
 
 ```ts
-import { formatDate, getToday, setDarkTheme } from '@almighty-shogun/utils';
+import {
+    formatDate,
+    getToday,
+    setDarkTheme
+} from '@almighty-shogun/utils';
 ```
 
 ## Requirements

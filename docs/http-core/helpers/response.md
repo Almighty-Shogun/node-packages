@@ -6,24 +6,22 @@ returns: An `HttpBaseResponse` wrapper that can be returned by route handlers an
 
 # HttpBaseResponse
 
-Response wrapper used by route handlers. It centralizes native `Response` creation, exposes `status` and `headers`, and provides static factory methods for common response shapes.
+Response wrapper shared by the server packages. It centralizes native `Response` creation, exposes `status` and `headers`, and provides static factory methods for common response shapes.
 
-Route handlers return this wrapper. Compiled routes call `unwrap()` before handing the native `Response` to Bun. The constructor is `protected`, so application code never calls `new HttpBaseResponse()`; instances come from the static factory methods below, reached either through the class itself or through the `response` argument passed to [`defineRoute()`](../routing/defineRoute) handlers.
+Route handlers return this wrapper. The server unwraps it before handing the native `Response` to the runtime. The constructor is `protected`, so application code never calls `new HttpBaseResponse()`; instances come from the static factory methods below, reached either through the class itself or through the `response` argument passed to route handlers.
 
-Every factory takes the response body first and an optional options object second. Which option fields are accepted depends on the method, and the four option shapes are listed in the type signature at the end of this page.
-
-`json()` serializes the body with `JSON.stringify()`. When serialization fails, for example because the value contains circular references or unsupported values, it throws a `TypeError` with the original error as the cause.
+Most factories take the response body first and an optional options object second. Which option fields are accepted depends on the method.
 
 ## Importing
 
 ```ts
-import { HttpBaseResponse } from '@almighty-shogun/bun-server';
+import { HttpBaseResponse } from '@almighty-shogun/http-core';
 ```
 
 ## Usage
 
 ```ts
-import { HttpBaseResponse, HttpStatus } from '@almighty-shogun/bun-server';
+import { HttpBaseResponse, HttpStatus } from '@almighty-shogun/http-core';
 
 const json = HttpBaseResponse.json({ ok: true });
 const custom = HttpBaseResponse.custom('Accepted', HttpStatus.Accepted, {
@@ -51,26 +49,51 @@ const native = json.unwrap();
 Use `custom()` when none of the named helpers fit. Its `status` argument is required because there is no safe default for an arbitrary response:
 
 ```ts
-import { HttpBaseResponse, HttpStatus } from '@almighty-shogun/bun-server';
+import { HttpBaseResponse, HttpStatus } from '@almighty-shogun/http-core';
 
 const response = HttpBaseResponse.custom('Locked', HttpStatus.Locked, {
     contentType: 'text/plain; charset=utf-8'
 });
 ```
 
-Use `json()`, `html()`, and `text()` when the content type is known from the method. They accept `CoreOptions`, so callers can override `status` and `headers`.
+Use `json()`, `html()`, and `text()` when the content type is known from the method. They accept [`CoreOptions`](../types#coreoptions), so callers can override `status` and `headers`.
 
-Use `file()` for a Bun file path or an existing `Blob`. When the body is a string, the method calls `Bun.file()`. Use `image()` when the content type should be restricted to [`ImageContentType`](../types#imagecontenttype).
+Use `image()` when the body is image data. It accepts [`ImageOptions`](../types#imageoptions), whose `contentType` is restricted to [`ImageContentType`](../types#imagecontenttype).
 
-Use the named status helpers when the status should be fixed by the method name: `ok()`, `created()`, `accepted()`, `badRequest()`, `unauthorized()`, `forbidden()`, `notFound()`, `notAllowed()`, `conflict()`, `unprocessableEntity()`, and `internalServerError()`. These methods accept `FixedStatusOptions`, so they allow headers and content type but not a status override.
+```ts
+import { HttpBaseResponse } from '@almighty-shogun/http-core';
 
-`noContent()` always returns `204 No Content` and only accepts a `null` body. `redirect()` sets the `Location` header and defaults to `302 Found`; its status is restricted to [`RedirectHttpStatus`](../types#redirecthttpstatus).
+const markup = '<svg xmlns="http://www.w3.org/2000/svg"/>';
+
+const chart = HttpBaseResponse.image(markup, {
+    contentType: 'image/svg+xml'
+});
+```
+
+Use the named status helpers when the status should be fixed by the method name: `ok()`, `created()`, `accepted()`, `badRequest()`, `unauthorized()`, `forbidden()`, `notFound()`, `notAllowed()`, `conflict()`, `unprocessableEntity()`, `tooManyRequests()`, and `internalServerError()`. These methods accept [`FixedStatusOptions`](../types#fixedstatusoptions), so they allow headers and content type but not a status override.
+
+`noContent()` always returns `204 No Content` and `notModified()` always returns `304 Not Modified`. Neither carries a body, so they take options only and their first argument is the options object rather than a body. `redirect()` sets the `Location` header and defaults to `302 Found`; it accepts [`RedirectOptions`](../types#redirectoptions), whose status is restricted to [`RedirectHttpStatus`](../types#redirecthttpstatus).
+
+## Failure handling
+
+`json()` serializes the body with `JSON.stringify()`. When serialization fails, for example because the value contains circular references or unsupported values, it throws a `TypeError` with the original error as the cause.
+
+## Extending
+
+The constructor is `protected` rather than private, so a server package can subclass the class to add a runtime-specific factory. [`@almighty-shogun/bun-server`](../../bun-server/responses/HttpResponse) does this in its [`HttpResponse`](../../bun-server/responses/HttpResponse) to add `file()`, which resolves a path through `Bun.file()`.
+
+A subclass inherits every factory above, and those inherited methods keep returning the `http-core` class rather than the subclass. That is deliberate: it is what lets a server check a handler result with a single `instanceof` regardless of which factory produced it.
 
 <FrontmatterDocs/>
 
 ## Uses
 
+- [CoreOptions](../types#coreoptions)
+- [FixedStatusOptions](../types#fixedstatusoptions)
+- [HttpStatus](../types#httpstatus)
+- [ImageOptions](../types#imageoptions)
 - [NullableOrUndefinable](../../utils/types#nullableorundefinable)
+- [RedirectOptions](../types#redirectoptions)
 - [Undefinable](../../utils/types#undefinable)
 
 ## Type signature
@@ -109,13 +132,8 @@ declare class HttpBaseResponse {
         options?: NullableOrUndefinable<CoreOptions>
     ): HttpBaseResponse;
 
-    static file(
-        body?: NullableOrUndefinable<string | Blob>,
-        options?: NullableOrUndefinable<BaseOptions>
-    ): HttpBaseResponse;
-
     static image(
-        body?: NullableOrUndefinable<string | Blob>,
+        body?: NullableOrUndefinable<BodyInit>,
         options?: NullableOrUndefinable<ImageOptions>
     ): HttpBaseResponse;
 
@@ -135,7 +153,10 @@ declare class HttpBaseResponse {
     ): HttpBaseResponse;
 
     static noContent(
-        body?: null,
+        options?: NullableOrUndefinable<CoreOptions>
+    ): HttpBaseResponse;
+
+    static notModified(
         options?: NullableOrUndefinable<CoreOptions>
     ): HttpBaseResponse;
 
@@ -174,6 +195,11 @@ declare class HttpBaseResponse {
         options?: NullableOrUndefinable<FixedStatusOptions>
     ): HttpBaseResponse;
 
+    static tooManyRequests(
+        body?: NullableOrUndefinable<BodyInit>,
+        options?: NullableOrUndefinable<FixedStatusOptions>
+    ): HttpBaseResponse;
+
     static internalServerError(
         body?: NullableOrUndefinable<BodyInit>,
         options?: NullableOrUndefinable<FixedStatusOptions>
@@ -183,28 +209,15 @@ declare class HttpBaseResponse {
         body?: NullableOrUndefinable<string | URL>,
         options?: NullableOrUndefinable<RedirectOptions>
     ): HttpBaseResponse;
+
+    protected static fixed(
+        body: NullableOrUndefinable<BodyInit>,
+        status: HttpStatus,
+        options: NullableOrUndefinable<FixedStatusOptions>
+    ): HttpBaseResponse;
+
+    protected static resolveCoreOptions(
+        options: NullableOrUndefinable<CoreOptions>
+    ): Required<CoreOptions>;
 }
-
-type CoreOptions = {
-    status?: Undefinable<HttpStatus>;
-    headers?: Undefinable<HeadersInit>;
-};
-
-type BaseOptions = CoreOptions & {
-    contentType?: Undefinable<string>;
-};
-
-type ImageOptions = CoreOptions & {
-    contentType?: Undefinable<ImageContentType>;
-};
-
-type RedirectOptions = {
-    status?: Undefinable<RedirectHttpStatus>;
-    headers?: Undefinable<HeadersInit>;
-};
-
-type FixedStatusOptions = {
-    headers?: Undefinable<HeadersInit>;
-    contentType?: Undefinable<string>;
-};
 ```

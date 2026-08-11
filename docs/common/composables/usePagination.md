@@ -59,7 +59,9 @@ watch([page, perPage], async () => {
     const newPage = page.value;
     const newPerPage = perPage.value;
 
-    const response = await fetch(`/..?page=${newPage}&limit=${newPerPage}`);
+    const response = await fetch(
+        `/..?page=${newPage}&limit=${newPerPage}`
+    );
     const result = await response.json();
 
     setTotal(result.total);

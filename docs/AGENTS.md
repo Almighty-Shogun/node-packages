@@ -2,6 +2,8 @@
 
 Use this file as the source of truth when creating or updating documentation in this repository.
 
+`docs/AGENTS.md` and `docs/CLAUDE.md` are the same document, differing only where they name themselves. Any change to one must be made to the other in the same commit, or they drift apart. The same rule applies to the root `AGENTS.md` and `CLAUDE.md`.
+
 ## Objective
 
 Maintain complete, consistent VitePress documentation for every public package export.
@@ -9,7 +11,7 @@ Maintain complete, consistent VitePress documentation for every public package e
 The documentation must:
 
 - Document only public exports.
-- Give every exported function, class, composable, or prototype method its own page.
+- Give every exported function, class, composable, or prototype method its own page, except in `http-core`; see the exception below.
 - Document all public types for a package in one `docs/<package>/types.md` page. Do not create one page per type.
 - Explain behavior in enough depth that a reader can use the export without reading its implementation.
 - Include copy-paste-ready usage.
@@ -17,6 +19,19 @@ The documentation must:
 - Follow the project-root `.editorconfig` for documentation files and all code examples.
 
 Do not combine unrelated runtime exports into one large API page.
+
+### The `http-core` Exception
+
+`http-core` groups two categories onto a single page each under `docs/http-core/helpers/` instead of one page per export:
+
+- `requests.md` &mdash; every `query*` helper
+- `errors.md` &mdash; every error class
+
+Each export still gets its own `##` heading, description, usage example, and a `### Type signature` subsection holding its declaration. Those subsections would crowd the page outline, so neither page sets `outline: deep`.
+
+This is deliberate and applies to `http-core` alone: the exports are small, highly repetitive, and share one contract that reads better stated once than repeated fifteen times. Do not split them back into one page per export, and do not extend this grouping to another package.
+
+`response.md` is not grouped. It documents `HttpBaseResponse` on its own and follows the normal API page schema below.
 
 ## Formatting And Code Style
 
@@ -530,7 +545,7 @@ type UsePagination = {
 
 Do not collapse structured declarations into unreadable single lines.
 
-Code blocks must not scroll horizontally. Keep every line at or under 80 characters, wrapping declarations, imports, and examples as needed:
+Code blocks must not scroll horizontally. Keep every line at or under 75 characters, wrapping declarations, imports, and examples as needed. The rendered code column fits roughly 78 characters, so 75 leaves a margin. Shell commands are exempt, because breaking an install command across lines reads worse than letting it scroll:
 
 ```ts
 declare function useDataTable<T>(
@@ -613,7 +628,7 @@ Before finishing:
 6. Confirm `returns` members match the returned object exactly.
 7. Confirm examples import the documented API and would compile.
 8. Confirm multiple-file or alternative examples use code groups with realistic filename labels.
-9. Confirm no code-block line exceeds 80 characters and no page has back-to-back code blocks.
+9. Confirm no code-block line exceeds 75 characters and no page has back-to-back code blocks.
 10. Search for duplicated "Optional" and "Defaults to" wording.
 11. Type check and build:
 
