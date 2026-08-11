@@ -1,6 +1,5 @@
-export { createNativeBridge } from './createNativeBridge';
-export { mapBridgeError, normalizeBridgeResponse } from './normalizeBridgeResponse';
-export { getErrorDetailsAs, isNativeError, isTransportError } from './utils/helper';
+export { default as createNativeBridge } from './bridge';
+export { getErrorDetailsAs, isNativeError, isTransportError, mapBridgeError, normalizeBridgeResponse } from './utils';
 
 export * from './types';
 export * from './errors';

@@ -103,16 +103,6 @@ type NativeTransportErrorDetails = {
 };
 ```
 
-## NativeBridgeMessageHandler
-
-WebKit message handler object looked up under `window.webkit.messageHandlers[handlerName]`. The bridge sends encoded string messages to native code through `postMessage()`.
-
-```ts
-type NativeBridgeMessageHandler = {
-    postMessage(message: string): void;
-};
-```
-
 ## NativeBridgeRequestMap
 
 Contract map used to type native request method names, request bodies, response bodies, and optional native error metadata.
@@ -124,76 +114,6 @@ type NativeBridgeRequestMap = Record<string, {
     errorCode?: Undefinable<string>;
     errorDetails?: unknown;
 }>;
-```
-
-## NativeRequestBody
-
-Extracts the request body type for one method from a [`NativeBridgeRequestMap`](./types#nativebridgerequestmap). It is used by [`NativeBridge.request()`](./types#nativebridge) overloads to require bodies only for methods that define them.
-
-```ts
-type NativeRequestBody<
-    TRequests extends NativeBridgeRequestMap,
-    TMethod extends keyof TRequests
-> = TRequests[TMethod]['body'];
-```
-
-## NativeResponseBody
-
-Extracts the response payload type for one method from a [`NativeBridgeRequestMap`](./types#nativebridgerequestmap).
-
-```ts
-type NativeResponseBody<
-    TRequests extends NativeBridgeRequestMap,
-    TMethod extends keyof TRequests
-> = TRequests[TMethod]['response'];
-```
-
-## NativeErrorCode
-
-Extracts the native error code union for one method. When the method contract does not provide an `errorCode`, the type falls back to `string`.
-
-```ts
-type NativeErrorCode<
-    TRequests extends NativeBridgeRequestMap,
-    TMethod extends keyof TRequests
-> = TRequests[TMethod] extends {
-    errorCode?: Undefinable<infer TErrorCode extends string>
-} ? TErrorCode : string;
-```
-
-## NativeErrorDetails
-
-Extracts the native error details type for one method. When the method contract does not provide `errorDetails`, the type falls back to `unknown`.
-
-```ts
-type NativeErrorDetails<
-    TRequests extends NativeBridgeRequestMap,
-    TMethod extends keyof TRequests
-> = TRequests[TMethod] extends {
-    errorDetails?: Undefinable<infer TErrorDetails>
-} ? TErrorDetails : unknown;
-```
-
-## BridgeErrorCode
-
-Every error code a request can resolve with: the codes the method contract declares, plus the transport codes the bridge itself produces. This is the `code` you read off a failed [`BridgeResponse`](./types#bridgeresponse), and the reason a `switch` over it has to handle `TIMEOUT`, `UNAVAILABLE`, `DISPOSED`, and `UNKNOWN` alongside your own.
-
-```ts
-type BridgeErrorCode<
-    TRequests extends NativeBridgeRequestMap,
-    TMethod extends keyof TRequests
-> = NativeErrorCode<TRequests, TMethod> | NativeTransportErrorCode;
-```
-
-## BridgeErrorDetails
-
-The matching details union: whatever the method contract declares under `errorDetails`, plus [`NativeTransportErrorDetails`](./types#nativetransporterrordetails) for transport failures. Narrow with [`isNativeError`](./functions/isNativeError) before treating the details as your own shape.
-
-```ts
-type BridgeErrorDetails<
-    TRequests extends NativeBridgeRequestMap,
-    TMethod extends keyof TRequests
-> = NativeErrorDetails<TRequests, TMethod> | NativeTransportErrorDetails;
 ```
 
 ## NativeRequestResult
@@ -209,29 +129,6 @@ type NativeRequestResult<
     BridgeErrorCode<TRequests, TMethod>,
     BridgeErrorDetails<TRequests, TMethod>
 >;
-```
-
-## NativeMethodsWithoutBody
-
-Builds a union of request method names whose body type is `void` or `undefined`. [`NativeBridge.request()`](./types#nativebridge) uses it to make the body argument optional for those methods.
-
-```ts
-type NativeMethodsWithoutBody<TRequests extends NativeBridgeRequestMap> = {
-    [TMethod in keyof TRequests]:
-    [NativeRequestBody<TRequests, TMethod>] extends [void]
-        ? TMethod
-        : [NativeRequestBody<TRequests, TMethod>] extends [undefined]
-            ? TMethod : never
-}[keyof TRequests];
-```
-
-## NativeMethodsWithBody
-
-Builds a union of request method names that require a body by excluding methods covered by [`NativeMethodsWithoutBody`](./types#nativemethodswithoutbody).
-
-```ts
-type NativeMethodsWithBody<TRequests extends NativeBridgeRequestMap> =
-    Exclude<keyof TRequests, NativeMethodsWithoutBody<TRequests>>;
 ```
 
 ## NativeResponseEventDetail
@@ -282,18 +179,6 @@ type NativeBridgeOptions = {
     handlerName?: Undefinable<string>;
     requestTimeout?: NullableOrUndefinable<number>;
     window?: Undefinable<NativeBridgeWindow>;
-};
-```
-
-## NativeBridgePendingRequest
-
-Internal pending-request state stored while a native request is waiting for a response, timeout, or bridge disposal. It is exported for tests and adapters that need to model bridge internals.
-
-```ts
-type NativeBridgePendingRequest = {
-    method: string;
-    resolve(value: BridgeResponse<unknown>): void;
-    timeoutId: Nullable<ReturnType<typeof setTimeout>>;
 };
 ```
 

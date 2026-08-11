@@ -10,21 +10,11 @@ export type {
 } from './bridgeResponse';
 
 export type {
-    BridgeErrorCode,
-    BridgeErrorDetails,
     NativeBridge,
     NativeBridgeOptions,
     NativeBridgeRequestMap,
     NativeBridgeWindow,
-    NativeErrorCode,
-    NativeErrorDetails,
-    NativeMethodsWithBody,
-    NativeMethodsWithoutBody,
-    NativeRequestBody,
     NativeRequestOptions,
     NativeRequestResult,
-    NativeResponseBody,
-    NativeResponseEventDetail,
-    NativeBridgePendingRequest,
-    NativeBridgeMessageHandler
+    NativeResponseEventDetail
 } from './nativeBridge';

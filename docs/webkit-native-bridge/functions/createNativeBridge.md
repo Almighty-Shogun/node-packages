@@ -208,7 +208,7 @@ Most failures arrive as a resolved failure response, but not all of them, and th
 
 - **Timeout, missing handler, or disposal while in flight** resolve to a failure with a [`NativeTransportErrorCode`](../types#nativetransporterrorcode) of `TIMEOUT`, `UNAVAILABLE`, or `DISPOSED`. These never throw.
 - **Calling `request()` on an already-disposed bridge throws** `NativeBridgeDisposedError` synchronously, before the promise is created. Guard with `isAvailable()` and your own disposal flag if a call can outlive `dispose()`.
-- **`call()` and `postMessage()` always throw** rather than resolving, since they have no response to carry an error. They raise `NativeBridgeDisposedError` after disposal and [`NativeBridgeUnavailableError`](../classes/NativeBridgeUnavailableError) when the configured handler is missing.
+- **`call()` and `postMessage()` always throw** rather than resolving, since they have no response to carry an error. They raise [`NativeBridgeDisposedError`](../errors#nativebridgedisposederror) after disposal and [`NativeBridgeUnavailableError`](../errors#nativebridgeunavailableerror) when the configured handler is missing.
 
 Errors reported by native code resolve as failures with `type: 'native'`, which [`isNativeError`](./isNativeError) narrows.
 
@@ -216,8 +216,8 @@ Errors reported by native code resolve as failures with `type: 'native'`, which 
 
 ## Uses
 
-- [NullableOrUndefinable](../../utils/types#nullableorundefinable)
-- [Undefinable](../../utils/types#undefinable)
+- [NativeBridgeDisposedError](../errors#nativebridgedisposederror)
+- [NativeBridgeUnavailableError](../errors#nativebridgeunavailableerror)
 
 ## Type signature
 
