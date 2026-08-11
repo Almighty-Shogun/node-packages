@@ -1,6 +1,5 @@
-import getVueI18n from './internal/getVueI18n';
 import type { Nullable, Undefinable } from '@almighty-shogun/utils';
-import type { I18n, Translate, TranslateExists, TranslationParams } from './internal/types';
+import { getVueI18n, type I18n, type Translate, type TranslateExists, type TranslationParams } from './internal';
 
 type I18nMethod = 't' | 'te';
 

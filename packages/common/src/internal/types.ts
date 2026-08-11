@@ -1,8 +1,8 @@
 import type { ComponentPublicInstance } from 'vue';
 import type { HTMLTarget, Undefinable } from '@almighty-shogun/utils';
 
-export type ComponentElement = HTMLElement | ComponentPublicInstance;
 export type ComponentTarget = HTMLTarget | ComponentPublicInstance;
+export type ComponentElement = HTMLElement | ComponentPublicInstance;
 
 export type TranslationParams = Record<string, unknown> | (string | number)[];
 

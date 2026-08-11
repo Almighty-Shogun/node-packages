@@ -1,5 +1,5 @@
 import { unwrapTarget } from '../util';
-import type { ComponentTarget } from '../internal/types';
+import type { ComponentTarget } from '../internal';
 import { getCurrentScope, onScopeDispose, watch, type MaybeRefOrGetter } from 'vue';
 import type { Arrayable, Undefinable, NullableOrUndefinable } from '@almighty-shogun/utils';
 
