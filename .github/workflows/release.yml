@@ -41,7 +41,9 @@ jobs:
                   bun pm version --cwd packages/bun-server $RELEASE_VERSION --no-git-tag-version
                   bun pm version --cwd packages/cloudflare-worker $RELEASE_VERSION --no-git-tag-version
 
-                  sed -i 's/workspace:\*/${{ env.RELEASE_VERSION }}/g' packages/common/package.json packages/bun-server/package.json packages/cloudflare-worker/package.json
+                  for package in prototype-extensions utils http-core common webkit-native-bridge bun-server cloudflare-worker; do
+                      sed -i "s/workspace:\^/^$RELEASE_VERSION/g; s/workspace:\*/$RELEASE_VERSION/g" "packages/$package/package.json"
+                  done
 
             - name: 🔨 Build packages
               run: |
