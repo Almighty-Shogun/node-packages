@@ -40,7 +40,7 @@
         "CODEOWNERS"
     ],
     "dependencies": {
-        "@types/luxon": "^3.7.3",
+        "@types/luxon": "^3.7.5",
         "luxon": "^3.7.2"
     },
     "devDependencies": {
