@@ -25,6 +25,8 @@ Registers keyboard shortcuts on `window` or a custom target.
 
 Only the first matching hotkey runs, and the handler receives the original `KeyboardEvent`.
 
+When the default `window` target is used in a browser, `useHotKey` makes `document.body` focusable with `tabindex="-1"` if it does not already have a `tabindex`. This lets close flows return focus to the page after a dialog, command palette, or other focus-trapping UI closes.
+
 ## Importing
 
 ```ts
@@ -58,7 +60,7 @@ Every field of `UseHotKeyOptions` is optional, and the defaults live in the impl
 - `event` &mdash; `'keydown'` or `'keyup'`. Defaults to `'keydown'`.
 - `preventDefault` &mdash; calls `preventDefault()` on a match. Defaults to `true`.
 - `stopPropagation` &mdash; calls `stopPropagation()` on a match. Defaults to `false`.
-- `ignoreWhileTyping` &mdash; skips shortcuts that use neither Control nor Meta while focus sits in an input, textarea, select, or content-editable element. Defaults to `true`.
+- `ignoreWhileTyping` &mdash; skips shortcuts that use neither Control nor Meta while focus sits in an input, textarea, select, or content-editable element. `Escape` still matches so focused dialogs and command palettes can close themselves. Defaults to `true`.
 - `repeat` &mdash; allows auto-repeat keydown events to match. Defaults to `false`.
 
 <FrontmatterDocs/>

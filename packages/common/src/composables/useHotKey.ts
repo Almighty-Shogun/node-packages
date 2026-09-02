@@ -36,6 +36,14 @@ export default function (hotKeys: Arrayable<string>, handler: HotKeyHandler, opt
         return typeof window !== 'undefined' ? window : null;
     }
 
+    function prepareGlobalTarget(): void {
+        if (hasValue(target) || typeof document === 'undefined' || document.body.hasAttribute('tabindex')) {
+            return;
+        }
+
+        document.body.tabIndex = -1;
+    }
+
     function handleEvent(event: KeyboardEvent): void {
         if (enabled !== undefined && !toValue(enabled)) {
             return;
@@ -54,7 +62,7 @@ export default function (hotKeys: Arrayable<string>, handler: HotKeyHandler, opt
             const usesCtrl = hotKey.ctrl || (hotKey.mod && !apple);
             const usesMeta = hotKey.meta || (hotKey.mod && apple);
 
-            if (ignoreWhileTyping && !usesCtrl && !usesMeta && isEditable(event.target)) {
+            if (ignoreWhileTyping && hotKey.key !== 'escape' && !usesCtrl && !usesMeta && isEditable(event.target)) {
                 return;
             }
 
@@ -71,6 +79,8 @@ export default function (hotKeys: Arrayable<string>, handler: HotKeyHandler, opt
             return;
         }
     }
+
+    prepareGlobalTarget();
 
     return useEventListener(resolveTarget, event, handleEvent);
 }
