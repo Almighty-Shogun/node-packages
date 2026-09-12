@@ -3,9 +3,15 @@ name: 🚀 Release packages and docs
 on:
     release:
         types: [ released ]
+    workflow_dispatch:
+        inputs:
+            version:
+                description: Released tag to publish, for example 3.1.0
+                required: true
+                type: string
 
 env:
-    RELEASE_VERSION: ${{ github.event.release.tag_name }}
+    RELEASE_VERSION: ${{ github.event.release.tag_name || github.event.inputs.version }}
 
 permissions:
     contents: read
