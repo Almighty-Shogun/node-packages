@@ -18,58 +18,76 @@ jobs:
         name: 🚀 Publish to Registry
 
         steps:
-            - name: 👀 Checkout
-              uses: actions/checkout@v6
+            -   name: 🔒 Validate release version
+                run: |
+                    if [[ ! "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
+                        echo "::error::Invalid release version '$RELEASE_VERSION'; expected a semver like 1.2.3 or 1.2.3-beta.1."
+                        exit 1
+                    fi
 
-            - name: ⚙️ Setup node & Bun
-              uses: actions/setup-node@v6
-              with:
-                  node-version: '26'
-                  registry-url: https://registry.npmjs.org
-            - uses: oven-sh/setup-bun@v2
+            -   name: 👀 Checkout
+                uses: actions/checkout@v6
 
-            - name: 📦️ Install dependencies
-              run: bun install --frozen-lockfile
+            -   name: ⚙️ Setup node & Bun
+                uses: oven-sh/setup-bun@v2
 
-            - name: ✏️ Tag version
-              run: |
-                  bun pm version --cwd packages/prototype-extensions $RELEASE_VERSION --no-git-tag-version
-                  bun pm version --cwd packages/utils $RELEASE_VERSION --no-git-tag-version
-                  bun pm version --cwd packages/http-core $RELEASE_VERSION --no-git-tag-version
-                  bun pm version --cwd packages/common $RELEASE_VERSION --no-git-tag-version
-                  bun pm version --cwd packages/webkit-native-bridge $RELEASE_VERSION --no-git-tag-version
-                  bun pm version --cwd packages/bun-server $RELEASE_VERSION --no-git-tag-version
-                  bun pm version --cwd packages/cloudflare-worker $RELEASE_VERSION --no-git-tag-version
+            -   name: ✨ Setup node 25.x
+                uses: actions/setup-node@v6
+                with:
+                    node-version: '25.x'
+                    registry-url: https://registry.npmjs.org
 
-                  for package in prototype-extensions utils http-core common webkit-native-bridge bun-server cloudflare-worker; do
-                      sed -i "s/workspace:\^/^$RELEASE_VERSION/g; s/workspace:\*/$RELEASE_VERSION/g" "packages/$package/package.json"
-                  done
+            -   name: 📦️ Install dependencies
+                run: bun install --frozen-lockfile
 
-            - name: 🔨 Build packages
-              run: |
-                  bun --cwd packages/prototype-extensions build
-                  bun --cwd packages/utils build
-                  bun --cwd packages/http-core build
-                  bun --cwd packages/common build
-                  bun --cwd packages/webkit-native-bridge build
-                  bun --cwd packages/bun-server build
-                  bun --cwd packages/cloudflare-worker build
+            -   name: 🔍 Collect packages
+                run: |
+                    packages=()
 
-            - name: 🚀 Publish packages
-              run: |
-                  bun publish --cwd packages/prototype-extensions --access public
-                  bun publish --cwd packages/utils --access public
-                  bun publish --cwd packages/http-core --access public
-                  bun publish --cwd packages/common --access public
-                  bun publish --cwd packages/webkit-native-bridge --access public
-                  bun publish --cwd packages/bun-server --access public
-                  bun publish --cwd packages/cloudflare-worker --access public
-              env:
-                  NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
+                    for manifest in packages/*/package.json; do
+                        packages+=("$(basename "$(dirname "$manifest")")")
+                    done
+
+                    echo "::notice::Releasing ${packages[*]}"
+                    echo "PACKAGES=${packages[*]}" >> "$GITHUB_ENV"
+
+            -   name: ✏️ Tag version
+                run: |
+                    for package in $PACKAGES; do
+                        bun pm version --cwd packages/$package $RELEASE_VERSION --no-git-tag-version
+                        sed -i "s/workspace:\^/^$RELEASE_VERSION/g; s/workspace:\*/$RELEASE_VERSION/g" "packages/$package/package.json"
+                    done
+
+            -   name: 🔨 Build packages
+                run: |
+                    for package in $PACKAGES; do
+                        bun --cwd packages/$package build
+                    done
+
+            -   name: 🚀 Publish packages
+                run: |
+                    publish() {
+                        local dir="packages/$1"
+                        local name version
+                        name=$(node -p "require('./$dir/package.json').name")
+                        version=$(node -p "require('./$dir/package.json').version")
+
+                        if npm view "$name@$version" version >/dev/null 2>&1; then
+                            echo "::notice::$name@$version is already published, skipping."
+                            return 0
+                        fi
+
+                        (cd "$dir" && npm publish --access public)
+                    }
+
+                    for package in $PACKAGES; do
+                        publish "$package"
+                    done
 
     docs:
         runs-on: ubuntu-latest
         name: 🚀 Build and deploy documentation
+        needs: publish
 
         steps:
             -   name: 👀 Checkout
@@ -90,4 +108,4 @@ jobs:
                     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
                     apiToken: ${{ secrets.CLOUDFLARE_ACCOUNT_TOKEN }}
                     gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-                    wranglerVersion: "4.69.0"
+                    wranglerVersion: "4.127.1"
