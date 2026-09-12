@@ -1,15 +1,48 @@
+# IDE
 .idea/*
+.fleet/*
+.vscode/*
+*.iml
+
+# Tools
+.ruimte/
+
+# VS Code extensions
+!.vscode/extensions.json
+
+# Project branding
 !.idea/.name
 !.idea/icon.svg
 
-docs/.agents
-docs/.codex
+# Dependencies
+node_modules/
+vendor/
 
-dist
-**/dist
+# Build output
+build/
+dist/
+out/
+target/
 
-node_modules
-**/node_modules
+# Environment
+.env
+.env.*
+!.env.example
 
-test
-**/test
+# AI
+.claude/
+.codex/
+.agents/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
