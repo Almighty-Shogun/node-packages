@@ -43,6 +43,7 @@ export const common: DefaultTheme.SidebarItem[] = [
         text: 'Router',
         collapsed: false,
         items: [
+            { text: 'getRouteName', link: '/common/router/getRouteName' },
             { text: 'useIsRoute', link: '/common/router/useIsRoute' },
             { text: 'useRouteMeta', link: '/common/router/useRouteMeta' },
             { text: 'useRouteName', link: '/common/router/useRouteName' },

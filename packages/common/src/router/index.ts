@@ -1,3 +1,4 @@
+export { default as getRouteName } from './getRouteName';
 export { default as useIsRoute } from './useIsRoute';
 export { default as useRouteMeta } from './useRouteMeta';
 export { default as useRouteName } from './useRouteName';
