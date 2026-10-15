@@ -1,0 +1,56 @@
+{
+    "name": "@almighty-shogun/vite-preset",
+    "description": "CSS Modules class name generation for Vite projects.",
+    "version": "0.0.0",
+    "type": "module",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsdown",
+        "typecheck": "tsc --noEmit",
+        "dev": "tsdown --watch --no-clean"
+    },
+    "publishConfig": {
+        "access": "public",
+        "provenance": true
+    },
+    "author": {
+        "name": "Almighty-Shogun",
+        "email": "alm1ghtyshogun1998@gmail.com",
+        "url": "https://shogun.ms"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Almighty-Shogun/node-packages.git",
+        "directory": "packages/vite-preset"
+    },
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.mts",
+    "typings": "./dist/index.d.mts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.mts",
+            "default": "./dist/index.mjs"
+        }
+    },
+    "files": [
+        "src",
+        "dist",
+        "LICENSE",
+        "CODEOWNERS"
+    ],
+    "dependencies": {
+        "change-case": "^5.4.4",
+        "css-class-generator": "^2.0.0",
+        "vite-css-modules": "^1.16.0"
+    },
+    "peerDependencies": {
+        "vite": "^8.3.4"
+    },
+    "devDependencies": {
+        "@types/node": "^26.4.0",
+        "tsdown": "^0.23.1",
+        "typescript": "^5.9.3",
+        "vite": "^8.3.4"
+    }
+}

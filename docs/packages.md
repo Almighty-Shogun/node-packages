@@ -4,9 +4,9 @@ outline: deep
 
 # Packages
 
-Seven packages, maintained in one Bun workspace. They share a version number and are published together, but each is installed on its own, covers a single concern, and ships as ESM-only TypeScript. There is no meta-package that pulls the others in, though a package brings its own dependencies with it: [`@almighty-shogun/common`](./common/) installs [`@almighty-shogun/utils`](./utils/), and the two server packages install [`@almighty-shogun/http-core`](./http-core/).
+Eight packages, maintained in one Bun workspace. They share a version number and are published together, but each is installed on its own, covers a single concern, and ships as ESM-only TypeScript. There is no meta-package that pulls the others in, though a package brings its own dependencies with it: [`@almighty-shogun/common`](./common/) installs [`@almighty-shogun/utils`](./utils/), and the two server packages install [`@almighty-shogun/http-core`](./http-core/).
 
-Only `common` assumes a framework. The rest work in any TypeScript project that meets their runtime requirement.
+`common` assumes Vue and Vue Router, while `vite-preset` assumes Vite. The other packages work in any TypeScript project that meets their runtime requirement.
 
 ## Foundations
 
@@ -28,6 +28,10 @@ Packages tied to one specific host runtime.
 - [Cloudflare Worker](./cloudflare-worker/) &mdash; typed route definitions with path parameters, worker module setup, and response helpers for the Workers runtime.
 - [WebKit Native Bridge](./webkit-native-bridge/) &mdash; typed request and command bridge for JavaScript embedded in a WebKit host application.
 
+## Build tooling
+
+- [Vite Preset](./vite-preset/) &mdash; CSS Modules class name generation for Vite projects.
+
 ## How they fit together
 
 Arrows are workspace dependencies, and the note is what the package needs from outside the workspace.
@@ -36,6 +40,7 @@ Arrows are workspace dependencies, and the note is what the package needs from o
 bun-server           ──► http-core ──► utils   (Bun-only)
 cloudflare-worker    ──► http-core ──► utils   (Workers-only)
 common               ──► utils                 (peer: vue, vue-router)
+vite-preset                                    (peer: vite)
 http-core            ──► utils                 (luxon)
 prototype-extensions                           (standalone)
 utils                                          (luxon)
@@ -52,7 +57,7 @@ What the other packages take from `utils` is the [shared type vocabulary](./util
 
 Both server packages re-export **every** `http-core` export from their own root, so an application installs one package and imports everything from it. `http-core` is published and documented for the rarer case of building your own server wrapper.
 
-Luxon is the only third-party runtime dependency in the workspace, and it reaches a bundle only through the code that uses it: in `utils` the [date helpers](./utils/date-time/formatDate), [`serialize`](./utils/serialization/serialize), [`deserialize`](./utils/serialization/deserialize), and [`disableZoom`](./utils/browser-dom/disableZoom), and in `http-core` only [`queryDate`](./http-core/helpers/requests#querydate). Both packages are side-effect free, so a build that never calls those drops Luxon entirely.
+Luxon reaches a bundle only through the code that uses it: in `utils` the [date helpers](./utils/date-time/formatDate), [`serialize`](./utils/serialization/serialize), [`deserialize`](./utils/serialization/deserialize), and [`disableZoom`](./utils/browser-dom/disableZoom), and in `http-core` only [`queryDate`](./http-core/helpers/requests#querydate). Both packages are side-effect free, so a build that never calls those drops Luxon entirely.
 
 ## Where to start
 
@@ -63,3 +68,4 @@ Luxon is the only third-party runtime dependency in the workspace, and it reache
 - **Writing a Bun HTTP server?** Go straight to [Bun Server](./bun-server/installation).
 - **Deploying to Cloudflare?** Go straight to [Cloudflare Worker](./cloudflare-worker/installation).
 - **Embedding a web UI in a native WebKit host?** Go straight to [WebKit Native Bridge](./webkit-native-bridge/installation).
+- **Configuring CSS Modules in Vite?** Start with [Vite Preset](./vite-preset/installation).

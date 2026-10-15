@@ -31,5 +31,12 @@ export const packages: DefaultTheme.SidebarItem[] = [
             { text: 'Cloudflare Worker', link: '/cloudflare-worker/' },
             { text: 'WebKit Native Bridge', link: '/webkit-native-bridge/' }
         ]
+    },
+    {
+        text: 'Build tooling',
+        collapsed: false,
+        items: [
+            { text: 'Vite Preset', link: '/vite-preset/' }
+        ]
     }
 ];

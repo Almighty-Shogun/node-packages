@@ -14,6 +14,7 @@ Workspace packages live in `packages/*`:
 - `@almighty-shogun/utils` &mdash; framework-agnostic utility functions. Depends on `luxon` and `@types/luxon`.
 - `@almighty-shogun/http-core` &mdash; runtime-agnostic HTTP vocabulary, the shared `HttpBaseResponse` class, query-string helpers, and the error classes both server packages throw. Depends on `utils` for types only and on `luxon` at runtime, used solely by `queryDate`.
 - `@almighty-shogun/common` &mdash; Vue application helpers. Depends on `utils` at runtime; `vue` and `vue-router` are peer dependencies.
+- `@almighty-shogun/vite-preset` &mdash; CSS Modules class name generation for Vite projects. Depends on `vite-css-modules`, `change-case`, and `css-class-generator`; `vite` is a peer dependency.
 - `@almighty-shogun/webkit-native-bridge` &mdash; typed JavaScript/native WebKit bridge helpers. Depends on `utils` for types only.
 - `@almighty-shogun/bun-server` &mdash; Bun HTTP server routing and response helpers. Depends on `http-core` at runtime and `utils` for types only; `@types/bun` is an optional peer dependency.
 - `@almighty-shogun/cloudflare-worker` &mdash; Cloudflare Worker routing, scheduling, and response helpers. Depends on `http-core` at runtime and `utils` for types only; `@cloudflare/workers-types` is an optional peer dependency.
@@ -72,6 +73,7 @@ bun --cwd packages/common build
 bun --cwd packages/webkit-native-bridge build
 bun --cwd packages/bun-server build
 bun --cwd packages/cloudflare-worker build
+bun --cwd packages/vite-preset build
 ```
 
 Documentation build:
