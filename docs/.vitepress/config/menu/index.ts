@@ -8,6 +8,7 @@ import { cloudflareWorker } from './cloudflare-worker';
 import type { DefaultTheme } from 'vitepress';
 import { webkitNativeBridge } from './webkit-native-bridge';
 import { prototypeExtensions } from './prototype-extensions';
+import { vitePreset } from './vite-preset';
 
 export const nav: DefaultTheme.NavItem[] = [
     {
@@ -17,7 +18,7 @@ export const nav: DefaultTheme.NavItem[] = [
     },
     {
         text: 'Packages',
-        activeMatch: '^/(packages$|prototype-extensions|utils|http-core|common|webkit-native-bridge|bun-server|cloudflare-worker)',
+        activeMatch: '^/(packages$|prototype-extensions|utils|http-core|common|webkit-native-bridge|bun-server|cloudflare-worker|vite-preset)',
         items: [
             { text: 'Overview', activeMatch: '^/packages$', link: '/packages' },
             {
@@ -41,6 +42,12 @@ export const nav: DefaultTheme.NavItem[] = [
                     { text: 'Cloudflare Worker', activeMatch: '^/cloudflare-worker/', link: '/cloudflare-worker/' },
                     { text: 'WebKit Native Bridge', activeMatch: '^/webkit-native-bridge/', link: '/webkit-native-bridge/' }
                 ]
+            },
+            {
+                text: 'Build tooling',
+                items: [
+                    { text: 'Vite Preset', activeMatch: '^/vite-preset/', link: '/vite-preset/' }
+                ]
             }
         ]
     }
@@ -55,5 +62,6 @@ export const sidebar: DefaultTheme.SidebarMulti = {
     '/common/': common,
     '/webkit-native-bridge/': webkitNativeBridge,
     '/bun-server/': bunServer,
-    '/cloudflare-worker/': cloudflareWorker
+    '/cloudflare-worker/': cloudflareWorker,
+    '/vite-preset/': vitePreset
 };
