@@ -2,6 +2,11 @@ import { useRoute } from 'vue-router';
 import { ref, watch, type Ref } from 'vue';
 import { hasValue, deserialize, type Nullable } from '@almighty-shogun/utils';
 
+export default function <T = string>(name: string, defaultValue: T): Ref<T>;
+export default function <T = string>(name: string, defaultValue: null): Ref<Nullable<T>>;
+export default function <T = string>(name: string, defaultValue: undefined): Ref<Nullable<T>>;
+export default function <T = string>(name: string, defaultValue?: Nullable<T>): Ref<Nullable<T>>;
+
 export default function <T = string>(name: string, defaultValue: Nullable<T> = null): Ref<Nullable<T>> {
     const route = useRoute();
 
