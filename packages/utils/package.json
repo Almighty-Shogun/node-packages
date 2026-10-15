@@ -40,11 +40,11 @@
         "CODEOWNERS"
     ],
     "dependencies": {
-        "@types/luxon": "^3.7.5",
+        "@types/luxon": "^3.7.6",
         "luxon": "^3.7.2"
     },
     "devDependencies": {
-        "tsdown": "^0.22.14",
+        "tsdown": "^0.23.1",
         "typescript": "^5.9.3"
     }
 }

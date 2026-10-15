@@ -43,7 +43,7 @@
         "@almighty-shogun/utils": "workspace:*"
     },
     "peerDependencies": {
-        "@types/bun": "^1.3.14"
+        "@types/bun": "^1.4.3"
     },
     "peerDependenciesMeta": {
         "@types/bun": {
@@ -51,8 +51,8 @@
         }
     },
     "devDependencies": {
-        "@types/bun": "^1.4.0",
-        "tsdown": "^0.22.14",
+        "@types/bun": "^1.4.3",
+        "tsdown": "^0.23.1",
         "typescript": "^5.9.3"
     }
 }

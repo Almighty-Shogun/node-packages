@@ -42,7 +42,7 @@
         "@almighty-shogun/utils": "workspace:*"
     },
     "devDependencies": {
-        "tsdown": "^0.22.14",
+        "tsdown": "^0.23.1",
         "typescript": "^5.9.3"
     }
 }

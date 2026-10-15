@@ -43,7 +43,7 @@
         "@almighty-shogun/utils": "workspace:*"
     },
     "peerDependencies": {
-        "@cloudflare/workers-types": "^5.20260809.1"
+        "@cloudflare/workers-types": "^5.20261014.1"
     },
     "peerDependenciesMeta": {
         "@cloudflare/workers-types": {
@@ -51,8 +51,8 @@
         }
     },
     "devDependencies": {
-        "@cloudflare/workers-types": "^5.20260901.1",
-        "tsdown": "^0.22.14",
+        "@cloudflare/workers-types": "^5.20261014.1",
+        "tsdown": "^0.23.1",
         "typescript": "^5.9.3"
     }
 }
