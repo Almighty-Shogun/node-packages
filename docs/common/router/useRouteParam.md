@@ -12,14 +12,14 @@ params:
       optional: true
       defaultValue: 'null'
 
-returns: A reactive `Ref<Nullable<T>>` containing the current route parameter value.
+returns: A reactive `Ref<T>` when a non-null default is provided, otherwise a `Ref<Nullable<T>>`.
 ---
 
 # useRouteParam
 
 Reads a Vue Router route parameter into a Vue ref. The returned ref updates whenever the active route changes, so components can consume route parameters without manually watching `useRoute()`.
 
-When the route parameter has a value, the composable returns it directly unless `defaultValue` has a value. In that case, `deserialize(value, defaultValue)` is used so numeric and other typed defaults can shape the returned value. When the route parameter has no value, the ref falls back to `defaultValue` or `null`.
+When the route parameter has a value, the composable returns it directly unless `defaultValue` has a value. In that case, `deserialize(value, defaultValue)` is used so numeric and other typed defaults can shape the returned value. When the route parameter has no value, the ref falls back to `defaultValue` or `null`. A non-null default narrows the returned ref to its non-nullish type; omitting the default or providing `null` or `undefined` keeps the ref nullable.
 
 ## Importing
 
@@ -67,6 +67,21 @@ const page = useRouteParam('page', 1);
 ## Type signature
 
 ```ts
+declare function useRouteParam<T = string>(
+    name: string,
+    defaultValue: T
+): Ref<T>;
+
+declare function useRouteParam<T = string>(
+    name: string,
+    defaultValue: null
+): Ref<Nullable<T>>;
+
+declare function useRouteParam<T = string>(
+    name: string,
+    defaultValue: undefined
+): Ref<Nullable<T>>;
+
 declare function useRouteParam<T = string>(
     name: string,
     defaultValue?: Nullable<T>
